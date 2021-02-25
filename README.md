@@ -1,3 +1,9 @@
+*** Remember ***
+Prior to working on any component, make sure you "git pull origin main" to bring down the latest files!
+---
+
+
+
 Developers: 
   Unit 2: Victoria Trac
   Unit 3: Sarah Rose, Chad Diaz
@@ -19,5 +25,6 @@ Dependencies Installed:
   ▶️Axios
   ▶️Styled Components
   ▶️redux dev tools extension
+  ---
   
  
