@@ -24,7 +24,7 @@ Dependencies Installed:
   ▶️React Router Dom
   ▶️Axios
   ▶️Styled Components
-  ▶️redux dev tools extension
+  ▶️Redux Dev Tools Extension
   ---
   
  
