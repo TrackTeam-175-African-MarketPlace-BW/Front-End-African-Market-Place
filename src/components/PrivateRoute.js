@@ -6,13 +6,13 @@ export default function PrivateRoute(props) {
   return (
     <Route
       {...rest}
-      render={({ location }) => {
+      render={() => {
         return localStorage.getItem("token") ? (
           children
         ) : (
           // REVIEW add updated pathname once determined
 
-          <Redirect to={{ pathname: "/", state: { from: location } }} />
+          <Redirect to="/login" />
         );
       }}
     />
