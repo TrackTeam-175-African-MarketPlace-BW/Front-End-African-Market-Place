@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Switch, Route, useHistory, useParams } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import Navigation from "./components/Navigation";
@@ -42,11 +41,6 @@ function App() {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    ownerName: state.ORS.name,
-    itemName: state.IRS.name,
-  };
-};
 
-export default connect(mapStateToProps, {})(App);
+
+export default App;
