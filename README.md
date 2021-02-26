@@ -2,11 +2,13 @@
 Prior to working on any component, make sure you "git pull origin main" to bring down the latest files!
 ---
 
-
+VERCEL APP: https://african-market-place-tt-175-buildweek.vercel.app/
 
 Developers: 
-  Unit 2: Victoria Trac
-  Unit 3: Sarah Rose, Chad Diaz
+
+  Unit 2 (Landing Page, React): Victoria Trac
+
+  Unit 3 (React, Redux): Sarah Rose, Chad Diaz
   
 ✔️ PRODUCT VISION DOCUMENT:
 
@@ -16,14 +18,23 @@ https://www.notion.so/Track-Team-175-African-Market-Place-PVD-9bba0a1762284950b3
 ** run npm install to download the following dependencies 
 
 Dependencies Installed: 
+
   ▶️@React Testing Library
+
   ▶️Redux
+
   ▶️React Redux
+
   ▶️Redux Thunk
+
   ▶️Redux Logger
+
   ▶️React Router Dom
+
   ▶️Axios
+
   ▶️Styled Components
+
   ▶️Redux Dev Tools Extension
   ---
   
