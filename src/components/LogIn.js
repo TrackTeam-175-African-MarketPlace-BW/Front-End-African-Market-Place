@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import axiosWIthAuth from "../utils/axiosWithAuth";
+
+import axiosWithAuth from '../utils/axiosWithAuth'
 
 const LogIn = () => {
   const [credentials, setCredentials] = useState({
@@ -19,8 +20,8 @@ const LogIn = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    axiosWIthAuth()
-      .post("/api/users/login", credentials)
+    axiosWithAuth()
+      .post("/users/login", credentials)
       .then((res) => {
         console.log("cd: Login.js: handleLogin: post request response: ", res);
         localStorage.setItem("token", res.data.payload);
@@ -31,7 +32,7 @@ const LogIn = () => {
           "cd: LogIn.js: handleLogin: post request error response: ",
           err.response.data.message
         );
-        setError(err.response.data.message.toUpperCase());
+        setError((err.response.data.message).toUpperCase());
       });
   };
 
