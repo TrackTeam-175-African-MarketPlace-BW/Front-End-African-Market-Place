@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, useHistory, useParams } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import Navigation from "./components/Navigation";
 import OwnerProfile from "./components/OwnerProfile";
@@ -10,10 +10,7 @@ import Register from "./components/Register";
 import LogIn from "./components/LogIn";
 
 function App() {
-  const history = useHistory();
-  console.log("this is the history : ", history);
-  const id = useParams();
-  console.log("this is the id: ", id);
+
   return (
     <>
       <Navigation />
