@@ -28,7 +28,7 @@ export const itemsReducer = (state = initialState, action) => {
         ...state,
         isLoading: true,
       };
-    case ITEMS_LOADING:
+    case ITEMS_RETRIEVED:
       return {
         ...state,
         isLoading: false,

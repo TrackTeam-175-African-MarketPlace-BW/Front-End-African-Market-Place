@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
-import {useHistory} from 'react-router-dom'
+import React from 'react'
+
 
 const LogIn = () => {
-    const [credentials, setCredentials] = useState({
-        user
-    })
+
+    
     return (
         <div>
             <p>Hello from Login</p>
