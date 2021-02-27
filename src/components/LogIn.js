@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 
-import axiosWithAuth from '../utils/axiosWithAuth'
+import axiosWithAuth from "../utils/axiosWithAuth";
 
 const LogIn = () => {
   const [credentials, setCredentials] = useState({
@@ -32,7 +32,7 @@ const LogIn = () => {
           "cd: LogIn.js: handleLogin: post request error response: ",
           err.response.data.message
         );
-        setError((err.response.data.message).toUpperCase());
+        setError(err.response.data.message.toUpperCase());
       });
   };
 
