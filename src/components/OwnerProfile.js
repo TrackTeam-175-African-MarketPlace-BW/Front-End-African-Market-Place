@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { loadUser } from "../actions/ownerActions";
 
 // NOTE baseURL/api /${id}/profile
 
@@ -12,27 +13,15 @@ const Center = styled.div`
 `;
 
 const OwnerProfile = (props) => {
-  const [currentUser, setCurrentUser] = useState({});
-
-  const { id } = useParams();
+  // const { id } = useParams();
 
   useEffect(() => {
-    axiosWithAuth()
-      .get(`users/${id}`)
-      .then((response) => {
-        console.log(("OwnerProfile success response", response));
-        setCurrentUser(response.data);
-      })
-      .catch((error) => {
-        console.log("OwnerProfile error", error.response.data.message);
-      });
+    props.loadUser();
   }, []);
-
-  console.log(props.isEditing);
 
   return (
     <Center>
-      <div>
+      {/* <div>
         <p>your profile!</p>
         {props.user_photo ? <div>photo: {props.user_photo}</div> : null}
         <br></br>
@@ -43,7 +32,8 @@ const OwnerProfile = (props) => {
         <p>country: {props.country_id}</p>
         <br></br>
         {props.user_info ? <div>bio: {props.user_info}</div> : null}
-      </div>
+      </div> */}
+      {props.error && <p style={{ color: "red" }}>{props.error}</p>}
     </Center>
   );
 };
@@ -57,4 +47,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {})(OwnerProfile);
+export default connect(mapStateToProps, { loadUser })(OwnerProfile);

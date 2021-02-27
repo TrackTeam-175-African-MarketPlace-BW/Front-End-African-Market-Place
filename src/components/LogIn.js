@@ -24,7 +24,7 @@ const LogIn = () => {
       .post("/users/login", credentials)
       .then((res) => {
         console.log("cd: Login.js: handleLogin: post request response: ", res);
-        localStorage.setItem("token", res.data.payload);
+        localStorage.setItem("token", res.data.token);
         push("/itemsList"); // NOTE adjust where the user gets sent after logging in
       })
       .catch((err) => {
