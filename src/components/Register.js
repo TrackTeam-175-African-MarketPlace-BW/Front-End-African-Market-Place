@@ -126,6 +126,7 @@ const Register = () => {
           placeholder="url link format, please."
         />
         <br></br> */}
+        <br></br>
         <label htmlFor="user_info">
           bio:<br></br>
           <textarea
