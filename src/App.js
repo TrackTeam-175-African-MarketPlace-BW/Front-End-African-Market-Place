@@ -1,5 +1,5 @@
-import React from "react";
-import { Switch, Route, useHistory, useParams } from "react-router-dom";
+import React, {useState} from "react";
+import { Switch, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import Navigation from "./components/Navigation";
 import OwnerProfile from "./components/OwnerProfile";
@@ -8,15 +8,14 @@ import "./App.css";
 import TeamInfo from "./components/TeamInfo";
 import Register from "./components/Register";
 import LogIn from "./components/LogIn";
+import SingleItem from "./components/SingleItem";
 
 function App() {
-  const history = useHistory();
-  console.log("this is the history : ", history);
-  const id = useParams();
-  console.log("this is the id: ", id);
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
   return (
     <>
-      <Navigation />
+      <Navigation isLoggedIn={isLoggedIn}/>
       <Switch>
         <PrivateRoute path="/ownerProfile">
           <OwnerProfile />
@@ -32,6 +31,9 @@ function App() {
         </Route>
         <Route path="/register">
           <Register />
+        </Route>
+        <Route path="/singleItem">
+          <SingleItem />
         </Route>
         <Route exact path="/">
           <p>Hello from the Home page</p>

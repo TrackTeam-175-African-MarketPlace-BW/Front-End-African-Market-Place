@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const axiosWIthAuth = () => {
+const axiosWithAuth = () => {
   const token = localStorage.getItem("token");
   return axios.create({
     baseURL: "https://ialkamal-be-amp.herokuapp.com/api",
@@ -10,4 +10,4 @@ const axiosWIthAuth = () => {
   });
 };
 
-export default axiosWIthAuth;
+export default axiosWithAuth;
