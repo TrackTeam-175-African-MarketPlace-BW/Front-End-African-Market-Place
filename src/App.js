@@ -3,12 +3,14 @@ import { Switch, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import Navigation from "./components/Navigation";
 import OwnerProfile from "./components/OwnerProfile";
-import ItemsList from "./components/ItemsList";
+import ItemsList from "./components/ITEMS/ItemsList";
+import SingleItem from "./components/ITEMS/SingleItem";
+import UpdateItemForm from './components/ITEMS/UpdateItemForm';
 import "./App.css";
 import TeamInfo from "./components/TeamInfo";
 import Register from "./components/Register";
 import LogIn from "./components/LogIn";
-import SingleItem from "./components/SingleItem";
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -21,7 +23,7 @@ function App() {
           <OwnerProfile />
         </PrivateRoute>
         <PrivateRoute path="/itemsList">
-          <ItemsList />
+          <ItemsList setIsLoggedIn={setIsLoggedIn}/>
         </PrivateRoute>
         <Route path="/team">
           <TeamInfo />
@@ -34,6 +36,9 @@ function App() {
         </Route>
         <Route path="/singleItem">
           <SingleItem />
+        </Route>
+        <Route path="/updateItem">
+          <UpdateItemForm />
         </Route>
         <Route exact path="/">
           <p>Hello from the Home page</p>
