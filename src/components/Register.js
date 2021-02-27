@@ -15,7 +15,7 @@ const Register = () => {
     password: "",
     country: "",
     user_info: "",
-    user_photo: "",
+    // user_photo: "",
   });
 
   console.log("these are the credentials", credentials);
@@ -116,7 +116,7 @@ const Register = () => {
             })}
           </select>
         </label>
-        <label htmlFor="user_photo" />
+        {/* <label htmlFor="user_photo" />
         user photo?<br></br>
         <input
           type="text"
@@ -125,7 +125,7 @@ const Register = () => {
           onChange={handleChanges}
           placeholder="url link format, please."
         />
-        <br></br>
+        <br></br> */}
         <label htmlFor="user_info">
           bio:<br></br>
           <textarea
