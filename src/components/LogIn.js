@@ -25,7 +25,7 @@ const LogIn = () => {
       .then((res) => {
         console.log("cd: Login.js: handleLogin: post request response: ", res);
         localStorage.setItem("token", res.data.payload);
-        push("/ownerProfile");
+        push("/itemsList"); // NOTE adjust where the user gets sent after logging in
       })
       .catch((err) => {
         console.log(

@@ -13,13 +13,12 @@ const Center = styled.div`
 
 const OwnerProfile = (props) => {
   const [currentUser, setCurrentUser] = useState({});
-  // REVIEW can I only view the user profile if I am currently logged in as that user?
 
-  // const { id } = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     axiosWithAuth()
-      .get(`users/:id`)
+      .get(`users/${id}`)
       .then((response) => {
         console.log(("OwnerProfile success response", response));
         setCurrentUser(response.data);
