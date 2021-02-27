@@ -10,6 +10,7 @@ const Center = styled.div`
 
 const Register = () => {
   const [credentials, setCredentials] = useState({
+    name: "",
     email: "",
     password: "",
     country: {
@@ -19,6 +20,8 @@ const Register = () => {
       Tanzania: false,
       Sudan: false, // doesn't work
     },
+    user_info: "",
+    user_photo: "",
   });
 
   const [countries, setCountries] = useState([]);
@@ -46,7 +49,7 @@ const Register = () => {
       })
       .catch((error) => {
         console.log("Registration error", error.response.data.message); // REVIEW how do you find the error
-        setError(error.response.data.message);
+        setError();
       });
   };
 
@@ -66,16 +69,16 @@ const Register = () => {
   return (
     <Center>
       <form onSubmit={submitRegistration}>
-        {/* <label htmlFor="name" />
+        <label htmlFor="name" />
         name:<br></br>
         <input
           type="name"
           name="name"
-          value=""
+          value={credentials.name}
           onChange={handleChanges}
           placeholder="name required"
         />
-        <br></br> */}
+        <br></br>
         <label htmlFor="email" />
         email:<br></br>
         <input
@@ -115,27 +118,27 @@ const Register = () => {
             {/* <option value={countries.country}>{countries.country}</option> */}
           </select>
         </label>
-        {/* <br></br>
+        <br></br>
         <label htmlFor="user_photo" />
         user photo?<br></br>
         <input
           type="text"
           name="user_photo"
-          value=""
+          value={credentials.user_photo}
           onChange={handleChanges}
-          placeholder="user photo?"
+          placeholder="url link format, please."
         />
         <br></br>
-        <label htmlFor="user_info" >
-        tell us about yourself!<br></br>
-        <textarea
-          type="text"
-          name="user_info"
-          value={credentials.user_info}
-          onChange={handleChanges}
-          placeholder="bio?"
-        />
-        </label>*/}
+        <label htmlFor="user_info">
+          bio:<br></br>
+          <textarea
+            type="text"
+            name="user_info"
+            value={credentials.user_info}
+            onChange={handleChanges}
+            placeholder="tell us a little about yourself?"
+          />
+        </label>
         <br></br>
         <button style={{ marginTop: "5px" }}>Ready to register?</button>
         <br></br>
