@@ -18,7 +18,7 @@ const Register = () => {
     // user_photo: "",
   });
 
-  console.log("these are the credentials", credentials);
+  // console.log("these are the credentials", credentials);
 
   const [countries, setCountries] = useState([]);
   // console.log("these are the countries", countries);

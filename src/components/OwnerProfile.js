@@ -50,12 +50,7 @@ const OwnerProfile = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    name: state.ORS.name,
-    password: state.ORS.password,
-    email: state.ORS.email,
-    country_id: state.ORS.country_id,
-    user_photo: state.ORS.user_photo,
-    user_info: state.ORS.user_info,
+    ownerProfile: state.ORS.ownerProfile,
     error: state.ORS.error,
     isLoading: state.ORS.isLoading,
     isEditing: state.ORS.isEditing,
