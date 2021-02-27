@@ -8,6 +8,7 @@ import "./App.css";
 import TeamInfo from "./components/TeamInfo";
 import Register from "./components/Register";
 import LogIn from "./components/LogIn";
+import SingleItem from "./components/SingleItem";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -30,6 +31,9 @@ function App() {
         </Route>
         <Route path="/register">
           <Register />
+        </Route>
+        <Route path="/singleItem">
+          <SingleItem />
         </Route>
         <Route exact path="/">
           <p>Hello from the Home page</p>
