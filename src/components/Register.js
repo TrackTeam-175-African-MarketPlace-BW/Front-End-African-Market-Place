@@ -13,19 +13,15 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
-    country: {
-      Kenya: false, // doesn't work
-      Uganda: false,
-      Rwanda: false,
-      Tanzania: false,
-      Sudan: false, // doesn't work
-    },
+    country: "",
     user_info: "",
-    user_photo: "",
+    // user_photo: "",
   });
 
+  console.log("these are the credentials", credentials);
+
   const [countries, setCountries] = useState([]);
-  console.log("these are the countries", countries);
+  // console.log("these are the countries", countries);
 
   const { push } = useHistory();
 
@@ -44,7 +40,6 @@ const Register = () => {
       .post("/users/register", credentials)
       .then((response) => {
         console.log("Registration submit success", response);
-        localStorage.setItem("token", response);
         push("/login");
       })
       .catch((error) => {
@@ -57,8 +52,8 @@ const Register = () => {
     axiosWithAuth()
       .get("/countries")
       .then((response) => {
-        console.log("countries success response", response);
-        console.log("figuring out country dropdown", response.data);
+        // console.log("countries success response", response);
+        // console.log("figuring out country dropdown", response.data);
         setCountries(response.data);
       })
       .catch((error) => {
@@ -80,7 +75,7 @@ const Register = () => {
         />
         <br></br>
         <label htmlFor="email" />
-        email:<br></br>
+        email: required<br></br>
         <input
           type="email"
           name="email"
@@ -102,24 +97,26 @@ const Register = () => {
         <label htmlFor="country">
           location:<br></br>
           <select
+            id="country"
             name="country"
             value={credentials.country}
-            //   placeholder="country location?"
+            // defaultValue={countries[0]}
             onChange={handleChanges}
           >
-            <option value="Kenya">Kenya</option>
-            <option value="Uganda">Uganda</option>
-            <option value="Tanzania">Tanzania</option>
-            <option value="Rwanda">Rwanda</option>
-            <option value="Sudan">South Sudan</option>
-            {/* {countries.map((oneCountry) => {
-              <option value={oneCountry.country}>{oneCountry.country}</option>;
-            })} */}
-            {/* <option value={countries.country}>{countries.country}</option> */}
+            {countries.map((country) => {
+              return (
+                <option
+                  key={country.id}
+                  value={country.country}
+                  defaultValue={country[0]}
+                >
+                  {country.country}
+                </option>
+              );
+            })}
           </select>
         </label>
-        <br></br>
-        <label htmlFor="user_photo" />
+        {/* <label htmlFor="user_photo" />
         user photo?<br></br>
         <input
           type="text"
@@ -127,7 +124,7 @@ const Register = () => {
           value={credentials.user_photo}
           onChange={handleChanges}
           placeholder="url link format, please."
-        />
+        /> */}
         <br></br>
         <label htmlFor="user_info">
           bio:<br></br>
