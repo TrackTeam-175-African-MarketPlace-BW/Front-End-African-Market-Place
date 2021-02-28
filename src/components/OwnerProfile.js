@@ -57,6 +57,7 @@ const OwnerProfile = (props) => {
         <br></br>
         bio: {props.ownerProfile.user_info}
         <br></br>
+        <button>update profile?</button>
         {/* {JSON.stringify(props.ownerProfile, 2, "")} */}
       </div>
       <div>
