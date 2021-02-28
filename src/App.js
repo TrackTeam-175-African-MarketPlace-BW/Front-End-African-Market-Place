@@ -18,10 +18,10 @@ function App() {
       <Navigation isLoggedIn={isLoggedIn} />
       <Switch>
         <PrivateRoute exact path="/:id/ownerProfile">
-          <OwnerProfile />
+          <OwnerProfile setIsLoggedIn={setIsLoggedIn}/>
         </PrivateRoute>
         <PrivateRoute path="/:id/itemsList">
-          <ItemsList />
+          <ItemsList setIsLoggedIn={setIsLoggedIn}/>
         </PrivateRoute>
         <Route path="/team">
           <TeamInfo />

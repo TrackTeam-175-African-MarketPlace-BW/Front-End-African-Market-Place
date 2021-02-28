@@ -18,6 +18,7 @@ const OwnerProfile = (props) => {
   useEffect(() => {
     props.loadUser(id);
     props.loadUserItems(id);
+    props.setIsLoggedIn(true);
   }, []);
 
   return (

@@ -5,6 +5,7 @@ import { getItems } from "../actions/itemsActions";
 const ItemsList = (props) => {
   useEffect(() => {
     props.getItems();
+    props.setIsLoggedIn(true)
   }, []);
 
   return (
