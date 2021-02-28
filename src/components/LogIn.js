@@ -3,7 +3,7 @@ import { NavLink, useHistory } from "react-router-dom";
 
 import axiosWithAuth from "../utils/axiosWithAuth";
 
-const LogIn = () => {
+const LogIn = (props) => {
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -24,15 +24,14 @@ const LogIn = () => {
       .post("/users/login", credentials)
       .then((res) => {
         console.log("cd: Login.js: handleLogin: post request response: ", res);
-        localStorage.setItem("token", res.data.payload);
-        push("/itemsList"); // NOTE adjust where the user gets sent after logging in
+        localStorage.setItem("token", res.data.token);
+        push(`${res.data.user.id}/itemsList`); // NOTE adjust where the user gets sent after logging in
       })
       .catch((err) => {
         console.log(
           "cd: LogIn.js: handleLogin: post request error response: ",
           err.response.data.message
         );
-        setError(err.response.data.message.toUpperCase());
       });
   };
 

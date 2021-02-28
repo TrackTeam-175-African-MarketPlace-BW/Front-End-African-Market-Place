@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const axiosWithAuth = () => {
-  const token = localStorage.getItem("token");
+  const token = window.localStorage.getItem("token");
   return axios.create({
     baseURL: "https://ialkamal-be-amp.herokuapp.com/api",
     headers: {
-      Authorization: `Bearer ${token}`,
+      authorization: `Bearer ${token}`,
     },
   });
 };

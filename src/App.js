@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import Navigation from "./components/Navigation";
@@ -11,16 +11,16 @@ import LogIn from "./components/LogIn";
 import SingleItem from "./components/SingleItem";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <>
-      <Navigation isLoggedIn={isLoggedIn}/>
+      <Navigation isLoggedIn={isLoggedIn} />
       <Switch>
-        <PrivateRoute path="/ownerProfile">
+        <PrivateRoute exact path="/:id/ownerProfile">
           <OwnerProfile />
         </PrivateRoute>
-        <PrivateRoute path="/itemsList">
+        <PrivateRoute path="/:id/itemsList">
           <ItemsList />
         </PrivateRoute>
         <Route path="/team">
@@ -42,7 +42,5 @@ function App() {
     </>
   );
 }
-
-
 
 export default App;
