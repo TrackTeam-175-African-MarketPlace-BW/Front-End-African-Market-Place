@@ -1,6 +1,12 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { getItems, showSingleItem } from "../../actions/itemsActions";
+import styled from 'styled-components';
+
+const ItemDiv = styled.div`
+display: flex;
+flex-wrap: wrap;
+`
 
 const ItemsList = (props) => {
   useEffect(() => {
@@ -13,14 +19,15 @@ const ItemsList = (props) => {
       
         {props.items.map((item) => {
           return (
-            <div key={item.id}>
+            <ItemDiv key={item.id}>
               <h5>{item.name}</h5>
               <p>{item.description}</p>
               <p><strong>{item.price}</strong></p>
               <p>{item.category}</p>
               <p>{item.market}</p>
               <p>{item.country}</p>
-            </div>
+              <br/>
+            </ItemDiv>
           )
         })}
       
