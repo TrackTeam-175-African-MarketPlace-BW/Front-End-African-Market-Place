@@ -1,43 +1,78 @@
 import {
-  ITEMS_LOADING,
-  ITEMS_RETRIEVED,
-  ERROR_LOADING_ITEMS,
+  DATA_LOADING,
+  DATA_RETRIEVED,
+  ERROR_LOADING_DATA,
+  CREATING_ITEM,
+  CREATED_ITEM,
   UPDATING_ITEM,
   UPDATED_ITEM,
+  REMOVING_ITEM,
   REMOVE_ITEM,
 } from "../actions/itemsActions";
 
 const initialState = {
-  // name: "",
-  // market_id: "",
-  // description: "",
-  // category: "",
-  // user_id: "",
-  // category_id: "",
-  // price: "",
   items: [],
-  error: "",
-  isLoading: false,
-  isEditing: false,
+  gettingItems: false,
+  updatingItem: false,
+  creatingItem: false,
+  deletingItem: false,
+  error: null,
+
 };
 
 export const itemsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ITEMS_LOADING:
+    case DATA_LOADING:
       return {
         ...state,
-        isLoading: true,
+        gettingItems: true,
       };
-    case ITEMS_RETRIEVED:
+    case DATA_RETRIEVED:
       return {
         ...state,
-        isLoading: false,
+        gettingItems: false,
         items: action.payload,
       };
-    case ERROR_LOADING_ITEMS:
+    case UPDATING_ITEM:
       return {
         ...state,
-        isLoading: false,
+        updatingItem: true,
+      }
+    case UPDATED_ITEM:
+      return {
+        ...state,
+        item: action.payload,
+        updatingItem: false,
+      }
+    case CREATING_ITEM:
+      return {
+        ...state,
+        creatingItem: true,
+      }
+    case CREATED_ITEM:
+      return {
+        ...state,
+        items: action.payload,
+        creatingItem: false,
+      }
+    case REMOVING_ITEM:
+      return {
+        ...state,
+        deletingItem: true,
+      }
+    case REMOVE_ITEM:
+      return {
+        ...state,
+        items: action.payload,
+        deletingItem: false,
+      }
+    case ERROR_LOADING_DATA:
+      return {
+        ...state,
+        gettingItems: false,
+        updatingItem: false,
+        creatingItem: false,
+        deletingItem: false,
         error: action.payload,
       };
     default:
