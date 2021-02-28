@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { getItems } from "../actions/itemsActions";
 
 const ItemsList = (props) => {
-    
   useEffect(() => {
     props.getItems();
   }, []);
@@ -11,6 +10,7 @@ const ItemsList = (props) => {
   return (
     <div>
       <p>Hello from ItemsList Comp</p>
+      {JSON.stringify(props.items, " ", 2)}
     </div>
   );
 };

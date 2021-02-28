@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { loadUser } from "../actions/ownerActions";
+import { loadUser, loadUserItems } from "../actions/ownerActions";
 
 // NOTE baseURL/api /${id}/profile
 
@@ -13,10 +13,11 @@ const Center = styled.div`
 `;
 
 const OwnerProfile = (props) => {
-  // const { id } = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
-    props.loadUser();
+    props.loadUser(id);
+    props.loadUserItems(id);
   }, []);
 
   return (
@@ -33,18 +34,27 @@ const OwnerProfile = (props) => {
         <br></br>
         {props.user_info ? <div>bio: {props.user_info}</div> : null}
       </div> */}
+      <h1>OWNER PROFILE</h1>
+      {JSON.stringify(props.ownerProfile, 2, "")}
+      <img src={props.ownerProfile.user_photo}></img>
+      {JSON.stringify(props.itemsForSale, 2, "")}
       {props.error && <p style={{ color: "red" }}>{props.error}</p>}
     </Center>
   );
 };
 
 const mapStateToProps = (state) => {
+  console.log("STATE: ", state);
   return {
+    owner_id: state.ORS.owner_id,
     ownerProfile: state.ORS.ownerProfile,
     error: state.ORS.error,
     isLoading: state.ORS.isLoading,
     isEditing: state.ORS.isEditing,
+    itemsForSale: state.ORS.itemsForSale,
   };
 };
 
-export default connect(mapStateToProps, { loadUser })(OwnerProfile);
+export default connect(mapStateToProps, { loadUser, loadUserItems })(
+  OwnerProfile
+);

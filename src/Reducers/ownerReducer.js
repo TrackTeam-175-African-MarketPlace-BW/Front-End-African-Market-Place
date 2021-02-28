@@ -2,9 +2,11 @@ import {
   USER_LOADING,
   USER_RETRIEVED,
   ERROR_LOADING_USER,
+  USER_ITEMS_RETRIEVED,
 } from "../actions/ownerActions";
 
 const initialState = {
+  owner_id: null,
   ownerProfile: {},
   error: "",
   isLoading: false,
@@ -24,6 +26,12 @@ export const ownerReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         ownerProfile: action.payload,
+      };
+    case USER_ITEMS_RETRIEVED:
+      return {
+        ...state,
+        isLoading: false,
+        itemsForSale: action.payload,
       };
     case ERROR_LOADING_USER:
       return {
