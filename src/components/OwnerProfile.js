@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { loadUser, loadUserItems } from "../actions/ownerActions";
+import { loadUser, loadUserItems, editingUser } from "../actions/ownerActions";
+import UpdateOwnerForm from "./UpdateOwnerForm";
 
 // NOTE baseURL/api /${id}/profile
 
@@ -27,15 +28,20 @@ const Headers = styled.h1`
 `;
 
 const OwnerProfile = (props) => {
-  const { id } = useParams(); // REVIEW pretty sure I will never understand this
+  const { id } = useParams();
   // console.log("USE PARAMS", useParams());
-  // console.log("sr: ownerProfile.js, const ownerProfile props", props);
+  console.log("sr: ownerProfile.js, const ownerProfile props", props);
 
   useEffect(() => {
     props.loadUser(id);
     props.loadUserItems(id);
-    props.setIsLoggedIn(true); // REVIEW where is this coming from
+    props.setIsLoggedIn(true);
   }, []);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    props.editingUser();
+  };
 
   // console.log("these are the items for sale", props.itemsForSale);
 
@@ -57,8 +63,13 @@ const OwnerProfile = (props) => {
         <br></br>
         bio: {props.ownerProfile.user_info}
         <br></br>
-        <button>update profile?</button>
+        <button onClick={handleClick}>update profile?</button>
         {/* {JSON.stringify(props.ownerProfile, 2, "")} */}
+      </div>
+      <div>
+        {props.isEditing ? (
+          <UpdateOwnerForm itemInfo={props.ownerProfile} />
+        ) : null}
       </div>
       <div>
         <div>
@@ -88,6 +99,7 @@ const OwnerProfile = (props) => {
         })} */}
         {/* {JSON.stringify(props.itemsForSale, 2, "")} */}
       </div>
+      <br></br>
       {props.error && <p style={{ color: "red" }}>{props.error}</p>}
     </FlexStyling>
   );
@@ -105,6 +117,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { loadUser, loadUserItems })(
-  OwnerProfile
-);
+export default connect(mapStateToProps, {
+  loadUser,
+  loadUserItems,
+  editingUser,
+})(OwnerProfile);

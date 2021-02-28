@@ -3,6 +3,8 @@ import {
   USER_RETRIEVED,
   ERROR_LOADING_USER,
   USER_ITEMS_RETRIEVED,
+  UPDATING_USER,
+  UPDATED_USER,
 } from "../actions/ownerActions";
 
 const initialState = {
@@ -38,6 +40,17 @@ export const ownerReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: action.payload,
+      };
+    case UPDATING_USER:
+      return {
+        ...state,
+        isEditing: true,
+      };
+    case UPDATED_USER:
+      return {
+        ...state,
+        item: action.payload,
+        isEditing: false,
       };
     default:
       return state;

@@ -4,6 +4,8 @@ export const USER_LOADING = "USER_LOADING";
 export const USER_RETRIEVED = "USER_RETRIEVED";
 export const USER_ITEMS_RETRIEVED = "USER_ITEMS_RETRIEVED";
 export const ERROR_LOADING_USER = "ERROR_LOADING_USER";
+export const UPDATING_USER = "UPDATING_USER";
+export const UPDATED_USER = "UPDATED_USER";
 
 export const loadUser = (id) => {
   return (dispatch) => {
@@ -31,6 +33,12 @@ export const loadUser = (id) => {
           payload: error.response.data.message,
         });
       });
+  };
+};
+
+export const editingUser = () => {
+  return (dispatch) => {
+    dispatch({ type: UPDATING_USER });
   };
 };
 
