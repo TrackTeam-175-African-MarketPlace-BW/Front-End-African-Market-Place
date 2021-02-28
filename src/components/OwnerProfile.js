@@ -6,10 +6,25 @@ import { loadUser, loadUserItems } from "../actions/ownerActions";
 
 // NOTE baseURL/api /${id}/profile
 
-// const Center = styled.div`
-//   display: flex;
-//   justify-content: center;
-// `;
+const FlexStyling = styled.div`
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  text-transform: lowercase;
+  font-size: 12px;
+  max-width: 80%;
+  margin-top: 8%;
+`;
+
+const Headers = styled.h1`
+  font-size: 20px;
+  font-weight: none;
+  // border: 1px solid black;
+  // border-radius: 5px;
+  padding: 4px;
+  width: 100%;
+`;
 
 const OwnerProfile = (props) => {
   const { id } = useParams(); // REVIEW pretty sure I will never understand this
@@ -25,12 +40,13 @@ const OwnerProfile = (props) => {
   // console.log("these are the items for sale", props.itemsForSale);
 
   return (
-    <div>
+    <FlexStyling>
       <div>
-        <h1>your profile!</h1>
+        <Headers>👥 welcome, {props.ownerProfile.name} </Headers>
         name: {props.ownerProfile.name}
         <br></br>
         <img
+          style={{ width: "40%", borderRadius: "10px" }}
           src={props.ownerProfile.user_photo}
           alt={props.ownerProfile.name}
         ></img>
@@ -44,7 +60,9 @@ const OwnerProfile = (props) => {
         {/* {JSON.stringify(props.ownerProfile, 2, "")} */}
       </div>
       <div>
-        <h1>items currently for sale:</h1>
+        <div>
+          <Headers>🌾 {props.ownerProfile.name}'s items for sale 🌾</Headers>
+        </div>
         {props.itemsForSale.map((item) => {
           return (
             <div key={item.id}>
@@ -70,7 +88,7 @@ const OwnerProfile = (props) => {
         {/* {JSON.stringify(props.itemsForSale, 2, "")} */}
       </div>
       {props.error && <p style={{ color: "red" }}>{props.error}</p>}
-    </div>
+    </FlexStyling>
   );
 };
 
