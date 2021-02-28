@@ -28,8 +28,8 @@ const Navigation = ({ isLoggedIn }) => {
         {isLoggedIn ? <></> : <Link to="/register">Register Here</Link>}
         <Link to="/team">Meet The BW Team</Link>
         <Link to="/">Home</Link>
-        {isLoggedIn && <Link to="/ownerProfile">Your Profile</Link>}
-        {isLoggedIn && <Link to="/itemsList">Items List</Link>}
+        {isLoggedIn && <Link to="/:id/ownerProfile">Your Profile</Link>}
+        {isLoggedIn && <Link to="/:id/itemsList">Items List</Link>}
       </NavDiv>
     </MainDiv>
   );

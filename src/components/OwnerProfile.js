@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { loadUser, loadUserItems } from "../actions/ownerActions";
 
 // NOTE baseURL/api /${id}/profile
 
@@ -12,27 +13,17 @@ const Center = styled.div`
 `;
 
 const OwnerProfile = (props) => {
-  const [currentUser, setCurrentUser] = useState({});
-
   const { id } = useParams();
 
   useEffect(() => {
-    axiosWithAuth()
-      .get(`users/${id}`)
-      .then((response) => {
-        console.log(("OwnerProfile success response", response));
-        setCurrentUser(response.data);
-      })
-      .catch((error) => {
-        console.log("OwnerProfile error", error.response.data.message);
-      });
+    props.loadUser(id);
+    props.loadUserItems(id);
+    props.setIsLoggedIn(true);
   }, []);
-
-  console.log(props.isEditing);
 
   return (
     <Center>
-      <div>
+      {/* <div>
         <p>your profile!</p>
         {props.user_photo ? <div>photo: {props.user_photo}</div> : null}
         <br></br>
@@ -43,23 +34,28 @@ const OwnerProfile = (props) => {
         <p>country: {props.country_id}</p>
         <br></br>
         {props.user_info ? <div>bio: {props.user_info}</div> : null}
-      </div>
+      </div> */}
+      <h1>OWNER PROFILE</h1>
+      {JSON.stringify(props.ownerProfile, 2, "")}
+      <img src={props.ownerProfile.user_photo}></img>
+      {JSON.stringify(props.itemsForSale, 2, "")}
+      {props.error && <p style={{ color: "red" }}>{props.error}</p>}
     </Center>
   );
 };
 
 const mapStateToProps = (state) => {
+  console.log("STATE: ", state);
   return {
-    name: state.ORS.name,
-    password: state.ORS.password,
-    email: state.ORS.email,
-    country_id: state.ORS.country_id,
-    user_photo: state.ORS.user_photo,
-    user_info: state.ORS.user_info,
+    owner_id: state.ORS.owner_id,
+    ownerProfile: state.ORS.ownerProfile,
     error: state.ORS.error,
     isLoading: state.ORS.isLoading,
     isEditing: state.ORS.isEditing,
+    itemsForSale: state.ORS.itemsForSale,
   };
 };
 
-export default connect(mapStateToProps, {})(OwnerProfile);
+export default connect(mapStateToProps, { loadUser, loadUserItems })(
+  OwnerProfile
+);
