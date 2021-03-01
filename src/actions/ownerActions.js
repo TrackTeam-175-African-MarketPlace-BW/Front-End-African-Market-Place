@@ -42,6 +42,26 @@ export const editingUser = () => {
   };
 };
 
+export const updatedUser = (id) => {
+  return (dispatch) => {
+    axiosWithAuth()
+      .put(`/users/${id}/profile`)
+      .then((response) => {
+        console.log(
+          "src: ownerActions.js, function: updatedUser success",
+          response
+        );
+        dispatch({
+          type: UPDATED_USER,
+          payload: response.data,
+        });
+      })
+      .catch((error) => {
+        console.log("updatedUser error", error);
+      });
+  };
+};
+
 export const loadUserItems = (id) => {
   return (dispatch) => {
     //dispatch({ type: USER_LOADING });

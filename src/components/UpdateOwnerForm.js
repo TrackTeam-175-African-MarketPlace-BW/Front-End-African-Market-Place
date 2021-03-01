@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axiosWithAuth from "../utils/axiosWithAuth";
-import { useHistory } from "react-router-dom";
-import { editingUser } from "../actions/ownerActions";
+import { useHistory, useParams } from "react-router-dom";
+import { loadUser, editingUser, updatedUser } from "../actions/ownerActions";
+import { connect } from "react-redux";
 
 // const Center = styled.div`
 //   display: flex;
 //   justify-content: center;
 // `;
 
-const UpdateOwnerForm = ({ itemInfo }) => {
-  //   console.log("UpdateOwnerForm props", itemInfo.country);
+const initialState = {
+  name: "",
+  email: "",
+  country: "",
+  user_info: "",
+  // user_photo: "",
+};
 
-  const [updatedInfo, setUpdatedInfo] = useState({
-    name: "",
-    email: "",
-    country: "",
-    user_info: "",
-    // user_photo: "",
-  });
+const UpdateOwnerForm = (props) => {
+  console.log("UpdateOwnerForm props", props);
+  const [updatedInfo, setUpdatedInfo] = useState(initialState);
 
   // console.log("these are the credentials", credentials);
 
@@ -26,8 +28,20 @@ const UpdateOwnerForm = ({ itemInfo }) => {
   // console.log("these are the countries", countries);
 
   const { push } = useHistory();
+  const { id } = useParams();
 
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    axiosWithAuth()
+      .get(`/users/${id}`)
+      .then((response) => {
+        setUpdatedInfo(response.data);
+      })
+      .catch((error) => {
+        console.log("updateOwnerForm get error", error.response.data.message);
+      });
+  }, []);
 
   const handleChanges = (e) => {
     setUpdatedInfo({
@@ -38,6 +52,7 @@ const UpdateOwnerForm = ({ itemInfo }) => {
 
   const submitUpdate = (e) => {
     e.preventDefault();
+    updatedUser();
   };
 
   useEffect(() => {
@@ -63,7 +78,7 @@ const UpdateOwnerForm = ({ itemInfo }) => {
           name="name"
           value={updatedInfo.name}
           onChange={handleChanges}
-          placeholder={itemInfo.name}
+          placeholder={props.itemInfo.name}
         />
         <br></br>
         <label htmlFor="email" />
@@ -73,7 +88,7 @@ const UpdateOwnerForm = ({ itemInfo }) => {
           name="email"
           value={updatedInfo.email}
           onChange={handleChanges}
-          placeholder={itemInfo.email}
+          placeholder={props.itemInfo.email}
         />
         <br></br>
         <label htmlFor="country">
@@ -84,7 +99,7 @@ const UpdateOwnerForm = ({ itemInfo }) => {
             value={updatedInfo.country}
             // defaultValue={countries[0]}
             onChange={handleChanges}
-            placeholder={itemInfo.country}
+            placeholder={props.itemInfo.country}
           >
             {countries.map((country) => {
               return (
@@ -117,7 +132,7 @@ const UpdateOwnerForm = ({ itemInfo }) => {
             name="user_info"
             value={updatedInfo.user_info}
             onChange={handleChanges}
-            placeholder={itemInfo.user_info}
+            placeholder={props.itemInfo.user_info}
           />
         </label>
         <br></br>
@@ -134,4 +149,19 @@ const UpdateOwnerForm = ({ itemInfo }) => {
   );
 };
 
-export default UpdateOwnerForm;
+const mapStateToProps = (state) => {
+  // console.log("STATE: ", state);
+  return {
+    owner_id: state.ORS.owner_id,
+    ownerProfile: state.ORS.ownerProfile,
+    error: state.ORS.error,
+    isLoading: state.ORS.isLoading,
+    isEditing: state.ORS.isEditing,
+  };
+};
+
+export default connect(mapStateToProps, {
+  loadUser,
+  editingUser,
+  updatedUser,
+})(UpdateOwnerForm);

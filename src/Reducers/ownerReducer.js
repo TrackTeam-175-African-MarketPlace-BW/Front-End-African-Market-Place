@@ -52,6 +52,7 @@ export const ownerReducer = (state = initialState, action) => {
         item: action.payload,
         isEditing: false,
       };
+
     default:
       return state;
   }

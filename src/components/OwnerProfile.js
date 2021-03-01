@@ -30,7 +30,7 @@ const Headers = styled.h1`
 const OwnerProfile = (props) => {
   const { id } = useParams();
   // console.log("USE PARAMS", useParams());
-  console.log("sr: ownerProfile.js, const ownerProfile props", props);
+  // console.log("sr: ownerProfile.js, const ownerProfile props", props);
 
   useEffect(() => {
     props.loadUser(id);
