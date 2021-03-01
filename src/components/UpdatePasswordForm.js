@@ -36,7 +36,7 @@ const UpdatePasswordForm = (props) => {
   const submitUpdatedPassword = (e) => {
     e.preventDefault();
     props.updatedPassword(props.id, changedPassword);
-    push(`/${props.id}/ownerProfile`);
+    push(`/newpassword`);
   };
 
   return (
@@ -60,7 +60,7 @@ const UpdatePasswordForm = (props) => {
           onChange={handleChanges}
         />
         <br></br>
-        <button style={{ marginTop: "5px" }}>update user info?</button>
+        <button style={{ marginTop: "5px" }}>change password?</button>
         <br></br>
         {error ? <div style={{ color: "red" }}>{error}</div> : null}
       </form>

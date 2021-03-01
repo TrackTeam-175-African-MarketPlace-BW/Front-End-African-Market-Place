@@ -35,8 +35,6 @@ const Headers = styled.h1`
 
 const OwnerProfile = (props) => {
   const { id } = useParams();
-  // console.log("USE PARAMS", useParams());
-  // console.log("sr: ownerProfile.js, const ownerProfile props", props);
 
   useEffect(() => {
     props.loadUser(id);
@@ -53,8 +51,6 @@ const OwnerProfile = (props) => {
     e.preventDefault();
     props.editingPassword();
   };
-
-  // console.log("these are the items for sale", props.itemsForSale);
 
   return (
     <FlexStyling>
@@ -78,7 +74,6 @@ const OwnerProfile = (props) => {
           <button onClick={handleUpdateProfile}>update profile?</button>
         ) : null}
         <button onClick={handleUpdatePassword}>update password?</button>
-        {/* {JSON.stringify(props.ownerProfile, 2, "")} */}
       </div>
       <div>{props.isEditingUser ? <UpdateOwnerForm /> : null}</div>
       <div>{props.isEditingPassword ? <UpdatePasswordForm /> : null}</div>
@@ -105,13 +100,8 @@ const OwnerProfile = (props) => {
             </div>
           );
         })}
-        {/* {props.itemsForSale.map((item) => {
-          return <div>{item}</div>;
-        })} */}
-        {/* {JSON.stringify(props.itemsForSale, 2, "")} */}
       </div>
       <br></br>
-      {/* {props.error && <p style={{ color: "red" }}>{props.error}</p>} */}
     </FlexStyling>
   );
 };
