@@ -80,7 +80,7 @@ const UpdatePasswordForm = (props) => {
         new password: <i onClick={togglePasswordVisibilityNew}>{eye}</i>{" "}
         <br></br>
         <input
-          type={passwordShown ? "text" : "password"}
+          type={passwordShown2 ? "text" : "password"}
           name="newPassword"
           value={changedPassword.newPassword}
           onChange={handleChanges}
