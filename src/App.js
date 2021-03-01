@@ -10,6 +10,7 @@ import "./App.css";
 import TeamInfo from "./components/TeamInfo";
 import Register from "./components/Register";
 import LogIn from "./components/LogIn";
+import EditItem from "./components/ITEMS/EditItem";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -18,11 +19,16 @@ function App() {
     <>
       <Navigation isLoggedIn={isLoggedIn} />
       <Switch>
-        <PrivateRoute exact path="/:id/ownerProfile">
-          <OwnerProfile setIsLoggedIn={setIsLoggedIn} />
+
+        <PrivateRoute path="/:id/ownerProfile">
+          <OwnerProfile setIsLoggedIn={setIsLoggedIn}/>
+
         </PrivateRoute>
         <PrivateRoute path="/itemsList">
           <ItemsList setIsLoggedIn={setIsLoggedIn} />
+        </PrivateRoute>
+        <PrivateRoute path="/:id/itemsList/:item.id">
+          <EditItem setIsLoggedIn={setIsLoggedIn}/>
         </PrivateRoute>
         <Route path="/team">
           <TeamInfo />
