@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
-import { loadUser, editingUser, updatedUser } from "../actions/ownerActions";
+import {
+  loadUser,
+  editingUser,
+  updatedUser,
+  cancelEditing,
+} from "../actions/ownerActions";
 import { connect } from "react-redux";
 
 // const Center = styled.div`
@@ -64,6 +69,11 @@ const UpdateOwnerForm = (props) => {
     e.preventDefault();
     props.updatedUser(props.id, updatedInfo);
     push(`/${props.id}/ownerProfile`);
+  };
+
+  const toCancelEditing = (e) => {
+    e.preventDefault();
+    props.cancelEditing();
   };
 
   return (
@@ -133,6 +143,9 @@ const UpdateOwnerForm = (props) => {
         <br></br>
         {error ? <div style={{ color: "red" }}>{error}</div> : null}
       </form>
+      <button style={{ marginTop: "5px" }} onClick={toCancelEditing}>
+        cancel editing.
+      </button>
       {/* <div>
         {countries.map((item) => {
           <div>{item.country}</div>;
@@ -157,4 +170,5 @@ export default connect(mapStateToProps, {
   loadUser,
   editingUser,
   updatedUser,
+  cancelEditing,
 })(UpdateOwnerForm);

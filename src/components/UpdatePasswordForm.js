@@ -7,6 +7,7 @@ import {
   editingUser,
   updatedUser,
   updatedPassword,
+  cancelEditing,
 } from "../actions/ownerActions";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -25,6 +26,7 @@ const UpdatePasswordForm = (props) => {
   //   console.log("updatedInfo", updatedInfo);
 
   // console.log("these are the credentials", credentials);
+  console.log("update password form props", props);
 
   const { push } = useHistory();
 
@@ -53,6 +55,11 @@ const UpdatePasswordForm = (props) => {
     push(`/newpassword`);
   };
 
+  const toCancelEditing = (e) => {
+    e.preventDefault();
+    props.cancelEditing();
+  };
+
   return (
     <div>
       <form onSubmit={submitUpdatedPassword}>
@@ -73,7 +80,7 @@ const UpdatePasswordForm = (props) => {
         new password: <i onClick={togglePasswordVisibilityNew}>{eye}</i>{" "}
         <br></br>
         <input
-          type={passwordShown2 ? "text" : "password"}
+          type={passwordShown ? "text" : "password"}
           name="newPassword"
           value={changedPassword.newPassword}
           onChange={handleChanges}
@@ -83,6 +90,7 @@ const UpdatePasswordForm = (props) => {
         <br></br>
         {error ? <div style={{ color: "red" }}>{error}</div> : null}
       </form>
+      <button onClick={toCancelEditing}>cancel editing</button>
     </div>
   );
 };
@@ -104,4 +112,5 @@ export default connect(mapStateToProps, {
   editingUser,
   updatedUser,
   updatedPassword,
+  cancelEditing,
 })(UpdatePasswordForm);

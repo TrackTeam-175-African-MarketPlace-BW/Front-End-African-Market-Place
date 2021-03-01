@@ -9,6 +9,7 @@ import {
   UPDATED_PASSWORD,
   TOGGLE_UPDATE_USER,
   TOGGLE_UPDATE_PASSWORD,
+  CANCEL_EDITING,
 } from "../actions/ownerActions";
 
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
   isLoading: false,
   isEditingUser: false,
   isEditingPassword: false,
+
   itemsForSale: [], //REVIEW This is a stretch part
 };
 
@@ -83,6 +85,12 @@ export const ownerReducer = (state = initialState, action) => {
       return {
         ...state,
         isEditingPassword: false,
+      };
+    case CANCEL_EDITING:
+      return {
+        ...state,
+        isEditingPassword: false,
+        isEditingUser: false,
       };
 
     default:

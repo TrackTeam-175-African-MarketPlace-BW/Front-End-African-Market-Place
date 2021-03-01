@@ -10,6 +10,7 @@ export const UPDATING_PASSWORD = "UPDATING_PASSWORD";
 export const UPDATED_PASSWORD = "UPDATED_PASSWORD";
 export const TOGGLE_UPDATE_USER = "TOGGLE_UPDATE_USER";
 export const TOGGLE_UPDATE_PASSWORD = "TOGGLE_UPDATE_PASSWORD";
+export const CANCEL_EDITING = "CANCEL_EDITING";
 
 export const loadUser = (id) => {
   return (dispatch) => {
@@ -109,6 +110,12 @@ export const updatedPassword = (id, changedPassword) => {
           payload: error.response.data.message,
         });
       });
+  };
+};
+
+export const cancelEditing = () => {
+  return (dispatch) => {
+    dispatch({ type: CANCEL_EDITING });
   };
 };
 
