@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -20,6 +21,7 @@ const NavDiv = styled.div`
 `;
 
 const Navigation = ({ isLoggedIn }) => {
+  const { id } = useParams();
   return (
     <MainDiv>
       <h2>Sauti African Market Place</h2>
@@ -28,8 +30,8 @@ const Navigation = ({ isLoggedIn }) => {
         {isLoggedIn ? <></> : <Link to="/register">Register Here</Link>}
         <Link to="/team">Meet The BW Team</Link>
         <Link to="/">Home</Link>
-        {isLoggedIn && <Link to="/:id/ownerProfile">Your Profile</Link>}
-        {isLoggedIn && <Link to="/:id/itemsList">Items List</Link>}
+        {isLoggedIn && <Link to={`/${id}/ownerProfile`}>Your Profile</Link>}
+        {isLoggedIn && <Link to={`/${id}/itemsList`}>Items List</Link>}
       </NavDiv>
     </MainDiv>
   );
