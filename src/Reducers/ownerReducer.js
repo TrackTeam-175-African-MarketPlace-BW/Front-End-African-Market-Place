@@ -7,6 +7,8 @@ import {
   UPDATED_USER,
 } from "../actions/ownerActions";
 
+import { ADD_ITEM } from "../actions/itemsActions";
+
 const initialState = {
   owner_id: null,
   ownerProfile: {},
@@ -53,7 +55,11 @@ export const ownerReducer = (state = initialState, action) => {
         ownerProfile: action.payload,
         isEditing: false,
       };
-
+    case ADD_ITEM:
+      return {
+        ...state,
+        itemsForSale: [...state.itemsForSale, action.payload],
+      };
     default:
       return state;
   }

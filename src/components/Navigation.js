@@ -31,14 +31,14 @@ const Navigation = (props) => {
   return (
     <MainDiv>
       <h2>Sauti African Market Place</h2>
-      <button onClick={() => {logOut()}}>Log Out</button>
+      {props.isLoggedIn ? <button onClick={() => {logOut()}}>Log Out</button> : <></> }
       <NavDiv>
         {props.isLoggedIn ? <></> : <Link to="/login"> Current Users: Log In</Link>}
         {props.isLoggedIn ? <></> : <Link to="/register">Register Here</Link>}
         <Link to="/team">Meet The BW Team</Link>
         <Link to="/">Home</Link>
         {props.isLoggedIn && <Link to={`/${props.id}/ownerProfile`}>Your Profile</Link>}
-        {props.isLoggedIn && <Link to={`/itemsList`}>Items List</Link>}
+        {props.isLoggedIn && <Link to={`${props.id}/itemsList`}>Items List</Link>}
       </NavDiv>
     </MainDiv>
   );

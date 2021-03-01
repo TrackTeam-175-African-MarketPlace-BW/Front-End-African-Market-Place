@@ -15,11 +15,12 @@ export const UPDATING_ITEM = "UPDATING_ITEM";
 export const UPDATED_ITEM = "UPDATED_ITEM";
 export const REMOVING_ITEM = "REMOVING_ITEM";
 export const REMOVE_ITEM = "REMOVE_ITEM";
+export const ADD_ITEM = "ADD_ITEM";
 
 export const getItems = () => (dispatch) => {
   dispatch({ type: DATA_LOADING });
-  setTimeout(() => {
-    axiosWithAuth()
+
+  axiosWithAuth()
     .get("/items")
     .then((res) => {
       console.log("cd: itemsActions: getItems: axios.get response: ", res);
@@ -35,8 +36,6 @@ export const getItems = () => (dispatch) => {
         payload: err.response.data.message,
       });
     });
-  }, 2000)
-  
 };
 
 export const showSingleItem = (itemId) => (dispatch) => {
@@ -58,10 +57,19 @@ export const showSingleItem = (itemId) => (dispatch) => {
 };
 
 export const updateSingleItem = (item) => (dispatch) => {
-  dispatch({ type: SINGLE_ITEM, payload: item});
+  dispatch({ type: SINGLE_ITEM, payload: item });
 };
 
 export const deleteItem = (itemId) => (dispatch) => {
   dispatch({ type: REMOVING_ITEM });
   axiosWithAuth().delete(`/`);
 };
+
+export const addItemForSale = (id, item) => (dispatch) => {
+  axiosWithAuth()
+    .post(`/users/${id}/items`, item)
+    .then((res) => {
+      console.log("cd: itemsActions.js: addItemsForSale: axios.post response: ", res)
+    })
+    .catch((err) => console.log({err}))
+  };

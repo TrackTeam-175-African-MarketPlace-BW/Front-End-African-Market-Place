@@ -22,13 +22,12 @@ function App() {
 
         <PrivateRoute path="/:id/ownerProfile">
           <OwnerProfile setIsLoggedIn={setIsLoggedIn}/>
-
         </PrivateRoute>
-        <PrivateRoute path="/itemsList">
+        <PrivateRoute exact path="/:id/itemsList">
           <ItemsList setIsLoggedIn={setIsLoggedIn} />
         </PrivateRoute>
-        <PrivateRoute path="/:id/itemsList/:item.id">
-          <EditItem setIsLoggedIn={setIsLoggedIn}/>
+        <PrivateRoute exact path="/singleItem/:item.id">
+          <SingleItem setIsLoggedIn={setIsLoggedIn}/>
         </PrivateRoute>
         <Route path="/team">
           <TeamInfo />
