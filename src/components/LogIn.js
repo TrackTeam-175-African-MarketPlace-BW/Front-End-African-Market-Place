@@ -3,7 +3,7 @@ import { NavLink, useHistory } from "react-router-dom";
 
 import axiosWithAuth from "../utils/axiosWithAuth";
 
-const LogIn = (props) => {
+const LogIn = () => {
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",

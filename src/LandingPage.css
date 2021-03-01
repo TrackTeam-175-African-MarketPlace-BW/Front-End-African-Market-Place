@@ -1,0 +1,75 @@
+/* container selectors */
+
+.div-container {
+    width: 100%;
+    margin-bottom: -5px;
+}
+
+.div-1 {
+    position: relative;
+}
+
+.div-container > img {
+    width: 100%;
+}
+
+.div-2 {
+    background-color: rgb(209, 113, 70);
+    color: white;
+    height: 20rem;
+}
+
+.div-4 {
+    background-color: rgb(151, 66, 56);
+    color: white;
+    height: 20rem;
+}
+
+/* .div-2 > p {
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+} */
+
+.flex-container {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: flex-start;
+}
+
+.div-1-flex {
+    position: absolute;
+    top: 60%;
+    width: 100%;
+}
+
+.text-container {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    width: 50%;
+    padding: 1rem;
+    text-align: center;
+    flex: 100%;
+}
+
+/* button selectors */
+
+.btn {
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin: .2em;
+    width: 45%;
+}
+
+.btn:hover {
+    border: 0;
+}
+
+/* text selectors */
+
+#landingPage-h2 {
+    margin-top: 1em;
+  }

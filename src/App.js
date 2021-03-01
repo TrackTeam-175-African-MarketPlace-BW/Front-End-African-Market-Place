@@ -10,7 +10,7 @@ import "./App.css";
 import TeamInfo from "./components/TeamInfo";
 import Register from "./components/Register";
 import LogIn from "./components/LogIn";
-
+import LandingPage from "./components/LandingPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -41,7 +41,7 @@ function App() {
           <UpdateItemForm />
         </Route>
         <Route exact path="/">
-          <p>Hello from the Home page</p>
+          <LandingPage />
         </Route>
       </Switch>
     </>

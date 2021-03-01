@@ -24,7 +24,7 @@ const Navigation = ({ isLoggedIn }) => {
     <MainDiv>
       <h2>Sauti African Market Place</h2>
       <NavDiv>
-        {isLoggedIn ? <></> : <Link to="/login"> Current Users: Log In</Link>}
+        {isLoggedIn ? <></> : <Link to="/login">Current Users: Log In</Link>}
         {isLoggedIn ? <></> : <Link to="/register">Register Here</Link>}
         <Link to="/team">Meet The BW Team</Link>
         <Link to="/">Home</Link>
