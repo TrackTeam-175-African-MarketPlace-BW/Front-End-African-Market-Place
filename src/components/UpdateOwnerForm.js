@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axiosWithAuth from "../utils/axiosWithAuth";
-import { useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { loadUser, editingUser, updatedUser } from "../actions/ownerActions";
 import { connect } from "react-redux";
 
@@ -29,7 +29,6 @@ const UpdateOwnerForm = (props) => {
   // console.log("these are the countries", countries);
 
   const { push } = useHistory();
- 
 
   const [error, setError] = useState("");
 
@@ -63,7 +62,7 @@ const UpdateOwnerForm = (props) => {
 
   const submitUpdate = (e) => {
     e.preventDefault();
-    props.updatedUser(props.id ,updatedInfo);
+    props.updatedUser(props.id, updatedInfo);
     push(`/${props.id}/ownerProfile`);
   };
 

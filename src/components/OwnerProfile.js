@@ -2,8 +2,16 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { loadUser, loadUserItems, editingUser } from "../actions/ownerActions";
+import {
+  loadUser,
+  loadUserItems,
+  editingUser,
+  editingPassword,
+  unmountUser,
+  unmountPasswordChange,
+} from "../actions/ownerActions";
 import UpdateOwnerForm from "./UpdateOwnerForm";
+import UpdatePasswordForm from "./UpdatePasswordForm";
 
 // NOTE baseURL/api /${id}/profile
 
@@ -29,21 +37,26 @@ const Headers = styled.h1`
 
 const OwnerProfile = (props) => {
   const { id } = useParams();
-  // console.log("USE PARAMS", useParams());
-  // console.log("sr: ownerProfile.js, const ownerProfile props", props);
 
   useEffect(() => {
     props.loadUser(id);
     props.loadUserItems(id);
     props.setIsLoggedIn(true);
+    return () => {
+      props.unmountUser();
+      props.unmountPasswordChange();
+    };
   }, []);
 
-  const handleClick = (e) => {
+  const handleUpdateProfile = (e) => {
     e.preventDefault();
     props.editingUser();
   };
 
-  // console.log("these are the items for sale", props.itemsForSale);
+  const handleUpdatePassword = (e) => {
+    e.preventDefault();
+    props.editingPassword();
+  };
 
   return (
     <FlexStyling>
@@ -63,10 +76,19 @@ const OwnerProfile = (props) => {
         <br></br>
         bio: {props.ownerProfile.user_info}
         <br></br>
-        <button onClick={handleClick}>update profile?</button>
-        {/* {JSON.stringify(props.ownerProfile, 2, "")} */}
+        {props.isEditingUser === false ? (
+          <button onClick={handleUpdateProfile}>update profile?</button>
+        ) : null}
+        {props.isEditingPassword === false ? (
+          <button onClick={handleUpdatePassword}>update password?</button>
+        ) : null}
       </div>
-      <div>{props.isEditing ? <UpdateOwnerForm /> : null}</div>
+      <div>{props.isEditingUser ? <UpdateOwnerForm /> : null}</div>
+      <div>{props.isEditingPassword ? <UpdatePasswordForm /> : null}</div>
+      {/* // NOTE HOW DO I GET ONLY ONE TO SHOW AT A TIME 
+         // NOTE HOW DO I ONLY SHOW ONE AT A TIME 
+      */}
+
       <div>
         <div>
           <Headers>🌾 {props.ownerProfile.name}'s items for sale 🌾</Headers>
@@ -90,13 +112,8 @@ const OwnerProfile = (props) => {
             </div>
           );
         })}
-        {/* {props.itemsForSale.map((item) => {
-          return <div>{item}</div>;
-        })} */}
-        {/* {JSON.stringify(props.itemsForSale, 2, "")} */}
       </div>
       <br></br>
-      {/* {props.error && <p style={{ color: "red" }}>{props.error}</p>} */}
     </FlexStyling>
   );
 };
@@ -108,7 +125,8 @@ const mapStateToProps = (state) => {
     ownerProfile: state.ORS.ownerProfile,
     error: state.ORS.error,
     isLoading: state.ORS.isLoading,
-    isEditing: state.ORS.isEditing,
+    isEditingUser: state.ORS.isEditingUser,
+    isEditingPassword: state.ORS.isEditingPassword,
     itemsForSale: state.ORS.itemsForSale,
   };
 };
@@ -117,4 +135,7 @@ export default connect(mapStateToProps, {
   loadUser,
   loadUserItems,
   editingUser,
+  editingPassword,
+  unmountUser,
+  unmountPasswordChange,
 })(OwnerProfile);

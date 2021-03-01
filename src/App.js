@@ -11,24 +11,23 @@ import TeamInfo from "./components/TeamInfo";
 import Register from "./components/Register";
 import LogIn from "./components/LogIn";
 import EditItem from "./components/ITEMS/EditItem";
+import NewPasswordSuccess from "./components/NewPasswordSuccess";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <>
-      <Navigation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+      <Navigation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Switch>
-
         <PrivateRoute path="/:id/ownerProfile">
-          <OwnerProfile setIsLoggedIn={setIsLoggedIn}/>
-
+          <OwnerProfile setIsLoggedIn={setIsLoggedIn} />
         </PrivateRoute>
         <PrivateRoute path="/itemsList">
           <ItemsList setIsLoggedIn={setIsLoggedIn} />
         </PrivateRoute>
         <PrivateRoute path="/:id/itemsList/:item.id">
-          <EditItem setIsLoggedIn={setIsLoggedIn}/>
+          <EditItem setIsLoggedIn={setIsLoggedIn} />
         </PrivateRoute>
         <Route path="/team">
           <TeamInfo />
@@ -44,6 +43,9 @@ function App() {
         </Route>
         <Route path="/updateItem">
           <UpdateItemForm />
+        </Route>
+        <Route path="/newpassword">
+          <NewPasswordSuccess />
         </Route>
         <Route exact path="/">
           <p>Hello from the Home page</p>
