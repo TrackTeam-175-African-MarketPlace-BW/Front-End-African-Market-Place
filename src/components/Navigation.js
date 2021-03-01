@@ -17,7 +17,7 @@ const MainDiv = styled.div`
 const NavDiv = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 500px;props.
+  width: 500px;
 `;
 
 const Navigation = (props) => {
