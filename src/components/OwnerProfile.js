@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import UpdateOwnerForm from "./UpdateOwnerForm";
@@ -59,7 +59,12 @@ const OwnerProfile = (props) => {
   return (
     <FlexStyling>
       <div>
-        <Headers>👥 welcome, {props.ownerProfile.name} </Headers>
+        <Headers>
+          <span role="img" aria-label="bust of two people emoji">
+            👥
+          </span>{" "}
+          welcome, {props.ownerProfile.name}{" "}
+        </Headers>
         name: {props.ownerProfile.name}
         <br></br>
         <img
@@ -86,7 +91,12 @@ const OwnerProfile = (props) => {
 
       <div>
         <div>
-          <Headers>🌾 {props.ownerProfile.name}'s items for sale 🌾</Headers>
+          <Headers>
+            <span role="img" aria-label="corn emoji">
+              🌾
+            </span>{" "}
+            {props.ownerProfile.name}'s items for sale{" "}
+          </Headers>
         </div>
         {props.itemsForSale.map((item) => {
           return (

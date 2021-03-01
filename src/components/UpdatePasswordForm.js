@@ -23,7 +23,6 @@ const UpdatePasswordForm = (props) => {
 
   const { push } = useHistory();
   const eye = <FontAwesomeIcon icon={faEye} />;
-  const [error, setError] = useState("");
 
   const handleChanges = (e) => {
     setChangedPassword({
@@ -80,7 +79,6 @@ const UpdatePasswordForm = (props) => {
         <br></br>
         <button style={{ marginTop: "5px" }}>change password.</button>
         <br></br>
-        {error ? <div style={{ color: "red" }}>{error}</div> : null}
       </form>
       <button onClick={toCancelEditing}>cancel editing</button>
     </div>

@@ -23,8 +23,6 @@ const UpdateOwnerForm = (props) => {
 
   const [countries, setCountries] = useState([]);
 
-  const [error, setError] = useState("");
-
   useEffect(() => {
     axiosWithAuth()
       .get(`/users/${props.id}`)
@@ -126,7 +124,6 @@ const UpdateOwnerForm = (props) => {
         <br></br>
         <button style={{ marginTop: "5px" }}>save updated info.</button>
         <br></br>
-        {error ? <div style={{ color: "red" }}>{error}</div> : null}
       </form>
       <button style={{ marginTop: "5px" }} onClick={toCancelEditing}>
         cancel editing.
