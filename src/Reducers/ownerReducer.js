@@ -7,6 +7,8 @@ import {
   UPDATED_USER,
   UPDATING_PASSWORD,
   UPDATED_PASSWORD,
+  TOGGLE_UPDATE_USER,
+  TOGGLE_UPDATE_PASSWORD,
 } from "../actions/ownerActions";
 
 const initialState = {
@@ -50,6 +52,12 @@ export const ownerReducer = (state = initialState, action) => {
         ...state,
         isEditingUser: true,
       };
+
+    case TOGGLE_UPDATE_USER:
+      return {
+        ...state,
+        isEditingUser: false,
+      };
     case UPDATED_USER:
       return {
         ...state,
@@ -65,6 +73,11 @@ export const ownerReducer = (state = initialState, action) => {
       return {
         ...state,
         ownerProfile: action.payload,
+        isEditingPassword: false,
+      };
+    case TOGGLE_UPDATE_PASSWORD:
+      return {
+        ...state,
         isEditingPassword: false,
       };
 

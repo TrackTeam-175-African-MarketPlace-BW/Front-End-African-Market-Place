@@ -7,6 +7,8 @@ import {
   loadUserItems,
   editingUser,
   editingPassword,
+  unmountUser,
+  unmountPasswordChange,
 } from "../actions/ownerActions";
 import UpdateOwnerForm from "./UpdateOwnerForm";
 import UpdatePasswordForm from "./UpdatePasswordForm";
@@ -40,6 +42,10 @@ const OwnerProfile = (props) => {
     props.loadUser(id);
     props.loadUserItems(id);
     props.setIsLoggedIn(true);
+    return () => {
+      props.unmountUser();
+      props.unmountPasswordChange();
+    };
   }, []);
 
   const handleUpdateProfile = (e) => {
@@ -77,6 +83,10 @@ const OwnerProfile = (props) => {
       </div>
       <div>{props.isEditingUser ? <UpdateOwnerForm /> : null}</div>
       <div>{props.isEditingPassword ? <UpdatePasswordForm /> : null}</div>
+      {/* // NOTE HOW DO I GET ONLY ONE TO SHOW AT A TIME 
+         // NOTE HOW DO I ONLY SHOW ONE AT A TIME 
+      */}
+
       <div>
         <div>
           <Headers>🌾 {props.ownerProfile.name}'s items for sale 🌾</Headers>
@@ -124,4 +134,6 @@ export default connect(mapStateToProps, {
   loadUserItems,
   editingUser,
   editingPassword,
+  unmountUser,
+  unmountPasswordChange,
 })(OwnerProfile);
