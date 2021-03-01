@@ -79,7 +79,9 @@ const OwnerProfile = (props) => {
         {props.isEditingUser === false ? (
           <button onClick={handleUpdateProfile}>update profile?</button>
         ) : null}
-        <button onClick={handleUpdatePassword}>update password?</button>
+        {props.isEditingPassword === false ? (
+          <button onClick={handleUpdatePassword}>update password?</button>
+        ) : null}
       </div>
       <div>{props.isEditingUser ? <UpdateOwnerForm /> : null}</div>
       <div>{props.isEditingPassword ? <UpdatePasswordForm /> : null}</div>
