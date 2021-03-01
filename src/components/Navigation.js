@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 const MainDiv = styled.div`
@@ -22,9 +22,15 @@ const NavDiv = styled.div`
 
 const Navigation = (props) => {
 
+  const { push } = useHistory();
+  const logOut = () => {
+    window.localStorage.removeItem("token");
+    push('/')
+  }
   return (
     <MainDiv>
       <h2>Sauti African Market Place</h2>
+      <button onClick={() => {logOut()}}>Log Out</button>
       <NavDiv>
         {props.isLoggedIn ? <></> : <Link to="/login"> Current Users: Log In</Link>}
         {props.isLoggedIn ? <></> : <Link to="/register">Register Here</Link>}
