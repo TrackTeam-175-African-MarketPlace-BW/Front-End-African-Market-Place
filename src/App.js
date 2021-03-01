@@ -5,12 +5,11 @@ import Navigation from "./components/Navigation";
 import OwnerProfile from "./components/OwnerProfile";
 import ItemsList from "./components/ITEMS/ItemsList";
 import SingleItem from "./components/ITEMS/SingleItem";
-import UpdateItemForm from './components/ITEMS/UpdateItemForm';
+import UpdateItemForm from "./components/ITEMS/UpdateItemForm";
 import "./App.css";
 import TeamInfo from "./components/TeamInfo";
 import Register from "./components/Register";
 import LogIn from "./components/LogIn";
-
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -20,10 +19,10 @@ function App() {
       <Navigation isLoggedIn={isLoggedIn} />
       <Switch>
         <PrivateRoute exact path="/:id/ownerProfile">
-          <OwnerProfile setIsLoggedIn={setIsLoggedIn}/>
+          <OwnerProfile setIsLoggedIn={setIsLoggedIn} />
         </PrivateRoute>
-        <PrivateRoute path="/:id/itemsList">
-          <ItemsList setIsLoggedIn={setIsLoggedIn}/>
+        <PrivateRoute path="/itemsList">
+          <ItemsList setIsLoggedIn={setIsLoggedIn} />
         </PrivateRoute>
         <Route path="/team">
           <TeamInfo />

@@ -15,12 +15,13 @@ const initialState = {
   email: "",
   country: "",
   user_info: "",
-  // user_photo: "",
+  user_photo: "",
 };
 
 const UpdateOwnerForm = (props) => {
   console.log("UpdateOwnerForm props", props);
   const [updatedInfo, setUpdatedInfo] = useState(initialState);
+  //   console.log("updatedInfo", updatedInfo);
 
   // console.log("these are the credentials", credentials);
 
@@ -41,21 +42,6 @@ const UpdateOwnerForm = (props) => {
       .catch((error) => {
         console.log("updateOwnerForm get error", error.response.data.message);
       });
-  }, []);
-
-  const handleChanges = (e) => {
-    setUpdatedInfo({
-      ...updatedInfo,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const submitUpdate = (e) => {
-    e.preventDefault();
-    updatedUser();
-  };
-
-  useEffect(() => {
     axiosWithAuth()
       .get("/countries")
       .then((response) => {
@@ -68,6 +54,19 @@ const UpdateOwnerForm = (props) => {
       });
   }, []);
 
+  const handleChanges = (e) => {
+    setUpdatedInfo({
+      ...updatedInfo,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const submitUpdate = (e) => {
+    e.preventDefault();
+    props.updatedUser(updatedInfo);
+    push(`/${id}/ownerProfile`);
+  };
+
   return (
     <div>
       <form onSubmit={submitUpdate}>
@@ -78,7 +77,6 @@ const UpdateOwnerForm = (props) => {
           name="name"
           value={updatedInfo.name}
           onChange={handleChanges}
-          placeholder={props.itemInfo.name}
         />
         <br></br>
         <label htmlFor="email" />
@@ -88,7 +86,6 @@ const UpdateOwnerForm = (props) => {
           name="email"
           value={updatedInfo.email}
           onChange={handleChanges}
-          placeholder={props.itemInfo.email}
         />
         <br></br>
         <label htmlFor="country">
@@ -99,7 +96,6 @@ const UpdateOwnerForm = (props) => {
             value={updatedInfo.country}
             // defaultValue={countries[0]}
             onChange={handleChanges}
-            placeholder={props.itemInfo.country}
           >
             {countries.map((country) => {
               return (
@@ -114,16 +110,15 @@ const UpdateOwnerForm = (props) => {
             })}
           </select>
         </label>
-        {/* <label htmlFor="user_photo" />
+        <label htmlFor="user_photo" />
         user photo?<br></br>
         <input
           type="text"
           name="user_photo"
-          value={credentials.user_photo}
+          value={updatedInfo.user_photo}
           onChange={handleChanges}
-          placeholder="url link format, please."
         />
-        <br></br> */}
+        <br></br>
         <br></br>
         <label htmlFor="user_info">
           bio:<br></br>
@@ -132,7 +127,6 @@ const UpdateOwnerForm = (props) => {
             name="user_info"
             value={updatedInfo.user_info}
             onChange={handleChanges}
-            placeholder={props.itemInfo.user_info}
           />
         </label>
         <br></br>

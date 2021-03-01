@@ -66,11 +66,7 @@ const OwnerProfile = (props) => {
         <button onClick={handleClick}>update profile?</button>
         {/* {JSON.stringify(props.ownerProfile, 2, "")} */}
       </div>
-      <div>
-        {props.isEditing ? (
-          <UpdateOwnerForm itemInfo={props.ownerProfile} />
-        ) : null}
-      </div>
+      <div>{props.isEditing ? <UpdateOwnerForm /> : null}</div>
       <div>
         <div>
           <Headers>🌾 {props.ownerProfile.name}'s items for sale 🌾</Headers>

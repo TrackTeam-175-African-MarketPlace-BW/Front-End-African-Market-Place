@@ -1,5 +1,4 @@
 import axiosWithAuth from "../utils/axiosWithAuth";
-
 export const USER_LOADING = "USER_LOADING";
 export const USER_RETRIEVED = "USER_RETRIEVED";
 export const USER_ITEMS_RETRIEVED = "USER_ITEMS_RETRIEVED";
@@ -42,10 +41,10 @@ export const editingUser = () => {
   };
 };
 
-export const updatedUser = (id) => {
+export const updatedUser = (id, updatedInfo) => {
   return (dispatch) => {
     axiosWithAuth()
-      .put(`/users/${id}/profile`)
+      .put(`/users/${id}/profile`, updatedInfo)
       .then((response) => {
         console.log(
           "src: ownerActions.js, function: updatedUser success",
@@ -57,7 +56,11 @@ export const updatedUser = (id) => {
         });
       })
       .catch((error) => {
-        console.log("updatedUser error", error);
+        console.log("updatedUser error", error.response);
+        dispatch({
+          type: ERROR_LOADING_USER,
+          payload: error.response.data.message,
+        });
       });
   };
 };
