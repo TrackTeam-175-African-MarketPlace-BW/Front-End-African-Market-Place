@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { getItems, updateSingleItem } from "./../../actions/itemsActions";
+import {
+  getItems,
+  updateSingleItem,
+  addItemForSale,
+} from "./../../actions/itemsActions";
 import Loader from "react-loader-spinner";
 import styled from "styled-components";
 import { useHistory, useParams } from "react-router-dom";
@@ -28,7 +32,8 @@ const StyledH4 = styled.h4`
 `;
 
 const ItemsList = (props) => {
-  const {id} = useParams();
+  const { id } = useParams();
+
   const { push } = useHistory();
   useEffect(() => {
     props.getItems();
@@ -36,8 +41,13 @@ const ItemsList = (props) => {
   }, []);
 
   const handleSingle = (item) => {
-    props.updateSingleItem(item)
-  }
+    props.updateSingleItem(item);
+  };
+
+  const addItem = (item) => {
+    console.log("cd: ItemsList.js: addItem: item: ", item);
+    props.addItemForSale(props.id, item);
+  };
 
   return (
     <div>
@@ -57,8 +67,17 @@ const ItemsList = (props) => {
                 <StyledH4>{item.price}</StyledH4>
                 <button
                   onClick={() => {
+                    addItem(item);
+                  }}
+                >
+                  Add Item To Sell
+                </button>
+                <br />
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
                     handleSingle(item);
-                    push(`/${id}/itemsList/${item.id}`);
+                    push(`/singleItem/${item.id}`);
                   }}
                 >
                   Update Item
@@ -68,23 +87,24 @@ const ItemsList = (props) => {
           })}
         </ItemContainer>
       )}
-
-
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
+    id: state.ORS.owner_id,
     items: state.IRS.items,
     error: state.IRS.error,
     gettingItems: state.IRS.getItems,
     updatingItem: state.IRS.updatingItem,
     creatingItem: state.IRS.creatingItem,
     deletingItem: state.IRS.deletingItem,
-    showUpdate: state.SIR.showUpdate,
-    singleItem: state.SIR.singleItem,
   };
 };
 
-export default connect(mapStateToProps, { getItems, updateSingleItem })(ItemsList);
+export default connect(mapStateToProps, {
+  getItems,
+  updateSingleItem,
+  addItemForSale,
+})(ItemsList);

@@ -18,20 +18,14 @@ export const loadUser = (id) => {
     axiosWithAuth()
       .get(`/users/${id}`)
       .then((response) => {
-        // console.log(
-        //   "sc: ownerActions: loadUser: axios.get response: ",
-        //   response
-        // );
+
         dispatch({
           type: USER_RETRIEVED,
           payload: response.data,
         });
       })
       .catch((error) => {
-        // console.log(
-        //   "sc: ownerActions: loadUser: axios.get error: ",
-        //   error.response
-        // );
+
         dispatch({
           type: ERROR_LOADING_USER,
           payload: error.response.data.message,

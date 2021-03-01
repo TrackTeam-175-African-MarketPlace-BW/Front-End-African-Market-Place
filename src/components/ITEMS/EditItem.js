@@ -33,7 +33,9 @@ const EditItem = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    item: state.SIR.selectedItem
+  };
 };
 
 export default connect(mapStateToProps, {})(EditItem);
