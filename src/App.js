@@ -17,7 +17,7 @@ function App() {
 
   return (
     <>
-      <Navigation isLoggedIn={isLoggedIn} />
+      <Navigation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
       <Switch>
 
         <PrivateRoute path="/:id/ownerProfile">

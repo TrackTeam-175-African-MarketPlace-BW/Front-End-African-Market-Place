@@ -25,6 +25,7 @@ const Navigation = (props) => {
   const { push } = useHistory();
   const logOut = () => {
     window.localStorage.removeItem("token");
+    props.setIsLoggedIn(false)
     push('/')
   }
   return (
