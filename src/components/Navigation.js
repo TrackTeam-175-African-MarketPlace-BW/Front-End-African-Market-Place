@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -17,24 +17,30 @@ const MainDiv = styled.div`
 const NavDiv = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 500px;
+  width: 500px;props.
 `;
 
-const Navigation = ({ isLoggedIn }) => {
-  const { id } = useParams();
+const Navigation = (props) => {
+
   return (
     <MainDiv>
       <h2>Sauti African Market Place</h2>
       <NavDiv>
-        {isLoggedIn ? <></> : <Link to="/login"> Current Users: Log In</Link>}
-        {isLoggedIn ? <></> : <Link to="/register">Register Here</Link>}
+        {props.isLoggedIn ? <></> : <Link to="/login"> Current Users: Log In</Link>}
+        {props.isLoggedIn ? <></> : <Link to="/register">Register Here</Link>}
         <Link to="/team">Meet The BW Team</Link>
         <Link to="/">Home</Link>
-        {isLoggedIn && <Link to={`/${id}/ownerProfile`}>Your Profile</Link>}
-        {isLoggedIn && <Link to={`/${id}/itemsList`}>Items List</Link>}
+        {props.isLoggedIn && <Link to={`/${props.id}/ownerProfile`}>Your Profile</Link>}
+        {props.isLoggedIn && <Link to={`/itemsList`}>Items List</Link>}
       </NavDiv>
     </MainDiv>
   );
 };
 
-export default Navigation;
+const mapStateToProps = (state) => {
+  return {
+    id: state.ORS.ownerProfile.id
+  }
+}
+
+export default connect(mapStateToProps, {})(Navigation);

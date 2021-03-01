@@ -96,7 +96,7 @@ const OwnerProfile = (props) => {
         {/* {JSON.stringify(props.itemsForSale, 2, "")} */}
       </div>
       <br></br>
-      {props.error && <p style={{ color: "red" }}>{props.error}</p>}
+      {/* {props.error && <p style={{ color: "red" }}>{props.error}</p>} */}
     </FlexStyling>
   );
 };

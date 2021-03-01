@@ -17,6 +17,7 @@ const initialState = {
 };
 
 export const ownerReducer = (state = initialState, action) => {
+  console.log("cd: OwnerReducer.js: action.payload: ", action.payload);
   switch (action.type) {
     case USER_LOADING:
       return {
@@ -49,9 +50,8 @@ export const ownerReducer = (state = initialState, action) => {
     case UPDATED_USER:
       return {
         ...state,
-        item: action.payload,
+        ownerProfile: action.payload,
         isEditing: false,
-        error: action.payload,
       };
 
     default:

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axiosWithAuth from "../utils/axiosWithAuth";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import { loadUser, editingUser, updatedUser } from "../actions/ownerActions";
 import { connect } from "react-redux";
 
@@ -29,13 +29,13 @@ const UpdateOwnerForm = (props) => {
   // console.log("these are the countries", countries);
 
   const { push } = useHistory();
-  const { id } = useParams();
+ 
 
   const [error, setError] = useState("");
 
   useEffect(() => {
     axiosWithAuth()
-      .get(`/users/${id}`)
+      .get(`/users/${props.id}`)
       .then((response) => {
         setUpdatedInfo(response.data);
       })
@@ -63,8 +63,8 @@ const UpdateOwnerForm = (props) => {
 
   const submitUpdate = (e) => {
     e.preventDefault();
-    props.updatedUser(updatedInfo);
-    push(`/${id}/ownerProfile`);
+    props.updatedUser(props.id ,updatedInfo);
+    push(`/${props.id}/ownerProfile`);
   };
 
   return (
@@ -146,7 +146,7 @@ const UpdateOwnerForm = (props) => {
 const mapStateToProps = (state) => {
   // console.log("STATE: ", state);
   return {
-    owner_id: state.ORS.owner_id,
+    id: state.ORS.ownerProfile.id,
     ownerProfile: state.ORS.ownerProfile,
     error: state.ORS.error,
     isLoading: state.ORS.isLoading,

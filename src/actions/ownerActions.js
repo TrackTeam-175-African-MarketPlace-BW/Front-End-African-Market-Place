@@ -52,11 +52,11 @@ export const updatedUser = (id, updatedInfo) => {
         );
         dispatch({
           type: UPDATED_USER,
-          payload: response.data,
+          payload: JSON.parse(response.config.data),
         });
       })
       .catch((error) => {
-        console.log("updatedUser error", error.response);
+        console.log("updatedUser error", {error});
         dispatch({
           type: ERROR_LOADING_USER,
           payload: error.response.data.message,
