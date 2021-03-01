@@ -38,7 +38,7 @@ const Navigation = (props) => {
         <Link to="/team">Meet The BW Team</Link>
         <Link to="/">Home</Link>
         {props.isLoggedIn && <Link to={`/${props.id}/ownerProfile`}>Your Profile</Link>}
-        {props.isLoggedIn && <Link to={`/itemsList`}>Items List</Link>}
+        {props.isLoggedIn && <Link to="/itemsList">Items List</Link>}
       </NavDiv>
     </MainDiv>
   );

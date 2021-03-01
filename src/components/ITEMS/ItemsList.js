@@ -33,7 +33,7 @@ const StyledH4 = styled.h4`
 
 const ItemsList = (props) => {
   const { id } = useParams();
-  
+
   const { push } = useHistory();
   useEffect(() => {
     props.getItems();
@@ -44,8 +44,9 @@ const ItemsList = (props) => {
     props.updateSingleItem(item);
   };
 
-  const addItem = (id , item) => {
-    props.addItemForSale(id, item);
+  const addItem = (item) => {
+    console.log("cd: ItemsList.js: addItem: item: ", item);
+    props.addItemForSale(props.id, item);
   };
 
   return (
@@ -92,7 +93,7 @@ const ItemsList = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    id: state.ORS.ownerProfile.id,
+    id: state.ORS.owner_id,
     items: state.IRS.items,
     error: state.IRS.error,
     gettingItems: state.IRS.getItems,

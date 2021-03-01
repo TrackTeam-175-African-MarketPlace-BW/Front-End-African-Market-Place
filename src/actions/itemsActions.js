@@ -1,3 +1,4 @@
+import { bindActionCreators } from "redux";
 import axiosWithAuth from "../utils/axiosWithAuth";
 // import { useHistory, useParams } from "react-router-dom";
 
@@ -66,10 +67,22 @@ export const deleteItem = (itemId) => (dispatch) => {
 };
 
 export const addItemForSale = (id, item) => (dispatch) => {
+  const sendItem = {
+    category: item.category,
+    country: item.country,
+    description: item.description,
+    market: item.market,
+    name: item.name,
+    price: item.price,
+  };
   axiosWithAuth()
-    .post(`/users/${id}/items`, item)
+    .post(`/users/${id}/items`, sendItem)
     .then((res) => {
       console.log("cd: itemsActions.js: addItemsForSale: axios.post response: ", res)
+      dispatch({
+        type: ADD_ITEM,
+        payload: res.data,
+      })
     })
     .catch((err) => console.log({err}))
   };
