@@ -129,7 +129,7 @@ const UpdateOwnerForm = (props) => {
           />
         </label>
         <br></br>
-        <button style={{ marginTop: "5px" }}>update user info?</button>
+        <button style={{ marginTop: "5px" }}>Save Updated Info</button>
         <br></br>
         {error ? <div style={{ color: "red" }}>{error}</div> : null}
       </form>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import styled from "styled-components";
@@ -36,6 +36,7 @@ const Headers = styled.h1`
 `;
 
 const OwnerProfile = (props) => {
+  const [isEditing, setIsEditing] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -82,9 +83,17 @@ const OwnerProfile = (props) => {
         {props.isEditingPassword === false ? (
           <button onClick={handleUpdatePassword}>update password?</button>
         ) : null}
+        {/* {props.isEditingUser || props.isEditingPassword ? (
+          <></>
+        ) : (
+          <button onClick={handleUpdateProfile}>update profile?</button> && (
+            <button onClick={handleUpdatePassword}>update password?</button>
+          )
+        )} */}
       </div>
-      <div>{props.isEditingUser ? <UpdateOwnerForm /> : null}</div>
-      <div>{props.isEditingPassword ? <UpdatePasswordForm /> : null}</div>
+      <div>{props.isEditingUser && <UpdateOwnerForm />}</div>
+      <div>{props.isEditingPassword && <UpdatePasswordForm />}</div>
+
       {/* // NOTE HOW DO I GET ONLY ONE TO SHOW AT A TIME 
          // NOTE HOW DO I ONLY SHOW ONE AT A TIME 
       */}

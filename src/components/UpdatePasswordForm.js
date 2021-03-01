@@ -36,6 +36,7 @@ const UpdatePasswordForm = (props) => {
   const submitUpdatedPassword = (e) => {
     e.preventDefault();
     props.updatedPassword(props.id, changedPassword);
+    window.localStorage.removeItem("token");
     push(`/newpassword`);
   };
 
@@ -45,7 +46,7 @@ const UpdatePasswordForm = (props) => {
         <label htmlFor="oldPassword" />
         old password:<br></br>
         <input
-          type="text"
+          type="password"
           name="oldPassword"
           value={changedPassword.oldPassword}
           onChange={handleChanges}
@@ -54,13 +55,13 @@ const UpdatePasswordForm = (props) => {
         <label htmlFor="newPassword" />
         new password:<br></br>
         <input
-          type="text"
+          type="password"
           name="newPassword"
           value={changedPassword.newPassword}
           onChange={handleChanges}
         />
         <br></br>
-        <button style={{ marginTop: "5px" }}>change password?</button>
+        <button style={{ marginTop: "5px" }}>Change Password</button>
         <br></br>
         {error ? <div style={{ color: "red" }}>{error}</div> : null}
       </form>
