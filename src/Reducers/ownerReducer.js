@@ -5,6 +5,8 @@ import {
   USER_ITEMS_RETRIEVED,
   UPDATING_USER,
   UPDATED_USER,
+  UPDATING_PASSWORD,
+  UPDATED_PASSWORD,
 } from "../actions/ownerActions";
 
 const initialState = {
@@ -12,7 +14,8 @@ const initialState = {
   ownerProfile: {},
   error: "",
   isLoading: false,
-  isEditing: false,
+  isEditingUser: false,
+  isEditingPassword: false,
   itemsForSale: [], //REVIEW This is a stretch part
 };
 
@@ -45,13 +48,24 @@ export const ownerReducer = (state = initialState, action) => {
     case UPDATING_USER:
       return {
         ...state,
-        isEditing: true,
+        isEditingUser: true,
       };
     case UPDATED_USER:
       return {
         ...state,
         ownerProfile: action.payload,
-        isEditing: false,
+        isEditingUser: false,
+      };
+    case UPDATING_PASSWORD:
+      return {
+        ...state,
+        isEditingPassword: true,
+      };
+    case UPDATED_PASSWORD:
+      return {
+        ...state,
+        ownerProfile: action.payload,
+        isEditingPassword: false,
       };
 
     default:

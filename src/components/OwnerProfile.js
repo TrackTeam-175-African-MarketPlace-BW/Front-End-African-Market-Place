@@ -2,8 +2,14 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { loadUser, loadUserItems, editingUser } from "../actions/ownerActions";
+import {
+  loadUser,
+  loadUserItems,
+  editingUser,
+  editingPassword,
+} from "../actions/ownerActions";
 import UpdateOwnerForm from "./UpdateOwnerForm";
+import UpdatePasswordForm from "./UpdatePasswordForm";
 
 // NOTE baseURL/api /${id}/profile
 
@@ -38,9 +44,14 @@ const OwnerProfile = (props) => {
     props.setIsLoggedIn(true);
   }, []);
 
-  const handleClick = (e) => {
+  const handleUpdateProfile = (e) => {
     e.preventDefault();
     props.editingUser();
+  };
+
+  const handleUpdatePassword = (e) => {
+    e.preventDefault();
+    props.editingPassword();
   };
 
   // console.log("these are the items for sale", props.itemsForSale);
@@ -63,10 +74,12 @@ const OwnerProfile = (props) => {
         <br></br>
         bio: {props.ownerProfile.user_info}
         <br></br>
-        <button onClick={handleClick}>update profile?</button>
+        <button onClick={handleUpdateProfile}>update profile?</button>
+        <button onClick={handleUpdatePassword}>update password?</button>
         {/* {JSON.stringify(props.ownerProfile, 2, "")} */}
       </div>
-      <div>{props.isEditing ? <UpdateOwnerForm /> : null}</div>
+      <div>{props.isEditingUser ? <UpdateOwnerForm /> : null}</div>
+      <div>{props.isEditingPassword ? <UpdatePasswordForm /> : null}</div>
       <div>
         <div>
           <Headers>🌾 {props.ownerProfile.name}'s items for sale 🌾</Headers>
@@ -108,7 +121,8 @@ const mapStateToProps = (state) => {
     ownerProfile: state.ORS.ownerProfile,
     error: state.ORS.error,
     isLoading: state.ORS.isLoading,
-    isEditing: state.ORS.isEditing,
+    isEditingUser: state.ORS.isEditingUser,
+    isEditingPassword: state.ORS.isEditingPassword,
     itemsForSale: state.ORS.itemsForSale,
   };
 };
@@ -117,4 +131,5 @@ export default connect(mapStateToProps, {
   loadUser,
   loadUserItems,
   editingUser,
+  editingPassword,
 })(OwnerProfile);
