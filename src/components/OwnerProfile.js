@@ -74,7 +74,9 @@ const OwnerProfile = (props) => {
         <br></br>
         bio: {props.ownerProfile.user_info}
         <br></br>
-        <button onClick={handleUpdateProfile}>update profile?</button>
+        {props.isEditingUser === false ? (
+          <button onClick={handleUpdateProfile}>update profile?</button>
+        ) : null}
         <button onClick={handleUpdatePassword}>update password?</button>
         {/* {JSON.stringify(props.ownerProfile, 2, "")} */}
       </div>
