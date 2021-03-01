@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import axiosWithAuth from "../utils/axiosWithAuth";
+import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import {
   loadUser,
@@ -8,12 +8,6 @@ import {
   updatedUser,
   cancelEditing,
 } from "../actions/ownerActions";
-import { connect } from "react-redux";
-
-// const Center = styled.div`
-//   display: flex;
-//   justify-content: center;
-// `;
 
 const initialState = {
   name: "",
@@ -24,16 +18,10 @@ const initialState = {
 };
 
 const UpdateOwnerForm = (props) => {
-  console.log("UpdateOwnerForm props", props);
+  const { push } = useHistory();
   const [updatedInfo, setUpdatedInfo] = useState(initialState);
-  //   console.log("updatedInfo", updatedInfo);
-
-  // console.log("these are the credentials", credentials);
 
   const [countries, setCountries] = useState([]);
-  // console.log("these are the countries", countries);
-
-  const { push } = useHistory();
 
   const [error, setError] = useState("");
 
@@ -49,8 +37,6 @@ const UpdateOwnerForm = (props) => {
     axiosWithAuth()
       .get("/countries")
       .then((response) => {
-        // console.log("countries success response", response);
-        // console.log("figuring out country dropdown", response.data);
         setCountries(response.data);
       })
       .catch((error) => {
@@ -103,7 +89,6 @@ const UpdateOwnerForm = (props) => {
             id="country"
             name="country"
             value={updatedInfo.country}
-            // defaultValue={countries[0]}
             onChange={handleChanges}
           >
             {countries.map((country) => {
@@ -146,17 +131,11 @@ const UpdateOwnerForm = (props) => {
       <button style={{ marginTop: "5px" }} onClick={toCancelEditing}>
         cancel editing.
       </button>
-      {/* <div>
-        {countries.map((item) => {
-          <div>{item.country}</div>;
-        })}
-      </div> */}
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
-  // console.log("STATE: ", state);
   return {
     id: state.ORS.ownerProfile.id,
     ownerProfile: state.ORS.ownerProfile,

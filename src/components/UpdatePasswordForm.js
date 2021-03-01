@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import axiosWithAuth from "../utils/axiosWithAuth";
+import React, { useState } from "react";
+import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import {
   loadUser,
@@ -9,7 +8,6 @@ import {
   updatedPassword,
   cancelEditing,
 } from "../actions/ownerActions";
-import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
@@ -19,19 +17,13 @@ const initialState = {
 };
 
 const UpdatePasswordForm = (props) => {
-  console.log("UpdatePasswordForm props", props);
   const [changedPassword, setChangedPassword] = useState(initialState);
   const [passwordShown, setPasswordShown] = useState(false);
   const [passwordShown2, setPasswordShown2] = useState(false);
-  //   console.log("updatedInfo", updatedInfo);
-
-  // console.log("these are the credentials", credentials);
-  console.log("update password form props", props);
 
   const { push } = useHistory();
-
-  const [error, setError] = useState("");
   const eye = <FontAwesomeIcon icon={faEye} />;
+  const [error, setError] = useState("");
 
   const handleChanges = (e) => {
     setChangedPassword({
@@ -96,7 +88,6 @@ const UpdatePasswordForm = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  // console.log("STATE: ", state);
   return {
     id: state.ORS.ownerProfile.id,
     ownerProfile: state.ORS.ownerProfile,

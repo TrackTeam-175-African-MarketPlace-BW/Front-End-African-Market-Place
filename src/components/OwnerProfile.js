@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import styled from "styled-components";
+import UpdateOwnerForm from "./UpdateOwnerForm";
+import UpdatePasswordForm from "./UpdatePasswordForm";
 import {
   loadUser,
   loadUserItems,
@@ -10,10 +11,7 @@ import {
   unmountUser,
   unmountPasswordChange,
 } from "../actions/ownerActions";
-import UpdateOwnerForm from "./UpdateOwnerForm";
-import UpdatePasswordForm from "./UpdatePasswordForm";
-
-// NOTE baseURL/api /${id}/profile
+import styled from "styled-components";
 
 const FlexStyling = styled.div`
   display: flex;
@@ -36,7 +34,6 @@ const Headers = styled.h1`
 `;
 
 const OwnerProfile = (props) => {
-  const [isEditing, setIsEditing] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -83,20 +80,9 @@ const OwnerProfile = (props) => {
         {props.isEditingPassword === false ? (
           <button onClick={handleUpdatePassword}>update password?</button>
         ) : null}
-        {/* {props.isEditingUser || props.isEditingPassword ? (
-          <></>
-        ) : (
-          <button onClick={handleUpdateProfile}>update profile?</button> && (
-            <button onClick={handleUpdatePassword}>update password?</button>
-          )
-        )} */}
       </div>
       <div>{props.isEditingUser && <UpdateOwnerForm />}</div>
       <div>{props.isEditingPassword && <UpdatePasswordForm />}</div>
-
-      {/* // NOTE HOW DO I GET ONLY ONE TO SHOW AT A TIME 
-         // NOTE HOW DO I ONLY SHOW ONE AT A TIME 
-      */}
 
       <div>
         <div>
@@ -128,7 +114,6 @@ const OwnerProfile = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  // console.log("STATE: ", state);
   return {
     owner_id: state.ORS.owner_id,
     ownerProfile: state.ORS.ownerProfile,

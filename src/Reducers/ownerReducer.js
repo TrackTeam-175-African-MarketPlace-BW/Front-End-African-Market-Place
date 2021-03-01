@@ -19,12 +19,10 @@ const initialState = {
   isLoading: false,
   isEditingUser: false,
   isEditingPassword: false,
-
-  itemsForSale: [], //REVIEW This is a stretch part
+  itemsForSale: [],
 };
 
 export const ownerReducer = (state = initialState, action) => {
-  console.log("cd: OwnerReducer.js: action.payload: ", action.payload);
   switch (action.type) {
     case USER_LOADING:
       return {
