@@ -9,6 +9,7 @@ import {
   UPDATED_PASSWORD,
   TOGGLE_UPDATE_USER,
   TOGGLE_UPDATE_PASSWORD,
+  CANCEL_EDITING,
 } from "../actions/ownerActions";
 
 import { ADD_ITEM } from "../actions/itemsActions";
@@ -20,11 +21,10 @@ const initialState = {
   isLoading: false,
   isEditingUser: false,
   isEditingPassword: false,
-  itemsForSale: [], //REVIEW This is a stretch part
+  itemsForSale: [],
 };
 
 export const ownerReducer = (state = initialState, action) => {
-  console.log("cd: OwnerReducer.js: action.payload: ", action.payload);
   switch (action.type) {
     case USER_LOADING:
       return {
@@ -55,6 +55,7 @@ export const ownerReducer = (state = initialState, action) => {
       return {
         ...state,
         isEditingUser: true,
+        isEditingPassword: false,
       };
 
     case TOGGLE_UPDATE_USER:
@@ -68,11 +69,13 @@ export const ownerReducer = (state = initialState, action) => {
         ...state,
         ownerProfile: action.payload,
         isEditingUser: false,
+        isEditingPassword: false,
       };
     case UPDATING_PASSWORD:
       return {
         ...state,
         isEditingPassword: true,
+        isEditingUser: false,
       };
     case UPDATED_PASSWORD:
       console.log("UPDATED_PASSWORD", action.payload);
@@ -80,17 +83,28 @@ export const ownerReducer = (state = initialState, action) => {
         ...state,
         ownerProfile: action.payload,
         isEditingPassword: false,
+        isEditingUser: false,
       };
     case TOGGLE_UPDATE_PASSWORD:
       return {
         ...state,
         isEditingPassword: false,
       };
+ feature/ForgotPassword
+    case CANCEL_EDITING:
+      return {
+        ...state,
+        isEditingPassword: false,
+        isEditingUser: false,
+      };
+
+
     case ADD_ITEM:
       return {
         ...state,
         itemsForSale: [...state.itemsForSale, action.payload],
       };
+ main
     default:
       return state;
   }

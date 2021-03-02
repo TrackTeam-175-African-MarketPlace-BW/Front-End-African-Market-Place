@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import styled from "styled-components";
+import UpdateOwnerForm from "./UpdateOwnerForm";
+import UpdatePasswordForm from "./UpdatePasswordForm";
 import {
   loadUser,
   loadUserItems,
@@ -10,10 +11,7 @@ import {
   unmountUser,
   unmountPasswordChange,
 } from "../actions/ownerActions";
-import UpdateOwnerForm from "./UpdateOwnerForm";
-import UpdatePasswordForm from "./UpdatePasswordForm";
-
-// NOTE baseURL/api /${id}/profile
+import styled from "styled-components";
 
 const FlexStyling = styled.div`
   display: flex;
@@ -61,7 +59,12 @@ const OwnerProfile = (props) => {
   return (
     <FlexStyling>
       <div>
-        <Headers>👥 welcome, {props.ownerProfile.name} </Headers>
+        <Headers>
+          <span role="img" aria-label="bust of two people emoji">
+            👥
+          </span>{" "}
+          welcome, {props.ownerProfile.name}{" "}
+        </Headers>
         name: {props.ownerProfile.name}
         <br></br>
         <img
@@ -83,15 +86,17 @@ const OwnerProfile = (props) => {
           <button onClick={handleUpdatePassword}>update password?</button>
         ) : null}
       </div>
-      <div>{props.isEditingUser ? <UpdateOwnerForm /> : null}</div>
-      <div>{props.isEditingPassword ? <UpdatePasswordForm /> : null}</div>
-      {/* // NOTE HOW DO I GET ONLY ONE TO SHOW AT A TIME 
-         // NOTE HOW DO I ONLY SHOW ONE AT A TIME 
-      */}
+      <div>{props.isEditingUser && <UpdateOwnerForm />}</div>
+      <div>{props.isEditingPassword && <UpdatePasswordForm />}</div>
 
       <div>
         <div>
-          <Headers>🌾 {props.ownerProfile.name}'s items for sale 🌾</Headers>
+          <Headers>
+            <span role="img" aria-label="corn emoji">
+              🌾
+            </span>{" "}
+            {props.ownerProfile.name}'s items for sale{" "}
+          </Headers>
         </div>
         {props.itemsForSale.map((item) => {
           return (
@@ -119,7 +124,6 @@ const OwnerProfile = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  // console.log("STATE: ", state);
   return {
     owner_id: state.ORS.owner_id,
     ownerProfile: state.ORS.ownerProfile,
