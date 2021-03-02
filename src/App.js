@@ -10,6 +10,7 @@ import "./App.css";
 import TeamInfo from "./components/TeamInfo";
 import Register from "./components/Register";
 import LogIn from "./components/LogIn";
+import LandingPage from "./components/LandingPage";
 import EditItem from "./components/ITEMS/EditItem";
 import NewPasswordSuccess from "./components/NewPasswordSuccess";
 
@@ -26,8 +27,8 @@ function App() {
         <PrivateRoute path="/itemsList">
           <ItemsList setIsLoggedIn={setIsLoggedIn} />
         </PrivateRoute>
-        <PrivateRoute path="/:id/itemsList/:item.id">
-          <EditItem setIsLoggedIn={setIsLoggedIn} />
+        <PrivateRoute path="/singleItem/:item.id">
+          <SingleItem setIsLoggedIn={setIsLoggedIn} />
         </PrivateRoute>
         <Route path="/team">
           <TeamInfo />
@@ -48,7 +49,7 @@ function App() {
           <NewPasswordSuccess />
         </Route>
         <Route exact path="/">
-          <p>Hello from the Home page</p>
+          <LandingPage />
         </Route>
       </Switch>
     </>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const NewPasswordSuccess = () => {
   return (
     <div>
-      You have changed your password succesfully!
+      You have changed your password successfully!
       <br></br>
       <Link to="/login" style={{ color: "red" }}>
         {" "}

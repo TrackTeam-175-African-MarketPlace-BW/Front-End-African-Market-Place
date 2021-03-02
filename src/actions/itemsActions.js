@@ -1,3 +1,4 @@
+import { bindActionCreators } from "redux";
 import axiosWithAuth from "../utils/axiosWithAuth";
 // import { useHistory, useParams } from "react-router-dom";
 
@@ -15,11 +16,12 @@ export const UPDATING_ITEM = "UPDATING_ITEM";
 export const UPDATED_ITEM = "UPDATED_ITEM";
 export const REMOVING_ITEM = "REMOVING_ITEM";
 export const REMOVE_ITEM = "REMOVE_ITEM";
+export const ADD_ITEM = "ADD_ITEM";
 
 export const getItems = () => (dispatch) => {
   dispatch({ type: DATA_LOADING });
-  setTimeout(() => {
-    axiosWithAuth()
+
+  axiosWithAuth()
     .get("/items")
     .then((res) => {
       console.log("cd: itemsActions: getItems: axios.get response: ", res);
@@ -35,8 +37,6 @@ export const getItems = () => (dispatch) => {
         payload: err.response.data.message,
       });
     });
-  }, 2000)
-  
 };
 
 export const showSingleItem = (itemId) => (dispatch) => {
@@ -58,10 +58,31 @@ export const showSingleItem = (itemId) => (dispatch) => {
 };
 
 export const updateSingleItem = (item) => (dispatch) => {
-  dispatch({ type: SINGLE_ITEM, payload: item});
+  dispatch({ type: SINGLE_ITEM, payload: item });
 };
 
 export const deleteItem = (itemId) => (dispatch) => {
   dispatch({ type: REMOVING_ITEM });
   axiosWithAuth().delete(`/`);
 };
+
+export const addItemForSale = (id, item) => (dispatch) => {
+  const sendItem = {
+    category: item.category,
+    country: item.country,
+    description: item.description,
+    market: item.market,
+    name: item.name,
+    price: item.price,
+  };
+  axiosWithAuth()
+    .post(`/users/${id}/items`, sendItem)
+    .then((res) => {
+      console.log("cd: itemsActions.js: addItemsForSale: axios.post response: ", res)
+      dispatch({
+        type: ADD_ITEM,
+        payload: res.data,
+      })
+    })
+    .catch((err) => console.log({err}))
+  };
