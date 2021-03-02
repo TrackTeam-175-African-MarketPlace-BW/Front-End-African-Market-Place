@@ -61,6 +61,10 @@ const OwnerProfile = (props) => {
   const deleteItem = (item) => {
     props.deleteUserItem(props.ownerProfile.id, item.id);
     console.log("ITEMFORSALE ID", props.ownerProfile, item.id);
+    console.log("THESE ARE THE CURRENT ITEMS FOR SALE", props.itemsForSale);
+    // props.itemsForSale.filter((itemForSale) => {
+    //   return itemForSale.id !== item.id;
+    // });
   };
 
   return (
@@ -108,8 +112,6 @@ const OwnerProfile = (props) => {
         {props.itemsForSale.map((item) => {
           return (
             <div key={item.id}>
-              id: {item.id}
-              <br></br>
               name: {item.name}
               <br></br>
               description: {item.description}
