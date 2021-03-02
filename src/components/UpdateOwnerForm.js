@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import axiosWithAuth from "../utils/axiosWithAuth";
-import { useHistory } from "react-router-dom";
-import { loadUser, editingUser, updatedUser } from "../actions/ownerActions";
 import { connect } from "react-redux";
-
-// const Center = styled.div`
-//   display: flex;
-//   justify-content: center;
-// `;
+import { useHistory } from "react-router-dom";
+import {
+  loadUser,
+  editingUser,
+  updatedUser,
+  cancelEditing,
+} from "../actions/ownerActions";
 
 const initialState = {
   name: "",
@@ -19,18 +18,10 @@ const initialState = {
 };
 
 const UpdateOwnerForm = (props) => {
-  console.log("UpdateOwnerForm props", props);
+  const { push } = useHistory();
   const [updatedInfo, setUpdatedInfo] = useState(initialState);
-  //   console.log("updatedInfo", updatedInfo);
-
-  // console.log("these are the credentials", credentials);
 
   const [countries, setCountries] = useState([]);
-  // console.log("these are the countries", countries);
-
-  const { push } = useHistory();
-
-  const [error, setError] = useState("");
 
   useEffect(() => {
     axiosWithAuth()
@@ -44,8 +35,6 @@ const UpdateOwnerForm = (props) => {
     axiosWithAuth()
       .get("/countries")
       .then((response) => {
-        // console.log("countries success response", response);
-        // console.log("figuring out country dropdown", response.data);
         setCountries(response.data);
       })
       .catch((error) => {
@@ -64,6 +53,11 @@ const UpdateOwnerForm = (props) => {
     e.preventDefault();
     props.updatedUser(props.id, updatedInfo);
     push(`/${props.id}/ownerProfile`);
+  };
+
+  const toCancelEditing = (e) => {
+    e.preventDefault();
+    props.cancelEditing();
   };
 
   return (
@@ -93,7 +87,6 @@ const UpdateOwnerForm = (props) => {
             id="country"
             name="country"
             value={updatedInfo.country}
-            // defaultValue={countries[0]}
             onChange={handleChanges}
           >
             {countries.map((country) => {
@@ -129,21 +122,17 @@ const UpdateOwnerForm = (props) => {
           />
         </label>
         <br></br>
-        <button style={{ marginTop: "5px" }}>update user info?</button>
+        <button style={{ marginTop: "5px" }}>save updated info.</button>
         <br></br>
-        {error ? <div style={{ color: "red" }}>{error}</div> : null}
       </form>
-      {/* <div>
-        {countries.map((item) => {
-          <div>{item.country}</div>;
-        })}
-      </div> */}
+      <button style={{ marginTop: "5px" }} onClick={toCancelEditing}>
+        cancel editing.
+      </button>
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
-  // console.log("STATE: ", state);
   return {
     id: state.ORS.ownerProfile.id,
     ownerProfile: state.ORS.ownerProfile,
@@ -157,4 +146,5 @@ export default connect(mapStateToProps, {
   loadUser,
   editingUser,
   updatedUser,
+  cancelEditing,
 })(UpdateOwnerForm);
