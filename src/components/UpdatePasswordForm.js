@@ -1,4 +1,4 @@
-import React, { useState, useParams } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import {
@@ -18,11 +18,9 @@ const initialState = {
 };
 
 const UpdatePasswordForm = (props) => {
-  // console.log("Updatepassword props", props);
   const [changedPassword, setChangedPassword] = useState(initialState);
   const [passwordShown, setPasswordShown] = useState(false);
   const [passwordShown2, setPasswordShown2] = useState(false);
-  // const { id } = useParams();
   const { push } = useHistory();
   const eye = <FontAwesomeIcon icon={faEye} />;
   const [error, setError] = useState("");
@@ -41,13 +39,6 @@ const UpdatePasswordForm = (props) => {
     setPasswordShown2(passwordShown2 ? false : true);
   };
 
-  // const submitUpdatedPassword = (e) => {
-  //   e.preventDefault();
-  //   props.updatedPassword(props.id, changedPassword);
-  //   window.localStorage.removeItem("token");
-  //   // push(`/newpassword`);
-  // };
-
   const submitPass = (e) => {
     e.preventDefault();
     axiosWithAuth()
@@ -58,7 +49,6 @@ const UpdatePasswordForm = (props) => {
         push(`/newpassword`);
       })
       .catch((error) => {
-        console.log("submit password error", { error });
         setError(error.response.data.message);
       });
   };
@@ -67,12 +57,6 @@ const UpdatePasswordForm = (props) => {
     e.preventDefault();
     props.cancelEditing();
   };
-
-  /* if edited/updated succesfully isEditingPassword = false
-  if isEditingPassword = false reroute to /newpassword
-
-current password: sarah2
-  */
 
   return (
     <div>

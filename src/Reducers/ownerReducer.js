@@ -33,7 +33,6 @@ export const ownerReducer = (state = initialState, action) => {
         isLoading: true,
       };
     case USER_RETRIEVED:
-      console.log("USER_RETRIEVED", action.payload);
       return {
         ...state,
         isLoading: false,
@@ -65,7 +64,6 @@ export const ownerReducer = (state = initialState, action) => {
         isEditingUser: false,
       };
     case UPDATED_USER:
-      console.log("UPDATED_USER", action.payload);
       return {
         ...state,
         ownerProfile: action.payload,
@@ -79,7 +77,6 @@ export const ownerReducer = (state = initialState, action) => {
         isEditingUser: false,
       };
     case UPDATED_PASSWORD:
-      console.log("UPDATED_PASSWORD", action.payload);
       return {
         ...state,
         ownerProfile: action.payload,
