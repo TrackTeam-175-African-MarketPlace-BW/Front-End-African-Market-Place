@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useParams } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import {
@@ -10,6 +10,7 @@ import {
 } from "../actions/ownerActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import axiosWithAuth from "../utils/axiosWithAuth";
 
 const initialState = {
   oldPassword: "",
@@ -17,13 +18,14 @@ const initialState = {
 };
 
 const UpdatePasswordForm = (props) => {
+  // console.log("Updatepassword props", props);
   const [changedPassword, setChangedPassword] = useState(initialState);
   const [passwordShown, setPasswordShown] = useState(false);
   const [passwordShown2, setPasswordShown2] = useState(false);
-
+  // const { id } = useParams();
   const { push } = useHistory();
   const eye = <FontAwesomeIcon icon={faEye} />;
-
+  const [error, setError] = useState("");
   const handleChanges = (e) => {
     setChangedPassword({
       ...changedPassword,
@@ -39,11 +41,26 @@ const UpdatePasswordForm = (props) => {
     setPasswordShown2(passwordShown2 ? false : true);
   };
 
-  const submitUpdatedPassword = (e) => {
+  // const submitUpdatedPassword = (e) => {
+  //   e.preventDefault();
+  //   props.updatedPassword(props.id, changedPassword);
+  //   window.localStorage.removeItem("token");
+  //   // push(`/newpassword`);
+  // };
+
+  const submitPass = (e) => {
     e.preventDefault();
-    props.updatedPassword(props.id, changedPassword);
-    window.localStorage.removeItem("token");
-    push(`/newpassword`);
+    axiosWithAuth()
+      .put(`/users/${props.ownerProfile.id}/password`, changedPassword)
+      .then((response) => {
+        console.log("submit password success", response);
+        window.localStorage.removeItem("token");
+        push(`/newpassword`);
+      })
+      .catch((error) => {
+        console.log("submit password error", { error });
+        setError(error.response.data.message);
+      });
   };
 
   const toCancelEditing = (e) => {
@@ -51,9 +68,15 @@ const UpdatePasswordForm = (props) => {
     props.cancelEditing();
   };
 
+  /* if edited/updated succesfully isEditingPassword = false
+  if isEditingPassword = false reroute to /newpassword
+
+current password: sarah2
+  */
+
   return (
     <div>
-      <form onSubmit={submitUpdatedPassword}>
+      <form onSubmit={submitPass}>
         <label htmlFor="oldPassword" />
         old password: <i onClick={togglePasswordVisibilityOld}>{eye}</i>
         <br></br>
@@ -77,6 +100,7 @@ const UpdatePasswordForm = (props) => {
           onChange={handleChanges}
         />
         <br></br>
+        {error && <div style={{ color: "red" }}>{error}</div>}
         <button style={{ marginTop: "5px" }}>change password.</button>
         <br></br>
       </form>

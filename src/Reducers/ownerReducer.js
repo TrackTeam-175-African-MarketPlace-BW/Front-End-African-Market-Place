@@ -10,6 +10,7 @@ import {
   TOGGLE_UPDATE_USER,
   TOGGLE_UPDATE_PASSWORD,
   CANCEL_EDITING,
+  ERROR_UPDATING_PASSWORD,
 } from "../actions/ownerActions";
 
 import { ADD_ITEM } from "../actions/itemsActions";
@@ -89,6 +90,13 @@ export const ownerReducer = (state = initialState, action) => {
       return {
         ...state,
         isEditingPassword: false,
+      };
+    case ERROR_UPDATING_PASSWORD:
+      return {
+        ...state,
+        isEditingPassword: true,
+        isEditingUser: false,
+        error: action.payload,
       };
 
     case CANCEL_EDITING:
