@@ -90,21 +90,19 @@ export const ownerReducer = (state = initialState, action) => {
         ...state,
         isEditingPassword: false,
       };
- feature/ForgotPassword
+      feature / ForgotPassword;
     case CANCEL_EDITING:
       return {
         ...state,
         isEditingPassword: false,
         isEditingUser: false,
       };
-
-
     case ADD_ITEM:
       return {
         ...state,
         itemsForSale: [...state.itemsForSale, action.payload],
       };
- main
+      main;
     default:
       return state;
   }
