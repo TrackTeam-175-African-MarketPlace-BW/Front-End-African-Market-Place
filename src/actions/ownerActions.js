@@ -17,12 +17,14 @@ export const loadUser = (id) => {
     axiosWithAuth()
       .get(`/users/${id}`)
       .then((response) => {
+
         dispatch({
           type: USER_RETRIEVED,
           payload: response.data,
         });
       })
       .catch((error) => {
+
         dispatch({
           type: ERROR_LOADING_USER,
           payload: error.response.data.message,

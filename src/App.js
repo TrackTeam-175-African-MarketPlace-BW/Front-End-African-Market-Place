@@ -26,8 +26,8 @@ function App() {
         <PrivateRoute path="/itemsList">
           <ItemsList setIsLoggedIn={setIsLoggedIn} />
         </PrivateRoute>
-        <PrivateRoute path="/:id/itemsList/:item.id">
-          <EditItem setIsLoggedIn={setIsLoggedIn} />
+        <PrivateRoute path="/singleItem/:item.id">
+          <SingleItem setIsLoggedIn={setIsLoggedIn} />
         </PrivateRoute>
         <Route path="/team">
           <TeamInfo />

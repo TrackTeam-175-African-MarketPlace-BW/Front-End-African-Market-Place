@@ -12,6 +12,8 @@ import {
   CANCEL_EDITING,
 } from "../actions/ownerActions";
 
+import { ADD_ITEM } from "../actions/itemsActions";
+
 const initialState = {
   owner_id: null,
   ownerProfile: {},
@@ -30,10 +32,12 @@ export const ownerReducer = (state = initialState, action) => {
         isLoading: true,
       };
     case USER_RETRIEVED:
+      console.log("USER_RETRIEVED", action.payload);
       return {
         ...state,
         isLoading: false,
         ownerProfile: action.payload,
+        owner_id: action.payload.id,
       };
     case USER_ITEMS_RETRIEVED:
       return {
@@ -60,6 +64,7 @@ export const ownerReducer = (state = initialState, action) => {
         isEditingUser: false,
       };
     case UPDATED_USER:
+      console.log("UPDATED_USER", action.payload);
       return {
         ...state,
         ownerProfile: action.payload,
@@ -73,6 +78,7 @@ export const ownerReducer = (state = initialState, action) => {
         isEditingUser: false,
       };
     case UPDATED_PASSWORD:
+      console.log("UPDATED_PASSWORD", action.payload);
       return {
         ...state,
         ownerProfile: action.payload,
@@ -84,6 +90,7 @@ export const ownerReducer = (state = initialState, action) => {
         ...state,
         isEditingPassword: false,
       };
+ feature/ForgotPassword
     case CANCEL_EDITING:
       return {
         ...state,
@@ -91,6 +98,13 @@ export const ownerReducer = (state = initialState, action) => {
         isEditingUser: false,
       };
 
+
+    case ADD_ITEM:
+      return {
+        ...state,
+        itemsForSale: [...state.itemsForSale, action.payload],
+      };
+ main
     default:
       return state;
   }
