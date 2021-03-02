@@ -13,21 +13,46 @@ const initialState = {
 };
 
 const EditItem = (props) => {
+  const [item, setItem] = useState({
+    name: "",
+    description: "",
+    price: "",
+    category: "",
+    market: "",
+    country: "",
+    owner: "",
+    owner_email: "",
+  });
+  const [countries, setCountries] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [markets, setMarkets] = useState([]);
 
-  const [item, setItem] = useState(initialState);
-  const { id } = useParams();
+  const { itemId } = useParams();
 
-  // useEffect(() => {
-  //     axiosWithAuth()
-  //         .get(`users/${props.id}/items/${props.item_id}`)
-  //       .then((res) => {
-  //           console.log("cd: EditItem.js: axios.get request: response: ",{res})
-  //         })
-  //       .catch((err) => {
-  //           console.log("cd: EditItem.js: axios.get request error: ", {err})
-  //         })
-     
-  // }, []);
+  useEffect(() => {
+    axiosWithAuth()
+      .get(`users/${props.id}/items/${itemId}`)
+      .then((res) => {
+        console.log("cd: EditItem.js, axios.get response: ", res);
+        setItem(res.data);
+      })
+      .catch((err) => {
+        console.log("cd: EditItem.js: axios.get error: ", { err });
+      });
+    axiosWithAuth()
+      .get("/countries")
+      .then((res) => setCountries(res.data))
+      .catch((err) => console.log(err))
+    axiosWithAuth()
+      .get("/categories")
+      .then((res) => setCategories(res.data))
+      .catch((err) => console.log(err))
+    axiosWithAuth()
+      .get("/markets")
+      .then((res) => setMarkets(res.data))
+      .catch((err) => console.log(err))
+  }, []);
+  
 
   return (
     <div>
@@ -38,9 +63,9 @@ const EditItem = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    item_id: state.IRS.items.id,
+    item_id: state.SIR.selectedItem.id,
     id: state.ORS.owner_id,
-    item: state.SIR.selectedItem,    
+    item: state.SIR.selectedItem,
   };
 };
 

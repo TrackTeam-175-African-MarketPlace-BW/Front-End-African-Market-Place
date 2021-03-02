@@ -75,7 +75,7 @@ const ItemsList = (props) => {
                 <br />
                 <button
                   onClick={() => {
-                    editItem(`${item.id}`)
+                    // editItem(`${item.id}`)
                     push(`/editItem/${item.id}`);
                   }}
                 >
