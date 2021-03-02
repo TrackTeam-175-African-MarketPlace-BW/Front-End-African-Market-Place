@@ -135,7 +135,6 @@ const UpdateOwnerForm = (props) => {
         </label>
         <br></br>
         <Button style={{ marginTop: "5px" }}>save updated info.</Button>
-        <br></br>
       </form>
       <Button style={{ marginTop: "5px" }} onClick={toCancelEditing}>
         cancel editing.

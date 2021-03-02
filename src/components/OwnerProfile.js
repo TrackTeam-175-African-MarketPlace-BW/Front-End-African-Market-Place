@@ -19,10 +19,11 @@ const FlexStyling = styled.div`
   display: flex;
   flex-direction: row;
 
-  margin: 0 auto;
-
   text-transform: lowercase;
   font-size: 12px;
+
+  width: 90%;
+  margin-left: 8%;
 `;
 
 const Names = styled.span`
@@ -33,6 +34,7 @@ const SaleItemsDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: flex-start;
   padding: 10px;
   border-radius: 20px;
   flex-wrap: wrap;
@@ -153,43 +155,41 @@ const OwnerProfile = (props) => {
         })}
       </SaleItemsDiv>
 
-      <div>
-        <ProfileDiv>
-          <div>
-            <Headers>
-              <span role="img" aria-label="bust of two people emoji">
-                👥
-              </span>{" "}
-              welcome, {props.ownerProfile.name}
-            </Headers>
-            <br></br>
-            <Names>name:</Names> {props.ownerProfile.name}
-            <br></br>
-            <img
-              style={{ width: "40%", borderRadius: "10px" }}
-              src={props.ownerProfile.user_photo}
-              alt={props.ownerProfile.name}
-            ></img>
-            <br></br>
-            <Names>country:</Names> {props.ownerProfile.country}
-            <br></br>
-            <Names>email:</Names> {props.ownerProfile.email}
-            <br></br>
-            <Names>bio:</Names> {props.ownerProfile.user_info}
-            <br></br>
-            {props.isEditingUser === false ? (
-              <Button onClick={handleUpdateProfile}>update profile?</Button>
-            ) : null}
-            {props.isEditingPassword === false ? (
-              <Button onClick={handleUpdatePassword}>update password?</Button>
-            ) : null}
-          </div>
-          <div>
-            {props.isEditingUser && <UpdateOwnerForm />}
-            {props.isEditingPassword && <UpdatePasswordForm />}
-          </div>
-        </ProfileDiv>
-      </div>
+      <ProfileDiv>
+        <div>
+          <Headers>
+            <span role="img" aria-label="bust of two people emoji">
+              👥
+            </span>{" "}
+            welcome, {props.ownerProfile.name}
+          </Headers>
+          <br></br>
+          <Names>name:</Names> {props.ownerProfile.name}
+          <br></br>
+          <img
+            style={{ width: "40%", borderRadius: "10px" }}
+            src={props.ownerProfile.user_photo}
+            alt={props.ownerProfile.name}
+          ></img>
+          <br></br>
+          <Names>country:</Names> {props.ownerProfile.country}
+          <br></br>
+          <Names>email:</Names> {props.ownerProfile.email}
+          <br></br>
+          <Names>bio:</Names> {props.ownerProfile.user_info}
+          <br></br>
+          {props.isEditingUser === false ? (
+            <Button onClick={handleUpdateProfile}>update profile?</Button>
+          ) : null}
+          {props.isEditingPassword === false ? (
+            <Button onClick={handleUpdatePassword}>update password?</Button>
+          ) : null}
+        </div>
+        <div>
+          {props.isEditingUser && <UpdateOwnerForm />}
+          {props.isEditingPassword && <UpdatePasswordForm />}
+        </div>
+      </ProfileDiv>
     </FlexStyling>
   );
 };

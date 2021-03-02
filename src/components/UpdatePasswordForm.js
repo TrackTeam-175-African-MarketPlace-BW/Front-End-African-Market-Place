@@ -115,7 +115,6 @@ const UpdatePasswordForm = (props) => {
         <br></br>
         {error && <div style={{ color: "red" }}>{error}</div>}
         <Button style={{ marginTop: "5px" }}>change password.</Button>
-        <br></br>
       </form>
       <Button onClick={toCancelEditing}>cancel editing</Button>
     </div>
