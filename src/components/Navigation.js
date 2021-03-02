@@ -10,7 +10,7 @@ const MainDiv = styled.div`
   padding: 0 40px;
   padding-bottom: 20px;
   align-items: baseline;
-  border: 1px solid red;
+  color: rgb(69, 73, 30);
 `;
 
 const NavDiv = styled.div`
