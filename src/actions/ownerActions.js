@@ -11,6 +11,7 @@ export const TOGGLE_UPDATE_USER = "TOGGLE_UPDATE_USER";
 export const TOGGLE_UPDATE_PASSWORD = "TOGGLE_UPDATE_PASSWORD";
 export const CANCEL_EDITING = "CANCEL_EDITING";
 export const ERROR_UPDATING_PASSWORD = "ERROR_UPDATING_PASSWORD";
+export const DELETE_USER_ITEM = "DELETE_USER_ITEM";
 
 export const loadUser = (id) => {
   return (dispatch) => {
@@ -115,6 +116,11 @@ export const unmountPasswordChange = () => {
   return (dispatch) => {
     dispatch({ type: TOGGLE_UPDATE_PASSWORD });
   };
+};
+
+export const deleteUserItem = (id, itemId) => (dispatch) => {
+  dispatch({ type: DELETE_USER_ITEM });
+  axiosWithAuth().delete(`/users/${id}/items/${itemId}`);
 };
 
 export const loadUserItems = (id) => {

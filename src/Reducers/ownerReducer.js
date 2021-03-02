@@ -11,6 +11,7 @@ import {
   TOGGLE_UPDATE_PASSWORD,
   CANCEL_EDITING,
   ERROR_UPDATING_PASSWORD,
+  DELETE_USER_ITEM,
 } from "../actions/ownerActions";
 
 import { ADD_ITEM } from "../actions/itemsActions";
@@ -106,6 +107,11 @@ export const ownerReducer = (state = initialState, action) => {
       return {
         ...state,
         itemsForSale: [...state.itemsForSale, action.payload],
+      };
+    case DELETE_USER_ITEM:
+      return {
+        ...state,
+        itemsForSale: [...state.itemsForSale],
       };
 
     default:

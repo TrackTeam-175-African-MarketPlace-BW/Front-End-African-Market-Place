@@ -10,6 +10,7 @@ import {
   editingPassword,
   unmountUser,
   unmountPasswordChange,
+  deleteUserItem,
 } from "../actions/ownerActions";
 import styled from "styled-components";
 
@@ -34,6 +35,7 @@ const Headers = styled.h1`
 `;
 
 const OwnerProfile = (props) => {
+  console.log("OWNERPROFILE PROPS", props);
   const { id } = useParams();
 
   useEffect(() => {
@@ -54,6 +56,11 @@ const OwnerProfile = (props) => {
   const handleUpdatePassword = (e) => {
     e.preventDefault();
     props.editingPassword();
+  };
+
+  const deleteItem = (item) => {
+    props.deleteUserItem(props.ownerProfile.id, item.id);
+    console.log("ITEMFORSALE ID", props.ownerProfile, item.id);
   };
 
   return (
@@ -101,6 +108,8 @@ const OwnerProfile = (props) => {
         {props.itemsForSale.map((item) => {
           return (
             <div key={item.id}>
+              id: {item.id}
+              <br></br>
               name: {item.name}
               <br></br>
               description: {item.description}
@@ -113,7 +122,13 @@ const OwnerProfile = (props) => {
               <br></br>
               country: {item.country}
               <br></br>
-              <br></br>
+              <button
+                onClick={() => {
+                  deleteItem(item);
+                }}
+              >
+                delete item?
+              </button>
             </div>
           );
         })}
@@ -142,4 +157,5 @@ export default connect(mapStateToProps, {
   editingPassword,
   unmountUser,
   unmountPasswordChange,
+  deleteUserItem,
 })(OwnerProfile);
