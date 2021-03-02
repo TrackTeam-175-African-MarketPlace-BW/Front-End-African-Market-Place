@@ -17,7 +17,6 @@ const initialState = {
   creatingItem: false,
   deletingItem: false,
   error: null,
-
 };
 
 export const itemsReducer = (state = initialState, action) => {
@@ -28,6 +27,7 @@ export const itemsReducer = (state = initialState, action) => {
         gettingItems: true,
       };
     case DATA_RETRIEVED:
+      console.log("DATA_RETRIEVED", action.payload)
       return {
         ...state,
         gettingItems: false,

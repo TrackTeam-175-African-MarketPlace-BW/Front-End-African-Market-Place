@@ -5,7 +5,6 @@ import Navigation from "./components/Navigation";
 import OwnerProfile from "./components/OwnerProfile";
 import ItemsList from "./components/ITEMS/ItemsList";
 import SingleItem from "./components/ITEMS/SingleItem";
-import UpdateItemForm from "./components/ITEMS/UpdateItemForm";
 import "./App.css";
 import TeamInfo from "./components/TeamInfo";
 import Register from "./components/Register";
@@ -42,9 +41,10 @@ function App() {
         <Route path="/singleItem">
           <SingleItem />
         </Route>
-        <Route path="/updateItem">
-          <UpdateItemForm />
+        <Route path="/editItem/:itemId">
+          <EditItem />
         </Route>
+
         <Route path="/newpassword">
           <NewPasswordSuccess />
         </Route>

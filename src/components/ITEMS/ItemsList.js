@@ -40,8 +40,8 @@ const ItemsList = (props) => {
     props.setIsLoggedIn(true);
   }, []);
 
-  const handleSingle = (item) => {
-    props.updateSingleItem(item);
+  const editItem = (itemId) => {
+    props.updateSingleItem(props.id, itemId);
   };
 
   const addItem = (item) => {
@@ -70,14 +70,13 @@ const ItemsList = (props) => {
                     addItem(item);
                   }}
                 >
-                  Add Item To Sell
+                  Add Item To Your Profile
                 </button>
                 <br />
                 <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleSingle(item);
-                    push(`/singleItem/${item.id}`);
+                  onClick={() => {
+                    editItem(`${item.id}`)
+                    push(`/editItem/${item.id}`);
                   }}
                 >
                   Update Item
@@ -94,6 +93,7 @@ const ItemsList = (props) => {
 const mapStateToProps = (state) => {
   return {
     id: state.ORS.owner_id,
+    item_id: state.IRS.items.id,
     items: state.IRS.items,
     error: state.IRS.error,
     gettingItems: state.IRS.getItems,
