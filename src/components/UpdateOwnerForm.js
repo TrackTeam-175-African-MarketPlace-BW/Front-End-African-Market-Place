@@ -93,24 +93,26 @@ const UpdateOwnerForm = (props) => {
         <br></br>
         <label htmlFor="country">
           location:<br></br>
-          <select
-            id="country"
-            name="country"
-            value={updatedInfo.country}
-            onChange={handleChanges}
-          >
-            {countries.map((country) => {
-              return (
-                <option
-                  key={country.id}
-                  value={country.country}
-                  defaultValue={country[0]}
-                >
-                  {country.country}
-                </option>
-              );
-            })}
-          </select>
+          <div className="select">
+            <select
+              id="country"
+              name="country"
+              value={updatedInfo.country}
+              onChange={handleChanges}
+            >
+              {countries.map((country) => {
+                return (
+                  <option
+                    key={country.id}
+                    value={country.country}
+                    defaultValue={country[0]}
+                  >
+                    {country.country}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
         </label>
         <label htmlFor="user_photo" />
         user photo?<br></br>
