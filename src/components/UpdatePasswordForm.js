@@ -22,23 +22,30 @@ const Button = styled.button`
   padding: 0.25em 1em;
 `;
 
+// const Input = styled.input`
+//   background: #00aec9;
+//   color: #fff;
+//   cursor: pointer;
+//   margin-bottom: 0;
+//   text-transform: uppercase;
+//   width: 100%;
+//   border-radius: 5px;
+//   height: 35px;
+//   border-color: transparent;
+//   box-shadow: 0px;
+//   outline: none;
+//   transition: 0.15s;
+//   text-align: center;
+//   &:active {
+//     background-color: #f1ac15;
+//   }
+// `;
+
 const Input = styled.input`
-  background: #00aec9;
-  color: #fff;
-  cursor: pointer;
-  margin-bottom: 0;
-  text-transform: uppercase;
-  width: 100%;
-  border-radius: 5px;
-  height: 35px;
-  border-color: transparent;
-  box-shadow: 0px;
-  outline: none;
-  transition: 0.15s;
-  text-align: center;
-  &:active {
-    background-color: #f1ac15;
-  }
+  padding: 10px;
+  border: 0;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
 `;
 
 const initialState = {
@@ -94,7 +101,7 @@ const UpdatePasswordForm = (props) => {
         old password: <i onClick={togglePasswordVisibilityOld}>{eye}</i>
         <br></br>
         <div>
-          <input
+          <Input
             type={passwordShown ? "text" : "password"}
             name="oldPassword"
             placeholder={"enter old password"}
@@ -106,7 +113,7 @@ const UpdatePasswordForm = (props) => {
         <label htmlFor="newPassword" />
         new password: <i onClick={togglePasswordVisibilityNew}>{eye}</i>{" "}
         <br></br>
-        <input
+        <Input
           type={passwordShown2 ? "text" : "password"}
           name="newPassword"
           value={changedPassword.newPassword}

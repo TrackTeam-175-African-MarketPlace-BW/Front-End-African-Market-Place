@@ -54,6 +54,15 @@ const Headers = styled.h1`
 // first #68773C
 // last #A54623
 
+// input,
+// textarea,
+// dropdown {
+//   padding: 10px;
+//   border: 0;
+//   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+//   border-radius: 8px;
+// }
+
 const Button = styled.button`
   background: #68773c;
   border-radius: 3px;

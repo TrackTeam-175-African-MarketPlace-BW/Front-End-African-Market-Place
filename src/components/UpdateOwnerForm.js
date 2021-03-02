@@ -19,6 +19,32 @@ const Button = styled.button`
   padding: 0.25em 1em;
 `;
 
+const Input = styled.input`
+  padding: 10px;
+  border: 0;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+`;
+
+const TextArea = styled.textarea`
+  padding: 10px;
+  border: 0;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+`;
+
+const Select = styled.select`
+  outline: 0;
+  background: white;
+  width: 100%;
+  height: 100%;
+  color: black;
+  cursor: pointer;
+  border: 1px solid white;
+  border-radius: 8px;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+`;
+
 const initialState = {
   name: "",
   email: "",
@@ -75,7 +101,7 @@ const UpdateOwnerForm = (props) => {
       <form onSubmit={submitUpdate}>
         <label htmlFor="name" />
         name:<br></br>
-        <input
+        <Input
           type="name"
           name="name"
           value={updatedInfo.name}
@@ -84,7 +110,7 @@ const UpdateOwnerForm = (props) => {
         <br></br>
         <label htmlFor="email" />
         email: required<br></br>
-        <input
+        <Input
           type="email"
           name="email"
           value={updatedInfo.email}
@@ -94,7 +120,7 @@ const UpdateOwnerForm = (props) => {
         <label htmlFor="country">
           location:<br></br>
           <div className="select">
-            <select
+            <Select
               id="country"
               name="country"
               value={updatedInfo.country}
@@ -111,12 +137,12 @@ const UpdateOwnerForm = (props) => {
                   </option>
                 );
               })}
-            </select>
+            </Select>
           </div>
         </label>
         <label htmlFor="user_photo" />
         user photo?<br></br>
-        <input
+        <Input
           type="text"
           name="user_photo"
           value={updatedInfo.user_photo}
@@ -126,7 +152,7 @@ const UpdateOwnerForm = (props) => {
         <br></br>
         <label htmlFor="user_info">
           bio:<br></br>
-          <textarea
+          <TextArea
             type="text"
             name="user_info"
             value={updatedInfo.user_info}
