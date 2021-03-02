@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 
 const Center = styled.div`
   display: flex;
@@ -15,17 +15,23 @@ const Register = () => {
     password: "",
     country: "",
     user_info: "",
-    // user_photo: "",
   });
 
-  // console.log("these are the credentials", credentials);
-
-  const [countries, setCountries] = useState([]);
-  // console.log("these are the countries", countries);
-
+  const [error, setError] = useState("");
   const { push } = useHistory();
 
-  const [error, setError] = useState("");
+  const [countries, setCountries] = useState([]);
+
+  useEffect(() => {
+    axiosWithAuth()
+      .get("/countries")
+      .then((response) => {
+        setCountries(response.data);
+      })
+      .catch((error) => {
+        console.log("countries error", error);
+      });
+  }, []);
 
   const handleChanges = (e) => {
     setCredentials({
@@ -43,23 +49,10 @@ const Register = () => {
         push("/login");
       })
       .catch((error) => {
-        console.log("Registration error", error.response.data.message); // REVIEW how do you find the error
+        console.log("Registration error", error.response.data.message);
         setError();
       });
   };
-
-  useEffect(() => {
-    axiosWithAuth()
-      .get("/countries")
-      .then((response) => {
-        // console.log("countries success response", response);
-        // console.log("figuring out country dropdown", response.data);
-        setCountries(response.data);
-      })
-      .catch((error) => {
-        console.log("countries error", error);
-      });
-  }, []);
 
   return (
     <Center>
@@ -100,7 +93,6 @@ const Register = () => {
             id="country"
             name="country"
             value={credentials.country}
-            // defaultValue={countries[0]}
             onChange={handleChanges}
           >
             {countries.map((country) => {
@@ -116,16 +108,6 @@ const Register = () => {
             })}
           </select>
         </label>
-        {/* <label htmlFor="user_photo" />
-        user photo?<br></br>
-        <input
-          type="text"
-          name="user_photo"
-          value={credentials.user_photo}
-          onChange={handleChanges}
-          placeholder="url link format, please."
-        />
-        <br></br> */}
         <br></br>
         <label htmlFor="user_info">
           bio:<br></br>
@@ -142,11 +124,6 @@ const Register = () => {
         <br></br>
         {error ? <div style={{ color: "red" }}>{error}</div> : null}
       </form>
-      {/* <div>
-        {countries.map((item) => {
-          <div>{item.country}</div>;
-        })}
-      </div> */}
     </Center>
   );
 };
