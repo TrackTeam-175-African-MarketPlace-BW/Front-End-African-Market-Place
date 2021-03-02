@@ -8,6 +8,16 @@ import {
   updatedUser,
   cancelEditing,
 } from "../actions/ownerActions";
+import styled, { css } from "styled-components";
+
+const Button = styled.button`
+  background: #a54623;
+  border-radius: 3px;
+
+  color: white;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+`;
 
 const initialState = {
   name: "",
@@ -122,12 +132,12 @@ const UpdateOwnerForm = (props) => {
           />
         </label>
         <br></br>
-        <button style={{ marginTop: "5px" }}>save updated info.</button>
+        <Button style={{ marginTop: "5px" }}>save updated info.</Button>
         <br></br>
       </form>
-      <button style={{ marginTop: "5px" }} onClick={toCancelEditing}>
+      <Button style={{ marginTop: "5px" }} onClick={toCancelEditing}>
         cancel editing.
-      </button>
+      </Button>
     </div>
   );
 };

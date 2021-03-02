@@ -11,6 +11,16 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import axiosWithAuth from "../utils/axiosWithAuth";
+import styled, { css } from "styled-components";
+
+const Button = styled.button`
+  background: #a54623;
+  border-radius: 3px;
+
+  color: white;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+`;
 
 const initialState = {
   oldPassword: "",
@@ -85,10 +95,10 @@ const UpdatePasswordForm = (props) => {
         />
         <br></br>
         {error && <div style={{ color: "red" }}>{error}</div>}
-        <button style={{ marginTop: "5px" }}>change password.</button>
+        <Button style={{ marginTop: "5px" }}>change password.</Button>
         <br></br>
       </form>
-      <button onClick={toCancelEditing}>cancel editing</button>
+      <Button onClick={toCancelEditing}>cancel editing</Button>
     </div>
   );
 };
