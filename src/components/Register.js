@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 const Center = styled.div`
   display: flex;
@@ -74,8 +76,14 @@ const Register = () => {
 
   const [error, setError] = useState("");
   const { push } = useHistory();
+  const [passwordShown, setPasswordShown] = useState(false);
+  const eye = <FontAwesomeIcon icon={faEye} />;
 
   const [countries, setCountries] = useState([]);
+
+  const togglePasswordVisibility = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
 
   useEffect(() => {
     axiosWithAuth()
@@ -144,9 +152,10 @@ const Register = () => {
         />
         <br></br>
         <label htmlFor="password" />
-        <Names>password</Names>:<br></br>
+        <Names>password</Names>: <i onClick={togglePasswordVisibility}>{eye}</i>
+        <br></br>
         <Input
-          type="password"
+          type={passwordShown ? "text" : "password"}
           name="password"
           value={credentials.password}
           onChange={handleChanges}
