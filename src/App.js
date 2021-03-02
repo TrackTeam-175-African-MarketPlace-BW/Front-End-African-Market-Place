@@ -11,6 +11,7 @@ import TeamInfo from "./components/TeamInfo";
 import Register from "./components/Register";
 import LogIn from "./components/LogIn";
 import LandingPage from "./components/LandingPage";
+import Footer from "./components/Footer";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -44,6 +45,7 @@ function App() {
           <LandingPage />
         </Route>
       </Switch>
+      <Footer isLoggedIn={isLoggedIn} />
     </>
   );
 }

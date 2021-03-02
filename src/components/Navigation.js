@@ -5,11 +5,10 @@ import styled from "styled-components";
 const MainDiv = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 80px;
+  height: auto;
   //   width: 100vw;
   padding: 0 40px;
-  padding-bottom: 20px;
-  align-items: baseline;
+  align-items: center;
   color: rgb(69, 73, 30);
 `;
 
@@ -22,7 +21,7 @@ const NavDiv = styled.div`
 const Navigation = ({ isLoggedIn }) => {
   return (
     <MainDiv>
-      <h2>Sauti African Market Place</h2>
+      <h1>Sauti African Market Place</h1>
       <NavDiv>
         {isLoggedIn ? <></> : <Link to="/login">Current Users: Log In</Link>}
         {isLoggedIn ? <></> : <Link to="/register">Register Here</Link>}
