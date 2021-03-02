@@ -10,6 +10,7 @@ import "./App.css";
 import TeamInfo from "./components/TeamInfo";
 import Register from "./components/Register";
 import LogIn from "./components/LogIn";
+import LandingPage from "./components/LandingPage";
 import EditItem from "./components/ITEMS/EditItem";
 import NewPasswordSuccess from "./components/NewPasswordSuccess";
 
@@ -48,7 +49,7 @@ function App() {
           <NewPasswordSuccess />
         </Route>
         <Route exact path="/">
-          <p>Hello from the Home page</p>
+          <LandingPage />
         </Route>
       </Switch>
     </>
