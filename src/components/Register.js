@@ -1,3 +1,4 @@
+import "../OwnerProfile.css";
 import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
@@ -6,6 +7,60 @@ import styled from "styled-components";
 const Center = styled.div`
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Headers = styled.h1`
+  font-size: 28px;
+  font-weight: none;
+  font-family: "Homemade Apple", cursive;
+  width: 100%;
+  text-align: center;
+`;
+
+const Button = styled.button`
+  background: #68773c;
+  border-radius: 8px;
+  color: white;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+  padding-top: 7px;
+  padding-bottom: 7px;
+`;
+
+const Input = styled.input`
+  padding: 10px;
+  border: 0;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  width: 120%;
+`;
+
+const Names = styled.span`
+  font-family: "Homemade Apple", cursive;
+  font-size: 14px;
+`;
+
+const TextArea = styled.textarea`
+  padding: 10px;
+  border: 0;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  width: 120%;
+`;
+
+const Select = styled.select`
+  outline: 0;
+  background: white;
+  width: 85%;
+  height: 100%;
+  color: black;
+  cursor: pointer;
+  border: 1px solid white;
+  border-radius: 8px;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  padding: 8px;
 `;
 
 const Register = () => {
@@ -56,10 +111,20 @@ const Register = () => {
 
   return (
     <Center>
+      <Headers>
+        <span role="img" aria-label="corn emoji">
+          🌱
+        </span>
+        {""} register
+        <span role="img" aria-label="corn emoji">
+          {""} 🌾
+        </span>
+      </Headers>
+
       <form onSubmit={submitRegistration}>
         <label htmlFor="name" />
-        name:<br></br>
-        <input
+        <Names>name</Names>:<br></br>
+        <Input
           type="name"
           name="name"
           value={credentials.name}
@@ -68,8 +133,9 @@ const Register = () => {
         />
         <br></br>
         <label htmlFor="email" />
-        email: required<br></br>
-        <input
+        <Names>email (required)</Names>
+        {""}:<br></br>
+        <Input
           type="email"
           name="email"
           value={credentials.email}
@@ -78,8 +144,8 @@ const Register = () => {
         />
         <br></br>
         <label htmlFor="password" />
-        password:<br></br>
-        <input
+        <Names>password</Names>:<br></br>
+        <Input
           type="password"
           name="password"
           value={credentials.password}
@@ -88,30 +154,31 @@ const Register = () => {
         />
         <br></br>
         <label htmlFor="country">
-          location:<br></br>
-          <select
-            id="country"
-            name="country"
-            value={credentials.country}
-            onChange={handleChanges}
-          >
-            {countries.map((country) => {
-              return (
-                <option
-                  key={country.id}
-                  value={country.country}
-                  defaultValue={country[0]}
-                >
-                  {country.country}
-                </option>
-              );
-            })}
-          </select>
+          <Names>location</Names>:<br></br>
+          <div>
+            <Select
+              id="country"
+              name="country"
+              value={credentials.country}
+              onChange={handleChanges}
+            >
+              {countries.map((country) => {
+                return (
+                  <option
+                    key={country.id}
+                    value={country.country}
+                    defaultValue={country[0]}
+                  >
+                    {country.country}
+                  </option>
+                );
+              })}
+            </Select>
+          </div>
         </label>
-        <br></br>
         <label htmlFor="user_info">
-          bio:<br></br>
-          <textarea
+          <Names>bio</Names>:<br></br>
+          <TextArea
             type="text"
             name="user_info"
             value={credentials.user_info}
@@ -120,7 +187,7 @@ const Register = () => {
           />
         </label>
         <br></br>
-        <button style={{ marginTop: "5px" }}>Ready to register?</button>
+        <Button style={{ marginTop: "10px" }}>Ready to register?</Button>
         <br></br>
         {error ? <div style={{ color: "red" }}>{error}</div> : null}
       </form>
