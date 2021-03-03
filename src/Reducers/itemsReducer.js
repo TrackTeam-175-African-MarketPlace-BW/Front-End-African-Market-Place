@@ -2,12 +2,6 @@ import {
   DATA_LOADING,
   DATA_RETRIEVED,
   ERROR_LOADING_DATA,
-  CREATING_ITEM,
-  CREATED_ITEM,
-  UPDATING_ITEM,
-  UPDATED_ITEM,
-  REMOVING_ITEM,
-  REMOVE_ITEM,
 } from "../actions/itemsActions";
 
 const initialState = {
