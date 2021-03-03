@@ -121,7 +121,7 @@ const OwnerProfile = (props) => {
   const addingNewItem = (e) => {
     e.preventDefault();
     props.addingItem();
-    push(`/${id}/addItem`)
+    push(`/${id}/addItem`);
   };
 
   const deleteItem = (item) => {
@@ -146,10 +146,7 @@ const OwnerProfile = (props) => {
 
         {props.itemsForSale.map((item) => {
           return (
-            <ItemDiv
-              key={item.id}
-              onClick={() => push(`/${id}/editItem/${item.id}`)}
-            >
+            <ItemDiv key={item.id}>
               <Names>name</Names>: {item.name}
               <br></br>
               <Names>info:</Names>: {item.description}
@@ -169,6 +166,14 @@ const OwnerProfile = (props) => {
                 }}
               >
                 delete item?
+              </Button>
+              <Button
+                other
+                onClick={() => {
+                  push(`/${id}/editItem/${item.id}`);
+                }}
+              >
+                edit item?
               </Button>
             </ItemDiv>
           );
@@ -204,14 +209,13 @@ const OwnerProfile = (props) => {
           {props.isEditingPassword === false ? (
             <Button onClick={handleUpdatePassword}>update password?</Button>
           ) : null}
-          {props.addingItem === false ? (
-            null
-          ) : <Button onClick={addingNewItem}>add item?</Button>}
+          {props.addingItem === false ? null : (
+            <Button onClick={addingNewItem}>add item?</Button>
+          )}
         </div>
         <div>
           {props.isEditingUser && <UpdateOwnerForm />}
           {props.isEditingPassword && <UpdatePasswordForm />}
-          
         </div>
       </ProfileDiv>
     </FlexStyling>
