@@ -144,13 +144,15 @@ const AddItem = (props) => {
           defaultValue="pickOne"
         >
           <option value="pickOne">--- Pick One ---</option>
-          {categories.map((category) => {
-            return (
-              <option key={category.id} value={category.category}>
-                {category.category}
-              </option>
-            );
-          })}
+          {categories
+            .sort((a, b) => a.id - b.id)
+            .map((category) => {
+              return (
+                <option key={category.id} value={category.category}>
+                  {category.category}
+                </option>
+              );
+            })}
         </Select>
         <br></br>
         <label htmlFor="market" /> <Names>Edit Market Location</Names>:<br></br>
@@ -162,13 +164,15 @@ const AddItem = (props) => {
           defaultValue="pickOne"
         >
           <option value="pickOne">--- Pick One ---</option>
-          {markets.map((market) => {
-            return (
-              <option key={market.id} value={market.market}>
-                {market.market}
-              </option>
-            );
-          })}
+          {markets
+            .sort((a, b) => a.id - b.id)
+            .map((market) => {
+              return (
+                <option key={market.id} value={market.market}>
+                  {market.market}
+                </option>
+              );
+            })}
         </Select>
         <br></br>
         <label htmlFor="country" /> <Names>Edit Country Location</Names>:
@@ -181,13 +185,15 @@ const AddItem = (props) => {
           defaultValue="pickOne"
         >
           <option value="pickOne">--- Pick One ---</option>
-          {countries.map((country) => {
-            return (
-              <option key={country.id} value={country.country}>
-                {country.country}
-              </option>
-            );
-          })}
+          {countries
+            .sort((a, b) => a.id - b.id)
+            .map((country) => {
+              return (
+                <option key={country.id} value={country.country}>
+                  {country.country}
+                </option>
+              );
+            })}
         </Select>
         <br></br>
         <Button type="submit">update item</Button>

@@ -70,7 +70,7 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
-    country: "",
+    country: "Kenya",
     user_info: "",
   });
 
@@ -171,17 +171,19 @@ const Register = () => {
               value={credentials.country}
               onChange={handleChanges}
             >
-              {countries.map((country) => {
-                return (
-                  <option
-                    key={country.id}
-                    value={country.country}
-                    defaultValue={country[0]}
-                  >
-                    {country.country}
-                  </option>
-                );
-              })}
+              {countries
+                .sort((a, b) => a.id - b.id)
+                .map((country) => {
+                  return (
+                    <option
+                      key={country.id}
+                      value={country.country}
+                      defaultValue={country[0]}
+                    >
+                      {country.country}
+                    </option>
+                  );
+                })}
             </Select>
           </div>
         </label>
