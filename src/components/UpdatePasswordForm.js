@@ -90,6 +90,7 @@ const UpdatePasswordForm = (props) => {
             onChange={handleChanges}
           />
         </div>
+        {error && <div style={{ color: "red" }}>{error}</div>}
         <br></br>
         <label htmlFor="newPassword" />
         new password: <i onClick={togglePasswordVisibilityNew}>{eye}</i>{" "}
@@ -101,7 +102,6 @@ const UpdatePasswordForm = (props) => {
           onChange={handleChanges}
         />
         <br></br>
-        {error && <div style={{ color: "red" }}>{error}</div>}
         <Button style={{ marginTop: "5px" }}>change password.</Button>
       </form>
       <Button onClick={toCancelEditing}>cancel editing</Button>

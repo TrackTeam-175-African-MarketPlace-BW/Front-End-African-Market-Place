@@ -147,6 +147,7 @@ const UpdateOwnerForm = (props) => {
           name="user_photo"
           value={updatedInfo.user_photo}
           onChange={handleChanges}
+          placeholder="url format please"
         />
         <br></br>
         <br></br>
