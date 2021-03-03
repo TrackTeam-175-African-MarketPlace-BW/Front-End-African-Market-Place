@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import axiosWithAuth from "../utils/axiosWithAuth";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 const Center = styled.div`
   display: flex;
@@ -50,12 +52,18 @@ const LogIn = () => {
   });
   const [error, setError] = useState("");
   const { push } = useHistory();
+  const [passwordShown, setPasswordShown] = useState(false);
+  const eye = <FontAwesomeIcon icon={faEye} />;
 
   const handleChange = (e) => {
     setCredentials({
       ...credentials,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const togglePasswordVisibility = () => {
+    setPasswordShown(passwordShown ? false : true);
   };
 
   const handleLogin = (e) => {
@@ -94,11 +102,13 @@ const LogIn = () => {
           placeholder="email here please"
         />
         <br />
-        <label htmlFor="password" /> <Names>password:</Names>
+        <label htmlFor="password" /> <Names>password</Names>:{" "}
+        <i onClick={togglePasswordVisibility}>{eye}</i>
+        <br></br>
         <Input
           id="password"
           name="password"
-          type="password"
+          type={passwordShown ? "text" : "password"}
           value={credentials.password}
           onChange={handleChange}
           placeholder="password here please"
