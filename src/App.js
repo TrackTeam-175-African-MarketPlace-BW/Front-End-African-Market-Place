@@ -13,6 +13,7 @@ import LandingPage from "./components/LandingPage";
 import Footer from "./components/Footer";
 import EditItem from "./components/ITEMS/EditItem";
 import NewPasswordSuccess from "./components/NewPasswordSuccess";
+import AddItem from "./components/ITEMS/AddItem";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,7 +25,7 @@ function App() {
         <PrivateRoute path="/:id/ownerProfile">
           <OwnerProfile setIsLoggedIn={setIsLoggedIn} />
         </PrivateRoute>
-        <PrivateRoute path="/itemsList">
+        <PrivateRoute path="/:id/itemsList">
           <ItemsList setIsLoggedIn={setIsLoggedIn} />
         </PrivateRoute>
         <PrivateRoute path="/singleItem/:item.id">
@@ -42,8 +43,11 @@ function App() {
         <Route path="/singleItem">
           <SingleItem />
         </Route>
-        <Route path="/editItem/:itemId">
+        <Route path="/:id/editItem/:itemId">
           <EditItem />
+        </Route>
+        <Route path="/:id/addItem">
+          <AddItem />
         </Route>
 
         <Route path="/newpassword">

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import {
   getItems,
   updateSingleItem,
-  addItemForSale
+  addItemForSale,
 } from "./../../actions/itemsActions";
 import Loader from "react-loader-spinner";
 import styled from "styled-components";
@@ -40,11 +40,12 @@ const ItemsList = (props) => {
     props.setIsLoggedIn(true);
   }, []);
 
-
   const addItem = (item) => {
     console.log("cd: ItemsList.js: addItem: item: ", item);
     props.addItemForSale(props.id, item);
   };
+
+  
 
   return (
     <div>
@@ -62,9 +63,19 @@ const ItemsList = (props) => {
                 <StyledH4>{item.market}</StyledH4>
                 <StyledH4>{item.country}</StyledH4>
                 <StyledH4>{item.price}</StyledH4>
+                <StyledH4>{item.owner}</StyledH4>
+                <StyledH4>{item.owner_email}</StyledH4>
+                <StyledH4>{item.id}</StyledH4>
                 <button
                   onClick={() => {
-                    addItem(item);
+                    addItem({
+                      name: item.name,
+                      description: item.description,
+                      market: item.market,
+                      country: item.country,
+                      price: item.price,
+                      category: item.category,
+                    });
                   }}
                 >
                   Add Item To Your Profile
@@ -73,11 +84,12 @@ const ItemsList = (props) => {
                 <button
                   onClick={() => {
                     // editItem(`${item.id}`)
-                    push(`/editItem/${item.id}`);
+                    push(`/${id}/editItem/${item.id}`);
                   }}
                 >
                   Update Item
                 </button>
+               
               </StyledDiv>
             );
           })}
@@ -103,5 +115,5 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   getItems,
   addItemForSale,
-  updateSingleItem,  
+  updateSingleItem,
 })(ItemsList);
