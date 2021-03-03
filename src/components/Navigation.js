@@ -6,8 +6,8 @@ import styled from "styled-components";
 const MainDiv = styled.div`
   display: flex;
   justify-content: space-between;
-  height: auto;
-  //   width: 100vw;
+  height: 60px;
+  /* width: 100vw; */
   padding: 0 40px;
   align-items: center;
   color: rgb(69, 73, 30);
@@ -17,6 +17,14 @@ const NavDiv = styled.div`
   display: flex;
   justify-content: space-between;
   width: 500px;
+  align-items: baseline;
+`;
+const Button = styled.button`
+  background: #68773c;
+  border-radius: 3px;
+  color: white;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
 `;
 
 const Navigation = (props) => {
@@ -29,8 +37,8 @@ const Navigation = (props) => {
   }
   return (
     <MainDiv>
-      <h1>Sauti African Market Place</h1>
-      {props.isLoggedIn ? <button onClick={() => {logOut()}}>Log Out</button> : <></> }
+      <h2>Sauti African Market Place</h2>
+      {props.isLoggedIn ? <Button onClick={() => {logOut()}}>Log Out</Button> : <></> }
       <NavDiv>
 
         {props.isLoggedIn ? <></> : <Link to="/login"> Current Users: Log In</Link>}

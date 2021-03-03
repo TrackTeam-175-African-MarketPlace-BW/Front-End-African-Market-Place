@@ -57,7 +57,6 @@ const Headers = styled.h1`
 const Button = styled.button`
   background: #68773c;
   border-radius: 3px;
-
   color: white;
   margin: 0.5em 1em;
   padding: 0.25em 1em;
