@@ -12,9 +12,14 @@ import {
   CANCEL_EDITING,
   ERROR_UPDATING_PASSWORD,
   DELETE_USER_ITEM,
+  addingItem,
 } from "../actions/ownerActions";
-
-import { ADD_ITEM } from "../actions/itemsActions";
+import {
+  UPDATING_ITEM,
+  UPDATED_ITEM,
+  ADDING_ITEM,
+  ADD_ITEM,
+} from "../actions/itemsActions";
 
 const initialState = {
   owner_id: null,
@@ -23,6 +28,8 @@ const initialState = {
   isLoading: false,
   isEditingUser: false,
   isEditingPassword: false,
+  updatingItem: false,
+  addingItem: false,
   itemsForSale: [],
 };
 
@@ -116,6 +123,31 @@ export const ownerReducer = (state = initialState, action) => {
         itemsForSale: state.itemsForSale.filter(
           (item) => item.id !== action.payload
         ),
+      };
+    case UPDATING_ITEM:
+      return {
+        ...state,
+        updatingItem: true,
+      };
+    case UPDATED_ITEM:
+      return {
+        ...state,
+        itemsForSale: [
+          ...state.itemsForSale.filter((item) => item.id !== action.payload.id),
+          action.payload,
+        ],
+        updatingItem: false,
+      };
+    case ADDING_ITEM:
+      return {
+        ...state,
+        addingItem: true,
+      };
+    case ADD_ITEM:
+      return {
+        ...state,
+        addingItem: false,
+        itemsForSale: [...state.itemsForSale, action.payload],
       };
     default:
       return state;

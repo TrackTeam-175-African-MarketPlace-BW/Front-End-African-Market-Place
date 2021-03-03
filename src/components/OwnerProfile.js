@@ -1,6 +1,6 @@
 import "../OwnerProfile.css";
 import React, { useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import UpdateOwnerForm from "./UpdateOwnerForm";
 import UpdatePasswordForm from "./UpdatePasswordForm";
@@ -12,8 +12,10 @@ import {
   unmountUser,
   unmountPasswordChange,
   deleteUserItem,
+  addingItem,
 } from "../actions/ownerActions";
 import styled, { css } from "styled-components";
+import AddItem from "./ITEMS/AddItem";
 
 const FlexStyling = styled.div`
   display: flex;
@@ -95,6 +97,7 @@ const ItemDiv = styled.div`
 const OwnerProfile = (props) => {
   console.log("OWNERPROFILE PROPS", props);
   const { id } = useParams();
+  const { push } = useHistory();
 
   useEffect(() => {
     props.loadUser(id);
@@ -114,6 +117,11 @@ const OwnerProfile = (props) => {
   const handleUpdatePassword = (e) => {
     e.preventDefault();
     props.editingPassword();
+  };
+  const addingNewItem = (e) => {
+    e.preventDefault();
+    props.addingItem();
+    push(`/${id}/addItem`);
   };
 
   const deleteItem = (item) => {
@@ -171,6 +179,14 @@ const OwnerProfile = (props) => {
               >
                 delete item?
               </Button>
+              <Button
+                other
+                onClick={() => {
+                  push(`/${id}/editItem/${item.id}`);
+                }}
+              >
+                edit item?
+              </Button>
             </ItemDiv>
           );
         })}
@@ -225,6 +241,9 @@ const OwnerProfile = (props) => {
           {props.isEditingPassword === false ? (
             <Button onClick={handleUpdatePassword}>update password?</Button>
           ) : null}
+          {props.addingItem === false ? null : (
+            <Button onClick={addingNewItem}>add item?</Button>
+          )}
         </div>
         <div>
           {props.isEditingUser && <UpdateOwnerForm />}
@@ -243,6 +262,8 @@ const mapStateToProps = (state) => {
     isLoading: state.ORS.isLoading,
     isEditingUser: state.ORS.isEditingUser,
     isEditingPassword: state.ORS.isEditingPassword,
+    addingItem: state.ORS.addingItem,
+    updatingItem: state.ORS.updatingItem,
     itemsForSale: state.ORS.itemsForSale,
   };
 };
@@ -255,4 +276,5 @@ export default connect(mapStateToProps, {
   unmountUser,
   unmountPasswordChange,
   deleteUserItem,
+  addingItem,
 })(OwnerProfile);
