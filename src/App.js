@@ -5,26 +5,30 @@ import Navigation from "./components/Navigation";
 import OwnerProfile from "./components/OwnerProfile";
 import ItemsList from "./components/ITEMS/ItemsList";
 import SingleItem from "./components/ITEMS/SingleItem";
-import UpdateItemForm from './components/ITEMS/UpdateItemForm';
+import UpdateItemForm from "./components/ITEMS/UpdateItemForm";
 import "./App.css";
 import TeamInfo from "./components/TeamInfo";
 import Register from "./components/Register";
 import LogIn from "./components/LogIn";
 import LandingPage from "./components/LandingPage";
-import Footer from "./components/Footer";
+import EditItem from "./components/ITEMS/EditItem";
+import NewPasswordSuccess from "./components/NewPasswordSuccess";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <>
-      <Navigation isLoggedIn={isLoggedIn} />
+      <Navigation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Switch>
-        <PrivateRoute exact path="/:id/ownerProfile">
-          <OwnerProfile setIsLoggedIn={setIsLoggedIn}/>
+        <PrivateRoute path="/:id/ownerProfile">
+          <OwnerProfile setIsLoggedIn={setIsLoggedIn} />
         </PrivateRoute>
-        <PrivateRoute path="/:id/itemsList">
-          <ItemsList setIsLoggedIn={setIsLoggedIn}/>
+        <PrivateRoute path="/itemsList">
+          <ItemsList setIsLoggedIn={setIsLoggedIn} />
+        </PrivateRoute>
+        <PrivateRoute path="/singleItem/:item.id">
+          <SingleItem setIsLoggedIn={setIsLoggedIn} />
         </PrivateRoute>
         <Route path="/team">
           <TeamInfo />
@@ -40,6 +44,9 @@ function App() {
         </Route>
         <Route path="/updateItem">
           <UpdateItemForm />
+        </Route>
+        <Route path="/newpassword">
+          <NewPasswordSuccess />
         </Route>
         <Route exact path="/">
           <LandingPage />
