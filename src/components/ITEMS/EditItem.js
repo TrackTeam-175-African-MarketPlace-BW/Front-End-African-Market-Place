@@ -75,7 +75,7 @@ const EditItem = (props) => {
     axiosWithAuth()
       .get(`users/${id}/items/${itemId}`)
       .then((res) => {
-        console.log("cd: EditItem.js, axios.get response: ", res);
+        // console.log("cd: EditItem.js, axios.get response: ", res);
         setItem({
           name: res.data.name,
           description: res.data.description,
@@ -90,7 +90,10 @@ const EditItem = (props) => {
       });
     axiosWithAuth()
       .get("/countries")
-      .then((res) => setCountries(res.data))
+      .then((res) => {
+        // console.log("setCountries response from EditItem.js: res: ", res)
+        setCountries(res.data)
+      })
       .catch((err) => console.log(err));
     axiosWithAuth()
       .get("/categories")

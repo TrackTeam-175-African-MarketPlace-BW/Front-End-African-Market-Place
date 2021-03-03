@@ -124,6 +124,7 @@ export const ownerReducer = (state = initialState, action) => {
         updatingItem: true,
       };
     case UPDATED_ITEM:
+      console.log("UPDATED_ITEM CHANGE", action.payload)
       return {
         ...state,
         itemsForSale: [

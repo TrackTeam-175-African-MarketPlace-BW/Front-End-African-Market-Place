@@ -83,7 +83,7 @@ const ItemDiv = styled.div`
 `;
 
 const OwnerProfile = (props) => {
-  console.log("OWNERPROFILE PROPS", props);
+  // console.log("OWNERPROFILE PROPS", props);
   const { id } = useParams();
   const { push } = useHistory();
 
@@ -139,45 +139,47 @@ const OwnerProfile = (props) => {
               😪
             </span>{" "}
             <br></br>
-            <Link to={`/${id}/itemsList`}>Want to change that?</Link> <br></br>Add an
-            item to your profile!
+            <Link to={`/${id}/itemsList`}>Want to change that?</Link> <br></br>
+            Add an item to your profile!
           </div>
         ) : null}
 
-        {props.itemsForSale.map((item) => {
-          return (
-            <ItemDiv key={item.id}>
-              <Names>name</Names>: {item.name}
-              <br></br>
-              <Names>info:</Names>: {item.description}
-              <br></br>
-              <Names>price</Names>: ${item.price}
-              <br></br>
-              <Names>category</Names>: {item.category}
-              <br></br>
-              <Names>market</Names>: {item.market}
-              <br></br>
-              <Names>country</Names>: {item.country}
-              <br></br>
-              <Button
-                other
-                onClick={() => {
-                  deleteItem(item);
-                }}
-              >
-                delete item?
-              </Button>
-              <Button
-                other
-                onClick={() => {
-                  push(`/${id}/editItem/${item.id}`);
-                }}
-              >
-                edit item?
-              </Button>
-            </ItemDiv>
-          );
-        })}
+        {props.itemsForSale
+          .sort((a, b) => b.id - a.id)
+          .map((item) => {
+            return (
+              <ItemDiv key={item.id}>
+                <Names>name</Names>: {item.name}
+                <br></br>
+                <Names>info:</Names>: {item.description}
+                <br></br>
+                <Names>price</Names>: ${item.price}
+                <br></br>
+                <Names>category</Names>: {item.category}
+                <br></br>
+                <Names>market</Names>: {item.market}
+                <br></br>
+                <Names>country</Names>: {item.country}
+                <br></br>
+                <Button
+                  other
+                  onClick={() => {
+                    deleteItem(item);
+                  }}
+                >
+                  delete item?
+                </Button>
+                <Button
+                  other
+                  onClick={() => {
+                    push(`/${id}/editItem/${item.id}`);
+                  }}
+                >
+                  edit item?
+                </Button>
+              </ItemDiv>
+            );
+          })}
       </SaleItemsDiv>
 
       <ProfileDiv>

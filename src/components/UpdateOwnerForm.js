@@ -52,7 +52,7 @@ const Select = styled.select`
 const initialState = {
   name: "",
   email: "",
-  country: "",
+  country: "Kenya",
   user_info: "",
   user_photo: "",
 };
@@ -130,17 +130,19 @@ const UpdateOwnerForm = (props) => {
               value={updatedInfo.country}
               onChange={handleChanges}
             >
-              {countries.map((country) => {
-                return (
-                  <option
-                    key={country.id}
-                    value={country.country}
-                    defaultValue={country[0]}
-                  >
-                    {country.country}
-                  </option>
-                );
-              })}
+              {countries
+                .sort((a, b) => a.id - b.id)
+                .map((country) => {
+                  return (
+                    <option
+                      key={country.id}
+                      value={country.country}
+                      defaultValue={country.id[0]}
+                    >
+                      {country.country}
+                    </option>
+                  );
+                })}
             </Select>
           </div>
         </label>

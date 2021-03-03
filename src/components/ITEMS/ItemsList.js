@@ -51,7 +51,7 @@ const ItemsList = (props) => {
         <h3 style={{ color: "red" }}>{props.error}</h3>
       ) : (
         <ItemContainer>
-          {props.items.map((item) => {
+          {props.items.sort((a,b) => b.id - a.id).map((item) => {
             return (
               <StyledDiv key={item.id}>
                 <span>
