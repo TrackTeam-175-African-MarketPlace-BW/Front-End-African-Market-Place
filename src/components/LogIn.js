@@ -70,7 +70,7 @@ const LogIn = () => {
       .catch((err) => {
         console.log(
           "cd: LogIn.js: handleLogin: post request error response: ",
-          err.response.data.message
+          setError(err.response.data.message)
         );
       });
   };
@@ -104,15 +104,15 @@ const LogIn = () => {
           placeholder="password here please"
         />
         <br />
-        <Button style={{ marginTop: "15px" }} type="submit">
-          Log In
-        </Button>
         {error && (
-          <div>
-            {error} Please Try Again, or{" "}
-            <NavLink to="/register">REGISTER HERE</NavLink>
+          <div style={{ color: "red" }}>
+            {error} please try again, or{" "}
+            <NavLink to="/register">register here</NavLink>
           </div>
         )}
+        <Button style={{ marginTop: "15px" }} type="submit">
+          log in
+        </Button>
       </form>
     </Center>
   );
