@@ -85,12 +85,7 @@ const LogIn = () => {
 
   return (
     <Center>
-      <Headers>
-        <span role="img" aria-label="corn emoji">
-          🌽
-        </span>
-        {""} welcome, login below!
-      </Headers>
+      <Headers>{""} welcome, login below!</Headers>
       <form onSubmit={handleLogin}>
         <label htmlFor="email" /> <Names>user email:</Names>
         <Input

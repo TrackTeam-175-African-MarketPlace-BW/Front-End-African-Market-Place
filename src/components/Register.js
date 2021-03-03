@@ -13,12 +13,10 @@ const Center = styled.div`
   align-items: center;
 `;
 
-const Headers = styled.h1`
-  font-size: 28px;
-  font-weight: none;
-  font-family: "Homemade Apple", cursive;
+const Headers = styled.div`
   width: 100%;
   text-align: center;
+  margin-left: 13%;
 `;
 
 const Button = styled.button`
@@ -120,13 +118,13 @@ const Register = () => {
   return (
     <Center>
       <Headers>
+        <img
+          src="https://i.ibb.co/Qd3wMdJ/Screen-Shot-2021-03-03-at-5-55-33-PM.png"
+          style={{ width: "23%" }}
+        ></img>
+        {/* {""} register
         <span role="img" aria-label="corn emoji">
-          🌱
-        </span>
-        {""} register
-        <span role="img" aria-label="corn emoji">
-          {""} 🌾
-        </span>
+          {""} 🌾 */}
       </Headers>
 
       <form onSubmit={submitRegistration}>
