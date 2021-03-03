@@ -1,3 +1,4 @@
+import "../../OwnerProfile.css";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import {
@@ -6,8 +7,17 @@ import {
   addItemForSale,
 } from "./../../actions/itemsActions";
 import Loader from "react-loader-spinner";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useHistory, useParams } from "react-router-dom";
+
+const Headers = styled.h1`
+  font-size: 20px;
+  font-weight: none;
+  font-family: "Homemade Apple", cursive;
+
+  width: 100%;
+  text-align: center;
+`;
 
 const ItemContainer = styled.div`
   display: grid;
@@ -22,13 +32,13 @@ const StyledDiv = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin: 15px;
+  text-transform: lowercase;
+  font-size: 1rem;
 `;
 
-const StyledH3 = styled.h3`
-  // font-size: 20px;
-`;
-const StyledH4 = styled.h4`
-  // font-size: 16px;
+const Names = styled.span`
+  font-family: "Homemade Apple", cursive;
+  font-size: 1em;
 `;
 
 const ItemsList = (props) => {
@@ -47,6 +57,7 @@ const ItemsList = (props) => {
 
   return (
     <div>
+      <Headers> 🍃 welc🌎me 🍃 to 🍃 the 🍃 market 🍃 </Headers>
       {props.gettingItems ? (
         <Loader type="ThreeDots" color="#c1c1c1" height={40} width={40} />
       ) : props.error ? (
@@ -56,15 +67,31 @@ const ItemsList = (props) => {
           {props.items.map((item) => {
             return (
               <StyledDiv key={item.id}>
-                <StyledH3>{item.name}</StyledH3>
-                <StyledH4>{item.description}</StyledH4>
-                <StyledH4>{item.market}</StyledH4>
-                <StyledH4>{item.country}</StyledH4>
-                <StyledH4>{item.price}</StyledH4>
-                <StyledH4>{item.owner}</StyledH4>
-                <StyledH4>{item.owner_email}</StyledH4>
-                <StyledH4>{item.id}</StyledH4>
-                <button
+                <span>
+                  <Names>name</Names>: {item.name}
+                </span>
+                <span>
+                  <Names>info</Names>: {item.description}
+                </span>
+                <span>
+                  <Names>🛒 market</Names>: {item.market}
+                </span>
+                <span>
+                  <Names>country</Names>: {item.country}
+                </span>
+                <span>
+                  <Names>price</Names>: ${item.price}
+                </span>
+                <span>
+                  <Names>owner</Names>: {item.owner}
+                </span>
+                <span>
+                  <Names>✉️email</Names>: {item.owner_email}
+                </span>
+                <span>
+                  <Names>id</Names>: {item.id}
+                </span>
+                {/* <button
                   onClick={() => {
                     addItem({
                       name: item.name,
@@ -86,7 +113,7 @@ const ItemsList = (props) => {
                   }}
                 >
                   Update Item
-                </button>
+                </button> */}
               </StyledDiv>
             );
           })}
