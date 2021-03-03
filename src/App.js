@@ -11,6 +11,7 @@ import TeamInfo from "./components/TeamInfo";
 import Register from "./components/Register";
 import LogIn from "./components/LogIn";
 import LandingPage from "./components/LandingPage";
+import Footer from "./components/Footer";
 import EditItem from "./components/ITEMS/EditItem";
 import NewPasswordSuccess from "./components/NewPasswordSuccess";
 
