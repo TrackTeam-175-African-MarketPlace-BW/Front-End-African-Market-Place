@@ -1,4 +1,5 @@
 import axiosWithAuth from "../utils/axiosWithAuth";
+import { ADDING_ITEM } from "./itemsActions";
 export const USER_LOADING = "USER_LOADING";
 export const USER_RETRIEVED = "USER_RETRIEVED";
 export const USER_ITEMS_RETRIEVED = "USER_ITEMS_RETRIEVED";
@@ -99,6 +100,9 @@ export const editingPassword = () => {
     dispatch({ type: UPDATING_PASSWORD });
   };
 };
+export const addingItem = () => (dispatch) => {
+  dispatch({type: ADDING_ITEM})
+}
 
 export const cancelEditing = () => {
   return (dispatch) => {

@@ -18,11 +18,11 @@ const EditItem = (props) => {
   const [markets, setMarkets] = useState([]);
 
   const { push } = useHistory();
-  const { itemId } = useParams();
+  const { id, itemId } = useParams();
 
   useEffect(() => {
     axiosWithAuth()
-      .get(`users/${props.id}/items/${itemId}`)
+      .get(`users/${id}/items/${itemId}`)
       .then((res) => {
         console.log("cd: EditItem.js, axios.get response: ", res);
         setItem({
@@ -62,8 +62,8 @@ const EditItem = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.updateSingleItem(props.id, itemId, item)
-    push("/itemsList");
+    props.updateSingleItem(id, itemId, item)
+    push(`/${id}/ownerProfile`);
   }
 
   return (

@@ -16,6 +16,7 @@ export const UPDATING_ITEM = "UPDATING_ITEM";
 export const UPDATED_ITEM = "UPDATED_ITEM";
 export const REMOVING_ITEM = "REMOVING_ITEM";
 export const REMOVE_ITEM = "REMOVE_ITEM";
+export const ADDING_ITEM = "ADDING_ITEM"
 export const ADD_ITEM = "ADD_ITEM";
 
 export const getItems = () => (dispatch) => {
@@ -73,10 +74,6 @@ export const updateSingleItem = (id, itemId, item) => (dispatch) => {
     })
   };
 
-export const deleteItem = (itemId) => (dispatch) => {
-  dispatch({ type: REMOVING_ITEM });
-  axiosWithAuth().delete(`/`);
-};
 
 export const addItemForSale = (id, item) => (dispatch) => {
   const sendItem = {
