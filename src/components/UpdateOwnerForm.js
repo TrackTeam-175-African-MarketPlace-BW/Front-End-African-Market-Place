@@ -8,7 +8,7 @@ import {
   updatedUser,
   cancelEditing,
 } from "../actions/ownerActions";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const Button = styled.button`
   background: #a54623;
@@ -19,10 +19,10 @@ const Button = styled.button`
   padding: 0.25em 1em;
 `;
 
-const Names = styled.span`
-  font-family: "Homemade Apple", cursive;
-  font-size: 14px;
-`;
+// const Names = styled.span`
+//   font-family: "Homemade Apple", cursive;
+//   font-size: 14px;
+// `;
 const Input = styled.input`
   padding: 10px;
   border: 0;

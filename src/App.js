@@ -4,7 +4,6 @@ import PrivateRoute from "./components/PrivateRoute";
 import Navigation from "./components/Navigation";
 import OwnerProfile from "./components/OwnerProfile";
 import ItemsList from "./components/ITEMS/ItemsList";
-import SingleItem from "./components/ITEMS/SingleItem";
 import "./App.css";
 import TeamInfo from "./components/TeamInfo";
 import Register from "./components/Register";
@@ -28,10 +27,7 @@ function App() {
         <PrivateRoute path="/:id/itemsList">
           <ItemsList setIsLoggedIn={setIsLoggedIn} />
         </PrivateRoute>
-        <PrivateRoute path="/singleItem/:item.id">
-          <SingleItem setIsLoggedIn={setIsLoggedIn} />
-        </PrivateRoute>
-        <Route path="/team">
+         <Route path="/team">
           <TeamInfo />
         </Route>
         <Route path="/login">
@@ -40,16 +36,12 @@ function App() {
         <Route path="/register">
           <Register />
         </Route>
-        <Route path="/singleItem">
-          <SingleItem />
-        </Route>
         <Route path="/:id/editItem/:itemId">
           <EditItem />
         </Route>
         <Route path="/:id/addItem">
-          <AddItem />
+          <AddItem setIsLoggedIn={setIsLoggedIn}/>
         </Route>
-
         <Route path="/newpassword">
           <NewPasswordSuccess />
         </Route>

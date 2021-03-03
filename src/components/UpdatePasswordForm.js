@@ -11,7 +11,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import axiosWithAuth from "../utils/axiosWithAuth";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const Button = styled.button`
   background: #a54623;

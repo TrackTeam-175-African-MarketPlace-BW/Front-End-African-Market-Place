@@ -1,14 +1,9 @@
 import "../../OwnerProfile.css";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import {
-  getItems,
-  updateSingleItem,
-  addItemForSale,
-} from "./../../actions/itemsActions";
+import { getItems } from "./../../actions/itemsActions";
 import Loader from "react-loader-spinner";
 import styled, { css } from "styled-components";
-import { useHistory, useParams } from "react-router-dom";
 
 const Headers = styled.h1`
   font-size: 20px;
@@ -42,18 +37,10 @@ const Names = styled.span`
 `;
 
 const ItemsList = (props) => {
-  const { id } = useParams();
-
-  const { push } = useHistory();
   useEffect(() => {
     props.getItems();
     props.setIsLoggedIn(true);
   }, []);
-
-  const addItem = (item) => {
-    console.log("cd: ItemsList.js: addItem: item: ", item);
-    props.addItemForSale(props.id, item);
-  };
 
   return (
     <div>
@@ -91,29 +78,6 @@ const ItemsList = (props) => {
                 <span>
                   <Names>id</Names>: {item.id}
                 </span>
-                {/* <button
-                  onClick={() => {
-                    addItem({
-                      name: item.name,
-                      description: item.description,
-                      market: item.market,
-                      country: item.country,
-                      price: item.price,
-                      category: item.category,
-                    });
-                  }}
-                >
-                  Add Item To Your Profile
-                </button>
-                <br />
-                <button
-                  onClick={() => {
-                    // editItem(`${item.id}`)
-                    push(`/${id}/editItem/${item.id}`);
-                  }}
-                >
-                  Update Item
-                </button> */}
               </StyledDiv>
             );
           })}
@@ -124,20 +88,10 @@ const ItemsList = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return {
-    id: state.ORS.owner_id,
-    item_id: state.IRS.items.id,
+  return {  
     items: state.IRS.items,
-    error: state.IRS.error,
-    gettingItems: state.IRS.getItems,
-    updatingItem: state.IRS.updatingItem,
-    creatingItem: state.IRS.creatingItem,
-    deletingItem: state.IRS.deletingItem,
+    error: state.IRS.error,    
   };
 };
 
-export default connect(mapStateToProps, {
-  getItems,
-  addItemForSale,
-  updateSingleItem,
-})(ItemsList);
+export default connect(mapStateToProps, { getItems })(ItemsList);

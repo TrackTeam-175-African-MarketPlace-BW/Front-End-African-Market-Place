@@ -12,13 +12,12 @@ import {
   CANCEL_EDITING,
   ERROR_UPDATING_PASSWORD,
   DELETE_USER_ITEM,
-  addingItem,
 } from "../actions/ownerActions";
 import {
   UPDATING_ITEM,
   UPDATED_ITEM,
   ADDING_ITEM,
-  ADD_ITEM,
+  ADDED_ITEM,
 } from "../actions/itemsActions";
 
 const initialState = {
@@ -112,11 +111,6 @@ export const ownerReducer = (state = initialState, action) => {
         isEditingPassword: false,
         isEditingUser: false,
       };
-    case ADD_ITEM:
-      return {
-        ...state,
-        itemsForSale: [...state.itemsForSale, action.payload],
-      };
     case DELETE_USER_ITEM:
       return {
         ...state,
@@ -143,7 +137,7 @@ export const ownerReducer = (state = initialState, action) => {
         ...state,
         addingItem: true,
       };
-    case ADD_ITEM:
+    case ADDED_ITEM:
       return {
         ...state,
         addingItem: false,

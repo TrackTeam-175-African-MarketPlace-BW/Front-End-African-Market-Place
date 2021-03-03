@@ -15,7 +15,7 @@ import {
   addingItem,
 } from "../actions/ownerActions";
 import styled, { css } from "styled-components";
-import AddItem from "./ITEMS/AddItem";
+
 
 const FlexStyling = styled.div`
   display: flex;
@@ -140,7 +140,7 @@ const OwnerProfile = (props) => {
               😪
             </span>{" "}
             <br></br>
-            <Link to="/itemslist">Want to change that?</Link> <br></br>Add an
+            <Link to={`/${id}/itemsList`}>Want to change that?</Link> <br></br>Add an
             item to your profile!
           </div>
         ) : null}

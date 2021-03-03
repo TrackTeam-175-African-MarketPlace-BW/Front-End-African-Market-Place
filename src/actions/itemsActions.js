@@ -1,9 +1,5 @@
-import { bindActionCreators } from "redux";
 import axiosWithAuth from "../utils/axiosWithAuth";
-// import { useHistory, useParams } from "react-router-dom";
 
-// const { push } = useHistory();
-// const { id } = useParams();
 
 export const DATA_LOADING = "DATA_LOADING";
 export const DATA_RETRIEVED = "DATA_RETRIEVED";
@@ -17,7 +13,7 @@ export const UPDATED_ITEM = "UPDATED_ITEM";
 export const REMOVING_ITEM = "REMOVING_ITEM";
 export const REMOVE_ITEM = "REMOVE_ITEM";
 export const ADDING_ITEM = "ADDING_ITEM";
-export const ADD_ITEM = "ADD_ITEM";
+export const ADDED_ITEM = "ADD_ITEM";
 
 export const getItems = () => (dispatch) => {
   dispatch({ type: DATA_LOADING });
@@ -76,6 +72,7 @@ export const updateSingleItem = (id, itemId, item) => (dispatch) => {
       console.log("cd: ItemsAction.js: updateSingleItem: axios.get error: ", {
         err,
       });
+      dispatch({type: ERROR_LOADING_DATA, payload: err.response.data.message})
     });
 };
 
@@ -96,9 +93,12 @@ export const addItemForSale = (id, item) => (dispatch) => {
         res
       );
       dispatch({
-        type: ADD_ITEM,
+        type: ADDED_ITEM,
         payload: res.data,
       });
     })
-    .catch((err) => console.log({ err }));
+    .catch((err) => {
+      console.log({ err })
+      dispatch({type: ERROR_LOADING_DATA, payload: err.response.data.message})
+    });
 };
