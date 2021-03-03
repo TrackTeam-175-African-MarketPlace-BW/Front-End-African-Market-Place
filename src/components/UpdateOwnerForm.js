@@ -19,6 +19,10 @@ const Button = styled.button`
   padding: 0.25em 1em;
 `;
 
+const Names = styled.span`
+  font-family: "Homemade Apple", cursive;
+  font-size: 14px;
+`;
 const Input = styled.input`
   padding: 10px;
   border: 0;

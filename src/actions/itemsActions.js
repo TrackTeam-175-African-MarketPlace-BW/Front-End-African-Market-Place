@@ -16,7 +16,7 @@ export const UPDATING_ITEM = "UPDATING_ITEM";
 export const UPDATED_ITEM = "UPDATED_ITEM";
 export const REMOVING_ITEM = "REMOVING_ITEM";
 export const REMOVE_ITEM = "REMOVE_ITEM";
-export const ADDING_ITEM = "ADDING_ITEM"
+export const ADDING_ITEM = "ADDING_ITEM";
 export const ADD_ITEM = "ADD_ITEM";
 
 export const getItems = () => (dispatch) => {
@@ -59,21 +59,25 @@ export const showSingleItem = (itemId) => (dispatch) => {
 };
 
 export const updateSingleItem = (id, itemId, item) => (dispatch) => {
-  dispatch({type: UPDATING_ITEM})
+  dispatch({ type: UPDATING_ITEM });
   axiosWithAuth()
     .put(`users/${id}/items/${itemId}`, item)
     .then((res) => {
-      console.log("cd: itemsActions.js: updateSingleItem: axios.put response: ", res)
+      console.log(
+        "cd: itemsActions.js: updateSingleItem: axios.put response: ",
+        res
+      );
       dispatch({
         type: UPDATED_ITEM,
         payload: res.data,
-      })
+      });
     })
     .catch((err) => {
-      console.log("cd: ItemsAction.js: updateSingleItem: axios.get error: ", {err})
-    })
-  };
-
+      console.log("cd: ItemsAction.js: updateSingleItem: axios.get error: ", {
+        err,
+      });
+    });
+};
 
 export const addItemForSale = (id, item) => (dispatch) => {
   const sendItem = {
@@ -87,11 +91,14 @@ export const addItemForSale = (id, item) => (dispatch) => {
   axiosWithAuth()
     .post(`/users/${id}/items`, sendItem)
     .then((res) => {
-      console.log("cd: itemsActions.js: addItemsForSale: axios.post response: ", res)
+      console.log(
+        "cd: itemsActions.js: addItemsForSale: axios.post response: ",
+        res
+      );
       dispatch({
         type: ADD_ITEM,
         payload: res.data,
-      })
+      });
     })
-    .catch((err) => console.log({err}))
-  };
+    .catch((err) => console.log({ err }));
+};
