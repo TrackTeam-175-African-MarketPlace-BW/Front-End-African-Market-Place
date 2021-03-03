@@ -1,3 +1,4 @@
+import "../OwnerProfile.css";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
@@ -10,30 +11,89 @@ import {
   editingPassword,
   unmountUser,
   unmountPasswordChange,
+  deleteUserItem,
 } from "../actions/ownerActions";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const FlexStyling = styled.div`
   display: flex;
-  margin: 0 auto;
-  align-items: center;
-  justify-content: center;
+  flex-direction: row;
+
   text-transform: lowercase;
   font-size: 12px;
-  max-width: 80%;
-  margin-top: 8%;
+
+  width: 90%;
+  margin-left: 8%;
+`;
+
+const Names = styled.span`
+  font-family: "Homemade Apple", cursive;
+`;
+
+const SaleItemsDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: flex-start;
+  padding: 10px;
+  border-radius: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px;
 `;
 
 const Headers = styled.h1`
-  font-size: 20px;
+  font-size: 23px;
   font-weight: none;
-  // border: 1px solid black;
-  // border-radius: 5px;
-  padding: 4px;
+  font-family: "Homemade Apple", cursive;
+
+  width: 100%;
+`;
+// first #68773C
+// last #A54623
+
+// input,
+// textarea,
+// dropdown {
+//   padding: 10px;
+//   border: 0;
+//   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+//   border-radius: 8px;
+// }
+
+const Button = styled.button`
+  background: #68773c;
+  border-radius: 3px;
+
+  color: white;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+
+  ${(props) =>
+    props.other &&
+    css`
+      background: #83a32e;
+      color: white;
+    `}
+`;
+
+const ProfileDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  text-align: center;
+  padding-right: 60px;
   width: 100%;
 `;
 
+const ItemDiv = styled.div`
+  padding: 12px;
+`;
+
 const OwnerProfile = (props) => {
+  console.log("OWNERPROFILE PROPS", props);
   const { id } = useParams();
 
   useEffect(() => {
@@ -56,69 +116,89 @@ const OwnerProfile = (props) => {
     props.editingPassword();
   };
 
+  const deleteItem = (item) => {
+    props.deleteUserItem(props.ownerProfile.id, item.id);
+    // console.log("ITEMFORSALE ID", props.ownerProfile, item.id);
+    // console.log("THESE ARE THE CURRENT ITEMS FOR SALE", props.itemsForSale);
+    // props.itemsForSale.filter((itemForSale) => {
+    //   return itemForSale.id !== item.id;
+    // });
+  };
+
   return (
     <FlexStyling>
-      <div>
+      <SaleItemsDiv>
         <Headers>
-          <span role="img" aria-label="bust of two people emoji">
-            👥
+          <span role="img" aria-label="corn emoji">
+            🌾
           </span>{" "}
-          welcome, {props.ownerProfile.name}{" "}
+          {props.ownerProfile.name}'s items for sale{" "}
         </Headers>
-        name: {props.ownerProfile.name}
         <br></br>
-        <img
-          style={{ width: "40%", borderRadius: "10px" }}
-          src={props.ownerProfile.user_photo}
-          alt={props.ownerProfile.name}
-        ></img>
-        <br></br>
-        country: {props.ownerProfile.country}
-        <br></br>
-        email: {props.ownerProfile.email}
-        <br></br>
-        bio: {props.ownerProfile.user_info}
-        <br></br>
-        {props.isEditingUser === false ? (
-          <button onClick={handleUpdateProfile}>update profile?</button>
-        ) : null}
-        {props.isEditingPassword === false ? (
-          <button onClick={handleUpdatePassword}>update password?</button>
-        ) : null}
-      </div>
-      <div>{props.isEditingUser && <UpdateOwnerForm />}</div>
-      <div>{props.isEditingPassword && <UpdatePasswordForm />}</div>
 
-      <div>
-        <div>
-          <Headers>
-            <span role="img" aria-label="corn emoji">
-              🌾
-            </span>{" "}
-            {props.ownerProfile.name}'s items for sale{" "}
-          </Headers>
-        </div>
         {props.itemsForSale.map((item) => {
           return (
-            <div key={item.id}>
-              name: {item.name}
+            <ItemDiv key={item.id}>
+              <Names>name</Names>: {item.name}
               <br></br>
-              description: {item.description}
+              <Names>info:</Names>: {item.description}
               <br></br>
-              price: {item.price}
+              <Names>price</Names>: ${item.price}
               <br></br>
-              category: {item.category}
+              <Names>category</Names>: {item.category}
               <br></br>
-              market: {item.market}
+              <Names>market</Names>: {item.market}
               <br></br>
-              country: {item.country}
+              <Names>country</Names>: {item.country}
               <br></br>
-              <br></br>
-            </div>
+              <Button
+                other
+                onClick={() => {
+                  deleteItem(item);
+                }}
+              >
+                delete item?
+              </Button>
+            </ItemDiv>
           );
         })}
-      </div>
-      <br></br>
+      </SaleItemsDiv>
+
+      <ProfileDiv>
+        <div>
+          <Headers>
+            <span role="img" aria-label="bust of two people emoji">
+              👥
+            </span>{" "}
+            welcome, {props.ownerProfile.name}
+          </Headers>
+          <br></br>
+          <Names>name:</Names> {props.ownerProfile.name}
+          <br></br>
+          <img
+            style={{ width: "40%", borderRadius: "10px" }}
+            src={props.ownerProfile.user_photo}
+            alt={props.ownerProfile.name}
+          ></img>
+          <br></br>
+          <Names>country:</Names> {props.ownerProfile.country}
+          <br></br>
+          <Names>email:</Names> {props.ownerProfile.email}
+          <br></br>
+          <Names>bio:</Names> {props.ownerProfile.user_info}
+          <br></br>
+          {props.isEditingUser === false ? (
+            <Button onClick={handleUpdateProfile}>update profile?</Button>
+          ) : null}
+          {props.isEditingPassword === false ? (
+            <Button onClick={handleUpdatePassword}>update password?</Button>
+          ) : null}
+        </div>
+        <div>
+          {props.isEditingUser && <UpdateOwnerForm />}
+          {props.isEditingPassword && <UpdatePasswordForm />}
+        </div>
+      </ProfileDiv>
     </FlexStyling>
   );
 };
@@ -142,4 +222,5 @@ export default connect(mapStateToProps, {
   editingPassword,
   unmountUser,
   unmountPasswordChange,
+  deleteUserItem,
 })(OwnerProfile);

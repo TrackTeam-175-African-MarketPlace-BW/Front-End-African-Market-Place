@@ -8,6 +8,42 @@ import {
   updatedUser,
   cancelEditing,
 } from "../actions/ownerActions";
+import styled, { css } from "styled-components";
+
+const Button = styled.button`
+  background: #a54623;
+  border-radius: 3px;
+
+  color: white;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+`;
+
+const Input = styled.input`
+  padding: 10px;
+  border: 0;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+`;
+
+const TextArea = styled.textarea`
+  padding: 10px;
+  border: 0;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+`;
+
+const Select = styled.select`
+  outline: 0;
+  background: white;
+  width: 100%;
+  height: 100%;
+  color: black;
+  cursor: pointer;
+  border: 1px solid white;
+  border-radius: 8px;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+`;
 
 const initialState = {
   name: "",
@@ -65,7 +101,7 @@ const UpdateOwnerForm = (props) => {
       <form onSubmit={submitUpdate}>
         <label htmlFor="name" />
         name:<br></br>
-        <input
+        <Input
           type="name"
           name="name"
           value={updatedInfo.name}
@@ -74,7 +110,7 @@ const UpdateOwnerForm = (props) => {
         <br></br>
         <label htmlFor="email" />
         email: required<br></br>
-        <input
+        <Input
           type="email"
           name="email"
           value={updatedInfo.email}
@@ -83,28 +119,30 @@ const UpdateOwnerForm = (props) => {
         <br></br>
         <label htmlFor="country">
           location:<br></br>
-          <select
-            id="country"
-            name="country"
-            value={updatedInfo.country}
-            onChange={handleChanges}
-          >
-            {countries.map((country) => {
-              return (
-                <option
-                  key={country.id}
-                  value={country.country}
-                  defaultValue={country[0]}
-                >
-                  {country.country}
-                </option>
-              );
-            })}
-          </select>
+          <div className="select">
+            <Select
+              id="country"
+              name="country"
+              value={updatedInfo.country}
+              onChange={handleChanges}
+            >
+              {countries.map((country) => {
+                return (
+                  <option
+                    key={country.id}
+                    value={country.country}
+                    defaultValue={country[0]}
+                  >
+                    {country.country}
+                  </option>
+                );
+              })}
+            </Select>
+          </div>
         </label>
         <label htmlFor="user_photo" />
         user photo?<br></br>
-        <input
+        <Input
           type="text"
           name="user_photo"
           value={updatedInfo.user_photo}
@@ -114,7 +152,7 @@ const UpdateOwnerForm = (props) => {
         <br></br>
         <label htmlFor="user_info">
           bio:<br></br>
-          <textarea
+          <TextArea
             type="text"
             name="user_info"
             value={updatedInfo.user_info}
@@ -122,12 +160,11 @@ const UpdateOwnerForm = (props) => {
           />
         </label>
         <br></br>
-        <button style={{ marginTop: "5px" }}>save updated info.</button>
-        <br></br>
+        <Button style={{ marginTop: "5px" }}>save updated info.</Button>
       </form>
-      <button style={{ marginTop: "5px" }} onClick={toCancelEditing}>
+      <Button style={{ marginTop: "5px" }} onClick={toCancelEditing}>
         cancel editing.
-      </button>
+      </Button>
     </div>
   );
 };

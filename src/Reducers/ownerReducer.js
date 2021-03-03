@@ -10,6 +10,8 @@ import {
   TOGGLE_UPDATE_USER,
   TOGGLE_UPDATE_PASSWORD,
   CANCEL_EDITING,
+  ERROR_UPDATING_PASSWORD,
+  DELETE_USER_ITEM,
 } from "../actions/ownerActions";
 
 import { ADD_ITEM } from "../actions/itemsActions";
@@ -32,7 +34,6 @@ export const ownerReducer = (state = initialState, action) => {
         isLoading: true,
       };
     case USER_RETRIEVED:
-      console.log("USER_RETRIEVED", action.payload);
       return {
         ...state,
         isLoading: false,
@@ -64,7 +65,6 @@ export const ownerReducer = (state = initialState, action) => {
         isEditingUser: false,
       };
     case UPDATED_USER:
-      console.log("UPDATED_USER", action.payload);
       return {
         ...state,
         ownerProfile: action.payload,
@@ -78,7 +78,6 @@ export const ownerReducer = (state = initialState, action) => {
         isEditingUser: false,
       };
     case UPDATED_PASSWORD:
-      console.log("UPDATED_PASSWORD", action.payload);
       return {
         ...state,
         ownerProfile: action.payload,
@@ -89,6 +88,13 @@ export const ownerReducer = (state = initialState, action) => {
       return {
         ...state,
         isEditingPassword: false,
+      };
+    case ERROR_UPDATING_PASSWORD:
+      return {
+        ...state,
+        isEditingPassword: true,
+        isEditingUser: false,
+        error: action.payload,
       };
 
     case CANCEL_EDITING:
@@ -101,6 +107,13 @@ export const ownerReducer = (state = initialState, action) => {
       return {
         ...state,
         itemsForSale: [...state.itemsForSale, action.payload],
+      };
+    case DELETE_USER_ITEM:
+      return {
+        ...state,
+        itemsForSale: state.itemsForSale.filter(
+          (item) => item.id !== action.payload
+        ),
       };
 
     default:

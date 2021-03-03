@@ -10,6 +10,24 @@ import {
 } from "../actions/ownerActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import axiosWithAuth from "../utils/axiosWithAuth";
+import styled, { css } from "styled-components";
+
+const Button = styled.button`
+  background: #a54623;
+  border-radius: 3px;
+
+  color: white;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+`;
+
+const Input = styled.input`
+  padding: 10px;
+  border: 0;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+`;
 
 const initialState = {
   oldPassword: "",
@@ -20,10 +38,9 @@ const UpdatePasswordForm = (props) => {
   const [changedPassword, setChangedPassword] = useState(initialState);
   const [passwordShown, setPasswordShown] = useState(false);
   const [passwordShown2, setPasswordShown2] = useState(false);
-
   const { push } = useHistory();
   const eye = <FontAwesomeIcon icon={faEye} />;
-
+  const [error, setError] = useState("");
   const handleChanges = (e) => {
     setChangedPassword({
       ...changedPassword,
@@ -39,11 +56,18 @@ const UpdatePasswordForm = (props) => {
     setPasswordShown2(passwordShown2 ? false : true);
   };
 
-  const submitUpdatedPassword = (e) => {
+  const submitPass = (e) => {
     e.preventDefault();
-    props.updatedPassword(props.id, changedPassword);
-    window.localStorage.removeItem("token");
-    push(`/newpassword`);
+    axiosWithAuth()
+      .put(`/users/${props.ownerProfile.id}/password`, changedPassword)
+      .then((response) => {
+        console.log("submit password success", response);
+        window.localStorage.removeItem("token");
+        push(`/newpassword`);
+      })
+      .catch((error) => {
+        setError(error.response.data.message);
+      });
   };
 
   const toCancelEditing = (e) => {
@@ -53,12 +77,12 @@ const UpdatePasswordForm = (props) => {
 
   return (
     <div>
-      <form onSubmit={submitUpdatedPassword}>
+      <form onSubmit={submitPass}>
         <label htmlFor="oldPassword" />
         old password: <i onClick={togglePasswordVisibilityOld}>{eye}</i>
         <br></br>
         <div>
-          <input
+          <Input
             type={passwordShown ? "text" : "password"}
             name="oldPassword"
             placeholder={"enter old password"}
@@ -70,17 +94,17 @@ const UpdatePasswordForm = (props) => {
         <label htmlFor="newPassword" />
         new password: <i onClick={togglePasswordVisibilityNew}>{eye}</i>{" "}
         <br></br>
-        <input
+        <Input
           type={passwordShown2 ? "text" : "password"}
           name="newPassword"
           value={changedPassword.newPassword}
           onChange={handleChanges}
         />
         <br></br>
-        <button style={{ marginTop: "5px" }}>change password.</button>
-        <br></br>
+        {error && <div style={{ color: "red" }}>{error}</div>}
+        <Button style={{ marginTop: "5px" }}>change password.</Button>
       </form>
-      <button onClick={toCancelEditing}>cancel editing</button>
+      <Button onClick={toCancelEditing}>cancel editing</Button>
     </div>
   );
 };
