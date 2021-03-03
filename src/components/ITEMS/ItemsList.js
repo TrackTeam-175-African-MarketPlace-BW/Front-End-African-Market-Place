@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import {
   getItems,
   updateSingleItem,
+  addItemForSale
 } from "./../../actions/itemsActions";
 import Loader from "react-loader-spinner";
 import styled from "styled-components";
@@ -101,5 +102,6 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   getItems,
+  addItemForSale,
   updateSingleItem,  
 })(ItemsList);
