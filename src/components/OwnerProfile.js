@@ -1,6 +1,6 @@
 import "../OwnerProfile.css";
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import UpdateOwnerForm from "./UpdateOwnerForm";
 import UpdatePasswordForm from "./UpdatePasswordForm";
@@ -136,6 +136,18 @@ const OwnerProfile = (props) => {
         </Headers>
         <br></br>
 
+        {props.itemsForSale.length === 0 ? (
+          <div>
+            No items currently listed! How sad!{" "}
+            <span role="img" aria-label="crying emoji">
+              😪
+            </span>{" "}
+            <br></br>
+            <Link to="/itemslist">Want to change that?</Link> <br></br>Add an
+            item to your profile!
+          </div>
+        ) : null}
+
         {props.itemsForSale.map((item) => {
           return (
             <ItemDiv key={item.id}>
@@ -175,11 +187,31 @@ const OwnerProfile = (props) => {
           <br></br>
           <Names>name:</Names> {props.ownerProfile.name}
           <br></br>
-          <img
-            style={{ width: "40%", borderRadius: "10px" }}
-            src={props.ownerProfile.user_photo}
-            alt={props.ownerProfile.name}
-          ></img>
+          {props.ownerProfile.user_photo ? (
+            <div>
+              <img
+                style={{ width: "40%", borderRadius: "10px" }}
+                src={props.ownerProfile.user_photo}
+                alt={props.ownerProfile.name}
+              ></img>
+            </div>
+          ) : (
+            <div>
+              no photo found!
+              <Link onClick={handleUpdateProfile}>{""} update profile?</Link>
+            </div>
+          )}
+          {/* {props.ownerProfile.user_photo ? (
+            <img
+              style={{ width: "40%", borderRadius: "10px" }}
+              src={props.ownerProfile.user_photo}
+              alt={props.ownerProfile.name}
+            ></img>
+          ) : (
+            <Link onClick={handleUpdateProfile}>
+              no photo found! update profile?
+            </Link>
+          )} */}
           <br></br>
           <Names>country:</Names> {props.ownerProfile.country}
           <br></br>
