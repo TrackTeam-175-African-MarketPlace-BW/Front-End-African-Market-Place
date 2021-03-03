@@ -119,8 +119,15 @@ export const unmountPasswordChange = () => {
 };
 
 export const deleteUserItem = (id, itemId) => (dispatch) => {
-  dispatch({ type: DELETE_USER_ITEM });
-  axiosWithAuth().delete(`/users/${id}/items/${itemId}`);
+  axiosWithAuth()
+    .delete(`/users/${id}/items/${itemId}`)
+    .then((res) => {
+      console.log(
+        "src: ownerActions.js: deleteUserItem: axios.delete response: ",
+        res
+      );
+      dispatch({ type: DELETE_USER_ITEM, payload: itemId });
+    });
 };
 
 export const loadUserItems = (id) => {

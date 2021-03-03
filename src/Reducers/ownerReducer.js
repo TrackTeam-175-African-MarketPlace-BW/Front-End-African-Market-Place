@@ -111,7 +111,9 @@ export const ownerReducer = (state = initialState, action) => {
     case DELETE_USER_ITEM:
       return {
         ...state,
-        itemsForSale: [...state.itemsForSale],
+        itemsForSale: state.itemsForSale.filter(
+          (item) => item.id !== action.payload
+        ),
       };
 
     default:

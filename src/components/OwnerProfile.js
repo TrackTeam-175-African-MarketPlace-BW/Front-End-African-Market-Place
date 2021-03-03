@@ -118,8 +118,8 @@ const OwnerProfile = (props) => {
 
   const deleteItem = (item) => {
     props.deleteUserItem(props.ownerProfile.id, item.id);
-    console.log("ITEMFORSALE ID", props.ownerProfile, item.id);
-    console.log("THESE ARE THE CURRENT ITEMS FOR SALE", props.itemsForSale);
+    // console.log("ITEMFORSALE ID", props.ownerProfile, item.id);
+    // console.log("THESE ARE THE CURRENT ITEMS FOR SALE", props.itemsForSale);
     // props.itemsForSale.filter((itemForSale) => {
     //   return itemForSale.id !== item.id;
     // });
