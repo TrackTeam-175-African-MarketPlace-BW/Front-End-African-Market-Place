@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import {
   getItems,
   updateSingleItem,
-  addItemForSale,
 } from "./../../actions/itemsActions";
 import Loader from "react-loader-spinner";
 import styled from "styled-components";
@@ -40,9 +39,6 @@ const ItemsList = (props) => {
     props.setIsLoggedIn(true);
   }, []);
 
-  const editItem = (itemId) => {
-    props.updateSingleItem(props.id, itemId);
-  };
 
   const addItem = (item) => {
     console.log("cd: ItemsList.js: addItem: item: ", item);
@@ -105,6 +101,5 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   getItems,
-  updateSingleItem,
-  addItemForSale,
+  updateSingleItem,  
 })(ItemsList);

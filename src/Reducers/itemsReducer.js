@@ -27,7 +27,7 @@ export const itemsReducer = (state = initialState, action) => {
         gettingItems: true,
       };
     case DATA_RETRIEVED:
-      console.log("DATA_RETRIEVED", action.payload)
+      console.log("DATA_RETRIEVED", action.payload);
       return {
         ...state,
         gettingItems: false,
@@ -37,35 +37,38 @@ export const itemsReducer = (state = initialState, action) => {
       return {
         ...state,
         updatingItem: true,
-      }
+      };
     case UPDATED_ITEM:
       return {
         ...state,
-        item: action.payload,
+        items: [
+          ...state.items.filter((item) => item.id !== action.payload.id),
+          action.payload,
+        ],
         updatingItem: false,
-      }
+      };
     case CREATING_ITEM:
       return {
         ...state,
         creatingItem: true,
-      }
+      };
     case CREATED_ITEM:
       return {
         ...state,
         items: action.payload,
         creatingItem: false,
-      }
+      };
     case REMOVING_ITEM:
       return {
         ...state,
         deletingItem: true,
-      }
+      };
     case REMOVE_ITEM:
       return {
         ...state,
         items: action.payload,
         deletingItem: false,
-      }
+      };
     case ERROR_LOADING_DATA:
       return {
         ...state,

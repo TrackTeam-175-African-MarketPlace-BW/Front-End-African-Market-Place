@@ -57,13 +57,14 @@ export const showSingleItem = (itemId) => (dispatch) => {
     });
 };
 
-export const updateSingleItem = (id, itemId) => (dispatch) => {
+export const updateSingleItem = (id, itemId, item) => (dispatch) => {
+  dispatch({type: UPDATING_ITEM})
   axiosWithAuth()
-    .get(`/users/${id}/items/${itemId}`)
+    .put(`users/${id}/items/${itemId}`, item)
     .then((res) => {
-      console.log("cd: ItemsAction.js: updateSingleItem: axios.get request: ", res)
+      console.log("cd: itemsActions.js: updateSingleItem: axios.put response: ", res)
       dispatch({
-        type: SINGLE_ITEM,
+        type: UPDATED_ITEM,
         payload: res.data,
       })
     })
