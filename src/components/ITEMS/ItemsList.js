@@ -25,10 +25,10 @@ const StyledDiv = styled.div`
 `;
 
 const StyledH3 = styled.h3`
-  font-size: 20px;
+  // font-size: 20px;
 `;
 const StyledH4 = styled.h4`
-  font-size: 16px;
+  // font-size: 16px;
 `;
 
 const ItemsList = (props) => {
@@ -44,8 +44,6 @@ const ItemsList = (props) => {
     console.log("cd: ItemsList.js: addItem: item: ", item);
     props.addItemForSale(props.id, item);
   };
-
-  
 
   return (
     <div>
@@ -89,7 +87,6 @@ const ItemsList = (props) => {
                 >
                   Update Item
                 </button>
-               
               </StyledDiv>
             );
           })}
