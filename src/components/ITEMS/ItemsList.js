@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import {
   getItems,
   updateSingleItem,
-  addItemForSale,
 } from "./../../actions/itemsActions";
 import Loader from "react-loader-spinner";
 import styled from "styled-components";
@@ -40,9 +39,6 @@ const ItemsList = (props) => {
     props.setIsLoggedIn(true);
   }, []);
 
-  const handleSingle = (item) => {
-    props.updateSingleItem(item);
-  };
 
   const addItem = (item) => {
     console.log("cd: ItemsList.js: addItem: item: ", item);
@@ -70,14 +66,13 @@ const ItemsList = (props) => {
                     addItem(item);
                   }}
                 >
-                  Add Item To Sell
+                  Add Item To Your Profile
                 </button>
                 <br />
                 <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleSingle(item);
-                    push(`/singleItem/${item.id}`);
+                  onClick={() => {
+                    // editItem(`${item.id}`)
+                    push(`/editItem/${item.id}`);
                   }}
                 >
                   Update Item
@@ -94,6 +89,7 @@ const ItemsList = (props) => {
 const mapStateToProps = (state) => {
   return {
     id: state.ORS.owner_id,
+    item_id: state.IRS.items.id,
     items: state.IRS.items,
     error: state.IRS.error,
     gettingItems: state.IRS.getItems,
@@ -105,6 +101,5 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   getItems,
-  updateSingleItem,
-  addItemForSale,
+  updateSingleItem,  
 })(ItemsList);

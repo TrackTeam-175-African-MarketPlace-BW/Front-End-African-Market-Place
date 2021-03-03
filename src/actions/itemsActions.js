@@ -57,9 +57,21 @@ export const showSingleItem = (itemId) => (dispatch) => {
     });
 };
 
-export const updateSingleItem = (item) => (dispatch) => {
-  dispatch({ type: SINGLE_ITEM, payload: item });
-};
+export const updateSingleItem = (id, itemId, item) => (dispatch) => {
+  dispatch({type: UPDATING_ITEM})
+  axiosWithAuth()
+    .put(`users/${id}/items/${itemId}`, item)
+    .then((res) => {
+      console.log("cd: itemsActions.js: updateSingleItem: axios.put response: ", res)
+      dispatch({
+        type: UPDATED_ITEM,
+        payload: res.data,
+      })
+    })
+    .catch((err) => {
+      console.log("cd: ItemsAction.js: updateSingleItem: axios.get error: ", {err})
+    })
+  };
 
 export const deleteItem = (itemId) => (dispatch) => {
   dispatch({ type: REMOVING_ITEM });
