@@ -88,16 +88,16 @@ const AddItem = (props) => {
       .catch((err) => console.log(err));
   }, []);
 
-    useEffect(() => {
-      if (item.country) {
-        setIsDisabled(false);
-      }
+  useEffect(() => {
+    if (item.country) {
+      setIsDisabled(false);
+    }
 
-      axiosWithAuth()
-        .get(`/markets?country=${item.country}`)
-        .then((res) => setMarkets(res.data))
-        .catch((err) => console.log(err));
-    }, [item.country]);
+    axiosWithAuth()
+      .get(`/markets?country=${item.country}`)
+      .then((res) => setMarkets(res.data))
+      .catch((err) => console.log(err));
+  }, [item.country]);
 
   const onChange = (e) => {
     let value = e.target.value;
@@ -209,7 +209,7 @@ const AddItem = (props) => {
             })}
         </Select>
         <br></br>
-        <Button type="submit">update item</Button>
+        <Button type="submit">add item for sale</Button>
       </form>
     </Center>
   );
