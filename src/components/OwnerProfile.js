@@ -127,12 +127,7 @@ const OwnerProfile = (props) => {
   return (
     <FlexStyling>
       <SaleItemsDiv>
-        <Headers>
-          <span role="img" aria-label="corn emoji">
-            🌾
-          </span>{" "}
-          {props.ownerProfile.name}'s items for sale{" "}
-        </Headers>
+        <Headers>{props.ownerProfile.name}'s items for sale </Headers>
         <br></br>
 
         {props.itemsForSale.length === 0 ? (
@@ -142,7 +137,7 @@ const OwnerProfile = (props) => {
               😪
             </span>{" "}
             <br></br>
-            <Link to={`/${id}/itemsList`}>Want to change that?</Link> <br></br>
+            <Link to={`/${id}/addItem`}>Want to change that?</Link> <br></br>
             Add an item to your profile!
           </div>
         ) : null}
@@ -187,12 +182,7 @@ const OwnerProfile = (props) => {
 
       <ProfileDiv>
         <div>
-          <Headers>
-            <span role="img" aria-label="bust of two people emoji">
-              👥
-            </span>{" "}
-            welcome, {props.ownerProfile.name}
-          </Headers>
+          <Headers>welcome, {props.ownerProfile.name}</Headers>
           <br></br>
           <Names>name:</Names> {props.ownerProfile.name}
           <br></br>
