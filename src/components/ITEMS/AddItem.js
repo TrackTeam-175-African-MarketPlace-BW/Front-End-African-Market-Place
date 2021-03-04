@@ -86,11 +86,18 @@ const AddItem = (props) => {
       .get("/categories")
       .then((res) => setCategories(res.data))
       .catch((err) => console.log(err));
-    axiosWithAuth()
-      .get("/markets")
-      .then((res) => setMarkets(res.data))
-      .catch((err) => console.log(err));
   }, []);
+
+    useEffect(() => {
+      if (item.country) {
+        setIsDisabled(false);
+      }
+
+      axiosWithAuth()
+        .get(`/markets?country=${item.country}`)
+        .then((res) => setMarkets(res.data))
+        .catch((err) => console.log(err));
+    }, [item.country]);
 
   const onChange = (e) => {
     let value = e.target.value;
@@ -160,26 +167,6 @@ const AddItem = (props) => {
             })}
         </Select>
         <br></br>
-        <label htmlFor="market" /> <Names>Edit Market Location</Names>:<br></br>
-        <Select
-          id="market"
-          name="market"
-          value={item.market}
-          onChange={onChange}
-          defaultValue="pickOne"
-        >
-          <option value="pickOne">--- Pick One ---</option>
-          {markets
-            .sort((a, b) => a.id - b.id)
-            .map((market) => {
-              return (
-                <option key={market.id} value={market.market}>
-                  {market.market}
-                </option>
-              );
-            })}
-        </Select>
-        <br></br>
         <label htmlFor="country" /> <Names>Edit Country Location</Names>:
         <br></br>
         <Select
@@ -196,6 +183,27 @@ const AddItem = (props) => {
               return (
                 <option key={country.id} value={country.country}>
                   {country.country}
+                </option>
+              );
+            })}
+        </Select>
+        <br></br>
+        <label htmlFor="market" /> <Names>Edit Market Location</Names>:<br></br>
+        <Select
+          id="market"
+          name="market"
+          value={item.market}
+          onChange={onChange}
+          disabled={isDisabled}
+          defaultValue="pickOne"
+        >
+          <option value="pickOne">--- Pick One ---</option>
+          {markets
+            .sort((a, b) => a.id - b.id)
+            .map((market) => {
+              return (
+                <option key={market.id} value={market.market}>
+                  {market.market}
                 </option>
               );
             })}
