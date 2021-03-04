@@ -125,6 +125,7 @@ const Register = () => {
     <Center>
       <Headers>
         <img
+          alt="corn and text that says register with a corn"
           src="https://i.ibb.co/Qd3wMdJ/Screen-Shot-2021-03-03-at-5-55-33-PM.png"
           style={{ width: "23%" }}
         ></img>
@@ -170,6 +171,7 @@ const Register = () => {
             <img
               onClick={handleClick}
               className="eye"
+              alt="eye icon"
               src="https://icon-library.com/images/vector-eye-icon/vector-eye-icon-6.jpg"
               style={{ marginLeft: "70px", width: "20px" }}
             />

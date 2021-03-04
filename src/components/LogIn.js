@@ -122,6 +122,7 @@ const LogIn = () => {
             />
             <img
               onClick={handleClick}
+              alt="eye icon"
               className="eye"
               src="https://icon-library.com/images/vector-eye-icon/vector-eye-icon-6.jpg"
               style={{ marginLeft: "14px", width: "20px" }}

@@ -111,6 +111,7 @@ const UpdatePasswordForm = (props) => {
             />
             <img
               onClick={handleClickOld}
+              alt="eye icon"
               className="eye"
               src="https://icon-library.com/images/vector-eye-icon/vector-eye-icon-6.jpg"
               style={{ width: "20px" }}
@@ -136,6 +137,7 @@ const UpdatePasswordForm = (props) => {
             <img
               onClick={handleClickNew}
               className="eye"
+              alt="eye icon"
               src="https://icon-library.com/images/vector-eye-icon/vector-eye-icon-6.jpg"
               style={{ width: "20px" }}
             />

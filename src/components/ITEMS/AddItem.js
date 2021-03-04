@@ -214,8 +214,8 @@ const AddItem = (props) => {
         </Select>
         <br></br>
         <ButtonDiv>
-          <Button type="submit">add item for sale</Button>{" "}
-          <Button style={{ width: "110px" }}>cancel edit?</Button>
+          <Button type="submit">add item for sale?</Button>{" "}
+          <Button style={{ width: "110px" }}>cancel addition?</Button>
         </ButtonDiv>
       </form>
     </Center>
