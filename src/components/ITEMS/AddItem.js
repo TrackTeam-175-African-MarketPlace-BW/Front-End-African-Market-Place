@@ -120,7 +120,7 @@ const AddItem = (props) => {
     <Center>
       <form onSubmit={handleSubmit}>
         <Headers>- add new item -</Headers>
-        <label htmlFor="name" /> <Names>Edit Item Name</Names>:<br></br>
+        <label htmlFor="name" /> <Names>Add Item Name</Names>:<br></br>
         <Input
           id="name"
           type="text"
@@ -129,7 +129,7 @@ const AddItem = (props) => {
           onChange={onChange}
         />
         <br></br>
-        <label htmlFor="description" /> <Names>Edit Item Description</Names>:
+        <label htmlFor="description" /> <Names>Add Item Description</Names>:
         <Input
           id="description"
           type="text"
@@ -138,7 +138,7 @@ const AddItem = (props) => {
           onChange={onChange}
         />
         <br></br>
-        <label htmlFor="price" /> <Names>Edit Item Price</Names>:<br></br>
+        <label htmlFor="price" /> <Names>Add Item Price</Names>:<br></br>
         <Input
           id="price"
           type="text"
@@ -147,7 +147,7 @@ const AddItem = (props) => {
           onChange={onChange}
         />
         <br></br>
-        <label htmlFor="category" /> <Names>Edit Item Category</Names>:<br></br>
+        <label htmlFor="category" /> <Names>Add Item Category</Names>:<br></br>
         <Select
           id="category"
           name="category"
@@ -167,7 +167,7 @@ const AddItem = (props) => {
             })}
         </Select>
         <br></br>
-        <label htmlFor="country" /> <Names>Edit Country Location</Names>:
+        <label htmlFor="country" /> <Names>Add Country Location</Names>:
         <br></br>
         <Select
           id="country"
