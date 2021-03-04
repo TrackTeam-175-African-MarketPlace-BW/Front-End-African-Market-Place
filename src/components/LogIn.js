@@ -35,7 +35,7 @@ const Input = styled.input`
   border: 0;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
   border-radius: 15px;
-  width: 100%;
+  width: 80%;
   height: 21px;
 `;
 
@@ -109,21 +109,22 @@ const LogIn = () => {
         <div className="form-field">
           <label htmlFor="password" />
 
-          <div className="ps" class="password">
+          <div className="ps" class="password" style={{ width: "80%" }}>
             <input
               id="password"
               name="password"
               value={credentials.password}
               onChange={handleChange}
-              placeholder="password here please"
+              placeholder="password here"
               className="text"
               type={eyeVisible ? "text" : "password"}
+              style={{ width: "30%" }}
             />
             <img
               onClick={handleClick}
               className="eye"
               src="https://icon-library.com/images/vector-eye-icon/vector-eye-icon-6.jpg"
-              style={{ width: "20px" }}
+              style={{ marginLeft: "130px", width: "20px" }}
             />
           </div>
         </div>
@@ -133,7 +134,7 @@ const LogIn = () => {
             <NavLink to="/register">register here</NavLink>
           </div>
         )}
-        <Button style={{ marginTop: "15px" }} type="submit">
+        <Button style={{ marginTop: "15px", marginLeft: "50px" }} type="submit">
           log in
         </Button>
       </form>

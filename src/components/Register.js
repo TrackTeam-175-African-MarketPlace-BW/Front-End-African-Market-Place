@@ -156,21 +156,22 @@ const Register = () => {
         <div className="form-field">
           <label htmlFor="password" />
 
-          <div className="ps" class="password">
+          <div className="ps" class="password" style={{ width: "120%" }}>
             <input
               id="password"
               name="password"
               value={credentials.password}
               onChange={handleChanges}
-              placeholder="password here please"
+              placeholder="password here"
               className="text"
               type={eyeVisible ? "text" : "password"}
+              style={{ width: "50%" }}
             />
             <img
               onClick={handleClick}
               className="eye"
               src="https://icon-library.com/images/vector-eye-icon/vector-eye-icon-6.jpg"
-              style={{ width: "20px" }}
+              style={{ marginLeft: "70px", width: "20px" }}
             />
           </div>
         </div>
@@ -210,7 +211,9 @@ const Register = () => {
           />
         </label>
         <br></br>
-        <Button style={{ marginTop: "10px" }}>Ready to register?</Button>
+        <Button style={{ marginTop: "10px", marginLeft: "60px" }}>
+          ready to register?
+        </Button>
         <br></br>
         {error ? <div style={{ color: "red" }}>{error}</div> : null}
       </form>

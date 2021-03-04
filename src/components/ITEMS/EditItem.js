@@ -14,9 +14,14 @@ const Center = styled.div`
   text-transform: lowercase;
 `;
 
-const Span = styled.span`
-  font-size: 4rem;
+const Headers = styled.h1`
+  font-size: 23px;
+  font-weight: none;
+  font-family: "Homemade Apple", cursive;
+  text-align: center;
+  width: 100%;
 `;
+
 const Button = styled.button`
   background: #68773c;
   border-radius: 8px;
@@ -25,6 +30,7 @@ const Button = styled.button`
   padding: 0.25em 1em;
   padding-top: 7px;
   padding-bottom: 7px;
+  margin-left: 24%;
 `;
 
 const Input = styled.input`
@@ -56,7 +62,6 @@ const Select = styled.select`
 `;
 
 const EditItem = (props) => {
-
   const [item, setItem] = useState({
     name: "",
     description: "",
@@ -133,10 +138,7 @@ const EditItem = (props) => {
 
   return (
     <Center>
-      <Span role="img" aria-label="corn and vase emoji">
-        🌾🏺🌾
-      </Span>
-
+      <Headers>update item information</Headers>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name" /> <Names>Edit Item Name</Names>:<br></br>
         <Input
@@ -221,7 +223,9 @@ const EditItem = (props) => {
           })}
         </Select>
         <br></br>
-        <Button type="submit">update item</Button>
+        <Button type="submit" style={{ marginTop: "13px" }}>
+          update item
+        </Button>
       </form>
     </Center>
   );
