@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import axiosWithAuth from "../../utils/axiosWithAuth";
 import { updateSingleItem } from "../../actions/itemsActions";
+import { cancelEditing } from "../../actions/ownerActions";
 import styled from "styled-components";
 
 const Center = styled.div`
@@ -30,7 +31,6 @@ const Button = styled.button`
   padding: 0.25em 1em;
   padding-top: 7px;
   padding-bottom: 7px;
-  margin-left: 24%;
 `;
 
 const Input = styled.input`
@@ -59,6 +59,10 @@ const Select = styled.select`
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
   padding: 8px;
   text-transform: lowercase;
+`;
+
+const ButtonDiv = styled.div`
+  display: flex;
 `;
 
 const EditItem = (props) => {
@@ -133,6 +137,12 @@ const EditItem = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     props.updateSingleItem(id, itemId, item);
+    push(`/${id}/ownerProfile`);
+  };
+
+  const toCancelEditing = (e) => {
+    e.preventDefault();
+    props.cancelEditing();
     push(`/${id}/ownerProfile`);
   };
 
@@ -223,9 +233,12 @@ const EditItem = (props) => {
           })}
         </Select>
         <br></br>
-        <Button type="submit" style={{ marginTop: "13px" }}>
-          update item
-        </Button>
+        <ButtonDiv>
+          <Button type="submit">update item</Button>{" "}
+          <Button onClick={toCancelEditing} style={{ width: "110px" }}>
+            cancel edit?
+          </Button>
+        </ButtonDiv>
       </form>
     </Center>
   );
@@ -233,10 +246,13 @@ const EditItem = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+    updatingItem: state.ORS.updatingItem,
     item_id: state.SIR.selectedItem.id,
     id: state.ORS.owner_id,
     item: state.SIR.selectedItem,
   };
 };
 
-export default connect(mapStateToProps, { updateSingleItem })(EditItem);
+export default connect(mapStateToProps, { updateSingleItem, cancelEditing })(
+  EditItem
+);
