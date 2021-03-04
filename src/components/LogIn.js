@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import axiosWithAuth from "../utils/axiosWithAuth";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 const Center = styled.div`
   display: flex;
@@ -33,11 +33,12 @@ const Button = styled.button`
 `;
 
 const Input = styled.input`
-  padding: 10px;
+  padding: 8px;
   border: 0;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
-  border-radius: 8px;
+  border-radius: 15px;
   width: 100%;
+  height: 21px;
 `;
 
 const Names = styled.span`
@@ -52,19 +53,15 @@ const LogIn = () => {
   });
   const [error, setError] = useState("");
   const { push } = useHistory();
-  const [passwordShown, setPasswordShown] = useState(false);
+  // const [passwordShown, setPasswordShown] = useState(false);
   const [eyeVisible, setEyeVisible] = useState(false);
-  const eye = <FontAwesomeIcon icon={faEye} />;
+  // const eye = <FontAwesomeIcon icon={faEye} />;
 
   const handleChange = (e) => {
     setCredentials({
       ...credentials,
       [e.target.name]: e.target.value,
     });
-  };
-
-  const togglePasswordVisibility = () => {
-    setPasswordShown(passwordShown ? false : true);
   };
 
   const handleLogin = (e) => {
@@ -115,22 +112,32 @@ const LogIn = () => {
           placeholder="email here please"
         />
         <br />
-        <label htmlFor="password" /> <Names>password</Names>:{" "}
+        {/* <label htmlFor="password" /> <Names>password</Names>:{" "}
         <i onClick={togglePasswordVisibility}>{eye}</i>
-        <br></br>
-        <Input
+        <br></br> */}
+        {/* <Input
           id="password"
           name="password"
           type={passwordShown ? "text" : "password"}
           value={credentials.password}
           onChange={handleChange}
           placeholder="password here please"
-        />
+        /> */}
         <br />
+        <Names>password</Names>:<br></br>
         <div className="form-field">
-          <label for="ps">Password:</label>
+          <label htmlFor="password" />
+
           <div className="ps" class="password">
-            <input className="text" type={eyeVisible ? "text" : "password"} />
+            <input
+              id="password"
+              name="password"
+              value={credentials.password}
+              onChange={handleChange}
+              placeholder="password here please"
+              className="text"
+              type={eyeVisible ? "text" : "password"}
+            />
             <img
               onClick={handleClick}
               className="eye"
