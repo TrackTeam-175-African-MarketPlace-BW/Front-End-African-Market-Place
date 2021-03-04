@@ -10,6 +10,7 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.3",
     "axios": "^0.21.1",
+    "postscribe": "^2.0.8",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
     "react-google-font-loader": "^1.1.0",

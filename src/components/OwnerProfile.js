@@ -16,7 +16,6 @@ import {
 } from "../actions/ownerActions";
 import styled, { css } from "styled-components";
 
-
 const FlexStyling = styled.div`
   display: flex;
   flex-direction: row;
@@ -26,6 +25,7 @@ const FlexStyling = styled.div`
 
   width: 90%;
   margin-left: 8%;
+  align-items: center;
 `;
 
 const Names = styled.span`
@@ -40,10 +40,12 @@ const SaleItemsDiv = styled.div`
   padding: 10px;
   border-radius: 20px;
   flex-wrap: wrap;
-  width: 100%;
+
+  width: 110%;
   margin: 0 auto;
   text-align: center;
   padding: 10px;
+  max-height: 40%;
 `;
 
 const Headers = styled.h1`
@@ -76,6 +78,7 @@ const ProfileDiv = styled.div`
   text-align: center;
   padding-right: 60px;
   width: 100%;
+  min-height: 40%;
 `;
 
 const ItemDiv = styled.div`
@@ -83,7 +86,6 @@ const ItemDiv = styled.div`
 `;
 
 const OwnerProfile = (props) => {
-  // console.log("OWNERPROFILE PROPS", props);
   const { id } = useParams();
   const { push } = useHistory();
 
@@ -114,22 +116,12 @@ const OwnerProfile = (props) => {
 
   const deleteItem = (item) => {
     props.deleteUserItem(props.ownerProfile.id, item.id);
-    // console.log("ITEMFORSALE ID", props.ownerProfile, item.id);
-    // console.log("THESE ARE THE CURRENT ITEMS FOR SALE", props.itemsForSale);
-    // props.itemsForSale.filter((itemForSale) => {
-    //   return itemForSale.id !== item.id;
-    // });
   };
 
   return (
     <FlexStyling>
       <SaleItemsDiv>
-        <Headers>
-          <span role="img" aria-label="corn emoji">
-            🌾
-          </span>{" "}
-          {props.ownerProfile.name}'s items for sale{" "}
-        </Headers>
+        <Headers>{props.ownerProfile.name}'s items for sale </Headers>
         <br></br>
 
         {props.itemsForSale.length === 0 ? (
@@ -139,7 +131,7 @@ const OwnerProfile = (props) => {
               😪
             </span>{" "}
             <br></br>
-            <Link to={`/${id}/itemsList`}>Want to change that?</Link> <br></br>
+            <Link to={`/${id}/addItem`}>Want to change that?</Link> <br></br>
             Add an item to your profile!
           </div>
         ) : null}
@@ -184,12 +176,7 @@ const OwnerProfile = (props) => {
 
       <ProfileDiv>
         <div>
-          <Headers>
-            <span role="img" aria-label="bust of two people emoji">
-              👥
-            </span>{" "}
-            welcome, {props.ownerProfile.name}
-          </Headers>
+          <Headers>welcome, {props.ownerProfile.name}</Headers>
           <br></br>
           <Names>name:</Names> {props.ownerProfile.name}
           <br></br>
@@ -207,17 +194,6 @@ const OwnerProfile = (props) => {
               <Link onClick={handleUpdateProfile}>{""} update profile?</Link>
             </div>
           )}
-          {/* {props.ownerProfile.user_photo ? (
-            <img
-              style={{ width: "40%", borderRadius: "10px" }}
-              src={props.ownerProfile.user_photo}
-              alt={props.ownerProfile.name}
-            ></img>
-          ) : (
-            <Link onClick={handleUpdateProfile}>
-              no photo found! update profile?
-            </Link>
-          )} */}
           <br></br>
           <Names>country:</Names> {props.ownerProfile.country}
           <br></br>
