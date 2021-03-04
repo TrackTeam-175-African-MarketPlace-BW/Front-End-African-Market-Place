@@ -1,1 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Poiret&family=Pacifico&display=swap");
+
+.password {
+  border: 1px solid black;
+  border-radius: 4px;
+  width: 170px;
+  padding: 2px;
+}
+
+.text {
+  border: 0px;
+  width: 140px;
+}
+
+.text:focus {
+  outline: 0px;
+}
+
+.form-field {
+  display: flex;
+}
+
+label {
+  margin-right: 5px;
+}

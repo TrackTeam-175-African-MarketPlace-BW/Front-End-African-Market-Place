@@ -53,6 +53,7 @@ const LogIn = () => {
   const [error, setError] = useState("");
   const { push } = useHistory();
   const [passwordShown, setPasswordShown] = useState(false);
+  const [eyeVisible, setEyeVisible] = useState(false);
   const eye = <FontAwesomeIcon icon={faEye} />;
 
   const handleChange = (e) => {
@@ -83,9 +84,26 @@ const LogIn = () => {
       });
   };
 
+  const handleClick = (e) => {
+    if (eyeVisible === false) {
+      setEyeVisible(true);
+      e.target.src =
+        "https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/000/036/original/eye-closed.png";
+    } else {
+      setEyeVisible(false);
+      e.target.src =
+        "https://icon-library.com/images/vector-eye-icon/vector-eye-icon-6.jpg";
+    }
+  };
+
+  // if (setEyeVisible(true){
+  //   e.target.src =
+  //     "https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/000/036/original/eye-closed.png";
+  // }};
+
   return (
     <Center>
-      <Headers>{""} welcome, login below!</Headers>
+      <Headers>welcome, login below!</Headers>
       <form onSubmit={handleLogin}>
         <label htmlFor="email" /> <Names>user email:</Names>
         <Input
@@ -109,6 +127,18 @@ const LogIn = () => {
           placeholder="password here please"
         />
         <br />
+        <div className="form-field">
+          <label for="ps">Password:</label>
+          <div className="ps" class="password">
+            <input className="text" type={eyeVisible ? "text" : "password"} />
+            <img
+              onClick={handleClick}
+              className="eye"
+              src="https://icon-library.com/images/vector-eye-icon/vector-eye-icon-6.jpg"
+              style={{ width: "20px" }}
+            />
+          </div>
+        </div>
         {error && (
           <div style={{ color: "red" }}>
             {error} please try again, or{" "}
