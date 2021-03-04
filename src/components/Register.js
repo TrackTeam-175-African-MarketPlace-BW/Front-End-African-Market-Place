@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 const Center = styled.div`
   display: flex;
@@ -74,14 +74,16 @@ const Register = () => {
 
   const [error, setError] = useState("");
   const { push } = useHistory();
-  const [passwordShown, setPasswordShown] = useState(false);
-  const eye = <FontAwesomeIcon icon={faEye} />;
+  // const [passwordShown, setPasswordShown] = useState(false);
+  // const eye = <FontAwesomeIcon icon={faEye} />;
+
+  const [eyeVisible, setEyeVisible] = useState(false);
 
   const [countries, setCountries] = useState([]);
 
-  const togglePasswordVisibility = () => {
-    setPasswordShown(passwordShown ? false : true);
-  };
+  // const togglePasswordVisibility = () => {
+  //   setPasswordShown(passwordShown ? false : true);
+  // };
 
   useEffect(() => {
     axiosWithAuth()
@@ -113,6 +115,18 @@ const Register = () => {
         console.log("Registration error", error.response.data.message);
         setError();
       });
+  };
+
+  const handleClick = (e) => {
+    if (eyeVisible === false) {
+      setEyeVisible(true);
+      e.target.src =
+        "https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/000/036/original/eye-closed.png";
+    } else {
+      setEyeVisible(false);
+      e.target.src =
+        "https://icon-library.com/images/vector-eye-icon/vector-eye-icon-6.jpg";
+    }
   };
 
   return (
@@ -149,7 +163,7 @@ const Register = () => {
           placeholder="email required"
         />
         <br></br>
-        <label htmlFor="password" />
+        {/* <label htmlFor="password" />
         <Names>password</Names>: <i onClick={togglePasswordVisibility}>{eye}</i>
         <br></br>
         <Input
@@ -159,7 +173,29 @@ const Register = () => {
           onChange={handleChanges}
           placeholder="password required."
         />
-        <br></br>
+        <br></br> */}
+        <Names>password</Names>:<br></br>
+        <div className="form-field">
+          <label htmlFor="password" />
+
+          <div className="ps" class="password">
+            <input
+              id="password"
+              name="password"
+              value={credentials.password}
+              onChange={handleChanges}
+              placeholder="password here please"
+              className="text"
+              type={eyeVisible ? "text" : "password"}
+            />
+            <img
+              onClick={handleClick}
+              className="eye"
+              src="https://icon-library.com/images/vector-eye-icon/vector-eye-icon-6.jpg"
+              style={{ width: "20px" }}
+            />
+          </div>
+        </div>
         <label htmlFor="country">
           <Names>location</Names>:<br></br>
           <div>

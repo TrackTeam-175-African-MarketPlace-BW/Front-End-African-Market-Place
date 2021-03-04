@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import axiosWithAuth from "../utils/axiosWithAuth";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 const Center = styled.div`
   display: flex;
@@ -53,9 +51,8 @@ const LogIn = () => {
   });
   const [error, setError] = useState("");
   const { push } = useHistory();
-  // const [passwordShown, setPasswordShown] = useState(false);
+
   const [eyeVisible, setEyeVisible] = useState(false);
-  // const eye = <FontAwesomeIcon icon={faEye} />;
 
   const handleChange = (e) => {
     setCredentials({
@@ -71,7 +68,7 @@ const LogIn = () => {
       .then((res) => {
         console.log("cd: Login.js: handleLogin: post request response: ", res);
         localStorage.setItem("token", res.data.token);
-        push(`${res.data.user.id}/ownerProfile`); // NOTE adjust where the user gets sent after logging in
+        push(`${res.data.user.id}/ownerProfile`);
       })
       .catch((err) => {
         console.log(
@@ -93,11 +90,6 @@ const LogIn = () => {
     }
   };
 
-  // if (setEyeVisible(true){
-  //   e.target.src =
-  //     "https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/000/036/original/eye-closed.png";
-  // }};
-
   return (
     <Center>
       <Headers>welcome, login below!</Headers>
@@ -112,17 +104,6 @@ const LogIn = () => {
           placeholder="email here please"
         />
         <br />
-        {/* <label htmlFor="password" /> <Names>password</Names>:{" "}
-        <i onClick={togglePasswordVisibility}>{eye}</i>
-        <br></br> */}
-        {/* <Input
-          id="password"
-          name="password"
-          type={passwordShown ? "text" : "password"}
-          value={credentials.password}
-          onChange={handleChange}
-          placeholder="password here please"
-        /> */}
         <br />
         <Names>password</Names>:<br></br>
         <div className="form-field">
