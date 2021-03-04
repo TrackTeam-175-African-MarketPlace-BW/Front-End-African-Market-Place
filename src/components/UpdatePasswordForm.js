@@ -8,8 +8,8 @@ import {
   updatedPassword,
   cancelEditing,
 } from "../actions/ownerActions";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faEye } from "@fortawesome/free-solid-svg-icons";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import styled from "styled-components";
 
@@ -26,7 +26,7 @@ const Input = styled.input`
   padding: 10px;
   border: 0;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
-  border-radius: 8px;
+  border-radius: 15ppx;
 `;
 
 const initialState = {
@@ -36,11 +36,14 @@ const initialState = {
 
 const UpdatePasswordForm = (props) => {
   const [changedPassword, setChangedPassword] = useState(initialState);
-  const [passwordShown, setPasswordShown] = useState(false);
-  const [passwordShown2, setPasswordShown2] = useState(false);
+  const [eyeVisibleOldPS, setEyeVisibleOldPS] = useState(false);
+  const [eyeVisibleNewPS, setEyeVisibleNewPS] = useState(false);
+  // const [passwordShown, setPasswordShown] = useState(false);
+  // const [passwordShown2, setPasswordShown2] = useState(false);
   const { push } = useHistory();
-  const eye = <FontAwesomeIcon icon={faEye} />;
+  // const eye = <FontAwesomeIcon icon={faEye} />;
   const [error, setError] = useState("");
+
   const handleChanges = (e) => {
     setChangedPassword({
       ...changedPassword,
@@ -48,12 +51,36 @@ const UpdatePasswordForm = (props) => {
     });
   };
 
-  const togglePasswordVisibilityOld = () => {
-    setPasswordShown(passwordShown ? false : true);
+  // const togglePasswordVisibilityOld = () => {
+  //   setPasswordShown(passwordShown ? false : true);
+  // };
+
+  // const togglePasswordVisibilityNew = () => {
+  //   setPasswordShown2(passwordShown2 ? false : true);
+  // };
+
+  const handleClickOld = (e) => {
+    if (eyeVisibleOldPS === false) {
+      setEyeVisibleOldPS(true);
+      e.target.src =
+        "https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/000/036/original/eye-closed.png";
+    } else {
+      setEyeVisibleOldPS(false);
+      e.target.src =
+        "https://icon-library.com/images/vector-eye-icon/vector-eye-icon-6.jpg";
+    }
   };
 
-  const togglePasswordVisibilityNew = () => {
-    setPasswordShown2(passwordShown2 ? false : true);
+  const handleClickNew = (e) => {
+    if (eyeVisibleNewPS === false) {
+      setEyeVisibleNewPS(true);
+      e.target.src =
+        "https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/000/036/original/eye-closed.png";
+    } else {
+      setEyeVisibleNewPS(false);
+      e.target.src =
+        "https://icon-library.com/images/vector-eye-icon/vector-eye-icon-6.jpg";
+    }
   };
 
   const submitPass = (e) => {
@@ -78,7 +105,7 @@ const UpdatePasswordForm = (props) => {
   return (
     <div>
       <form onSubmit={submitPass}>
-        <label htmlFor="oldPassword" />
+        {/* <label htmlFor="oldPassword" />
         old password: <i onClick={togglePasswordVisibilityOld}>{eye}</i>
         <br></br>
         <div>
@@ -89,10 +116,32 @@ const UpdatePasswordForm = (props) => {
             value={changedPassword.oldPassword}
             onChange={handleChanges}
           />
+        </div> */}
+        password:<br></br>
+        <div className="form-field">
+          <label htmlFor="oldPassword" />
+
+          <div className="ps" class="oldPassword">
+            <input
+              id="oldPassword"
+              name="oldPassword"
+              value={changedPassword.oldPassword}
+              onChange={handleChanges}
+              placeholder="old password here"
+              className="text"
+              type={eyeVisibleOldPS ? "text" : "password"}
+            />
+            <img
+              onClick={handleClickOld}
+              className="eye"
+              src="https://icon-library.com/images/vector-eye-icon/vector-eye-icon-6.jpg"
+              style={{ width: "20px" }}
+            />
+          </div>
         </div>
         {error && <div style={{ color: "red" }}>{error}</div>}
         <br></br>
-        <label htmlFor="newPassword" />
+        {/* <label htmlFor="newPassword" />
         new password: <i onClick={togglePasswordVisibilityNew}>{eye}</i>{" "}
         <br></br>
         <Input
@@ -101,7 +150,29 @@ const UpdatePasswordForm = (props) => {
           value={changedPassword.newPassword}
           onChange={handleChanges}
         />
-        <br></br>
+        <br></br> */}
+        password:<br></br>
+        <div className="form-field">
+          <label htmlFor="newPassword" />
+
+          <div className="ps" class="newPassword">
+            <input
+              id="newPassword"
+              name="newPassword"
+              value={changedPassword.newPassword}
+              onChange={handleChanges}
+              placeholder="new password here"
+              className="text"
+              type={eyeVisibleNewPS ? "text" : "password"}
+            />
+            <img
+              onClick={handleClickNew}
+              className="eye"
+              src="https://icon-library.com/images/vector-eye-icon/vector-eye-icon-6.jpg"
+              style={{ width: "20px" }}
+            />
+          </div>
+        </div>
         <Button style={{ marginTop: "5px" }}>change password.</Button>
       </form>
       <Button onClick={toCancelEditing}>cancel editing</Button>
