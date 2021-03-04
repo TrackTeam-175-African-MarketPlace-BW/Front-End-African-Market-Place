@@ -13,6 +13,13 @@ import {
 import axiosWithAuth from "../utils/axiosWithAuth";
 import styled from "styled-components";
 
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin-top: 90%;
+  justify-content: center;
+`;
+
 const Button = styled.button`
   background: #a54623;
   border-radius: 3px;
@@ -94,7 +101,7 @@ const UpdatePasswordForm = (props) => {
 
   return (
     <div>
-      <form onSubmit={submitPass}>
+      <Form onSubmit={submitPass}>
         password:<br></br>
         <div className="form-field">
           <label htmlFor="oldPassword" />
@@ -105,7 +112,7 @@ const UpdatePasswordForm = (props) => {
               name="oldPassword"
               value={changedPassword.oldPassword}
               onChange={handleChanges}
-              placeholder="old pass"
+              placeholder="old"
               className="text"
               type={eyeVisibleOldPS ? "text" : "password"}
             />
@@ -129,7 +136,7 @@ const UpdatePasswordForm = (props) => {
               name="newPassword"
               value={changedPassword.newPassword}
               onChange={handleChanges}
-              placeholder="new pass"
+              placeholder="new"
               className="text"
               type={eyeVisibleNewPS ? "text" : "password"}
             />
@@ -141,8 +148,8 @@ const UpdatePasswordForm = (props) => {
             />
           </div>
         </div>
-        <Button style={{ marginTop: "5px" }}>change password.</Button>
-      </form>
+        <Button style={{ marginTop: "14px" }}>change password.</Button>
+      </Form>
       <Button onClick={toCancelEditing}>cancel editing</Button>
     </div>
   );

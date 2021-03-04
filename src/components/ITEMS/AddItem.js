@@ -5,6 +5,14 @@ import { connect } from "react-redux";
 import { addItemForSale } from "../../actions/itemsActions";
 import styled from "styled-components";
 
+const Headers = styled.h1`
+  font-size: 23px;
+  font-weight: none;
+  font-family: "Homemade Apple", cursive;
+  text-align: center;
+  width: 100%;
+`;
+
 const Center = styled.div`
   display: flex;
   justify-content: center;
@@ -13,9 +21,6 @@ const Center = styled.div`
   text-transform: lowercase;
 `;
 
-const Span = styled.span`
-  font-size: 4rem;
-`;
 const Button = styled.button`
   background: #68773c;
   border-radius: 8px;
@@ -103,11 +108,8 @@ const AddItem = (props) => {
 
   return (
     <Center>
-      <Span role="img" aria-label="corn and vase emoji">
-        🌾🏺🌾
-      </Span>
-
       <form onSubmit={handleSubmit}>
+        <Headers>- update your item -</Headers>
         <label htmlFor="name" /> <Names>Edit Item Name</Names>:<br></br>
         <Input
           id="name"

@@ -16,7 +16,6 @@ import {
 } from "../actions/ownerActions";
 import styled, { css } from "styled-components";
 
-
 const FlexStyling = styled.div`
   display: flex;
   flex-direction: row;
@@ -26,6 +25,7 @@ const FlexStyling = styled.div`
 
   width: 90%;
   margin-left: 8%;
+  align-items: center;
 `;
 
 const Names = styled.span`
@@ -40,10 +40,12 @@ const SaleItemsDiv = styled.div`
   padding: 10px;
   border-radius: 20px;
   flex-wrap: wrap;
-  width: 100%;
+
+  width: 110%;
   margin: 0 auto;
   text-align: center;
   padding: 10px;
+  max-height: 40%;
 `;
 
 const Headers = styled.h1`
@@ -76,6 +78,7 @@ const ProfileDiv = styled.div`
   text-align: center;
   padding-right: 60px;
   width: 100%;
+  min-height: 40%;
 `;
 
 const ItemDiv = styled.div`
