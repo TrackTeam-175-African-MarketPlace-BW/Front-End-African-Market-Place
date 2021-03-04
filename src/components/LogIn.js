@@ -118,13 +118,13 @@ const LogIn = () => {
               placeholder="password here"
               className="text"
               type={eyeVisible ? "text" : "password"}
-              style={{ width: "30%" }}
+              style={{ width: "63%" }}
             />
             <img
               onClick={handleClick}
               className="eye"
               src="https://icon-library.com/images/vector-eye-icon/vector-eye-icon-6.jpg"
-              style={{ marginLeft: "130px", width: "20px" }}
+              style={{ marginLeft: "14px", width: "20px" }}
             />
           </div>
         </div>
