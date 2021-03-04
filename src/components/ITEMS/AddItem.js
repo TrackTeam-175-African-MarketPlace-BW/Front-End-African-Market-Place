@@ -119,7 +119,7 @@ const AddItem = (props) => {
   return (
     <Center>
       <form onSubmit={handleSubmit}>
-        <Headers>- update your item -</Headers>
+        <Headers>- add new item -</Headers>
         <label htmlFor="name" /> <Names>Edit Item Name</Names>:<br></br>
         <Input
           id="name"
