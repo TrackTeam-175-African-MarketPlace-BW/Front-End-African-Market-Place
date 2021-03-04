@@ -1,3 +1,4 @@
+import "../UpdatePassword.css";
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -8,8 +9,7 @@ import {
   updatedPassword,
   cancelEditing,
 } from "../actions/ownerActions";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faEye } from "@fortawesome/free-solid-svg-icons";
+
 import axiosWithAuth from "../utils/axiosWithAuth";
 import styled from "styled-components";
 
@@ -38,10 +38,8 @@ const UpdatePasswordForm = (props) => {
   const [changedPassword, setChangedPassword] = useState(initialState);
   const [eyeVisibleOldPS, setEyeVisibleOldPS] = useState(false);
   const [eyeVisibleNewPS, setEyeVisibleNewPS] = useState(false);
-  // const [passwordShown, setPasswordShown] = useState(false);
-  // const [passwordShown2, setPasswordShown2] = useState(false);
   const { push } = useHistory();
-  // const eye = <FontAwesomeIcon icon={faEye} />;
+
   const [error, setError] = useState("");
 
   const handleChanges = (e) => {
@@ -50,14 +48,6 @@ const UpdatePasswordForm = (props) => {
       [e.target.name]: e.target.value,
     });
   };
-
-  // const togglePasswordVisibilityOld = () => {
-  //   setPasswordShown(passwordShown ? false : true);
-  // };
-
-  // const togglePasswordVisibilityNew = () => {
-  //   setPasswordShown2(passwordShown2 ? false : true);
-  // };
 
   const handleClickOld = (e) => {
     if (eyeVisibleOldPS === false) {
@@ -105,29 +95,17 @@ const UpdatePasswordForm = (props) => {
   return (
     <div>
       <form onSubmit={submitPass}>
-        {/* <label htmlFor="oldPassword" />
-        old password: <i onClick={togglePasswordVisibilityOld}>{eye}</i>
-        <br></br>
-        <div>
-          <Input
-            type={passwordShown ? "text" : "password"}
-            name="oldPassword"
-            placeholder={"enter old password"}
-            value={changedPassword.oldPassword}
-            onChange={handleChanges}
-          />
-        </div> */}
         password:<br></br>
         <div className="form-field">
           <label htmlFor="oldPassword" />
 
-          <div className="ps" class="oldPassword">
+          <div className="ps" class="password">
             <input
               id="oldPassword"
               name="oldPassword"
               value={changedPassword.oldPassword}
               onChange={handleChanges}
-              placeholder="old password here"
+              placeholder="old pass"
               className="text"
               type={eyeVisibleOldPS ? "text" : "password"}
             />
@@ -141,27 +119,17 @@ const UpdatePasswordForm = (props) => {
         </div>
         {error && <div style={{ color: "red" }}>{error}</div>}
         <br></br>
-        {/* <label htmlFor="newPassword" />
-        new password: <i onClick={togglePasswordVisibilityNew}>{eye}</i>{" "}
-        <br></br>
-        <Input
-          type={passwordShown2 ? "text" : "password"}
-          name="newPassword"
-          value={changedPassword.newPassword}
-          onChange={handleChanges}
-        />
-        <br></br> */}
         password:<br></br>
         <div className="form-field">
           <label htmlFor="newPassword" />
 
-          <div className="ps" class="newPassword">
+          <div className="ps" class="password">
             <input
               id="newPassword"
               name="newPassword"
               value={changedPassword.newPassword}
               onChange={handleChanges}
-              placeholder="new password here"
+              placeholder="new pass"
               className="text"
               type={eyeVisibleNewPS ? "text" : "password"}
             />
