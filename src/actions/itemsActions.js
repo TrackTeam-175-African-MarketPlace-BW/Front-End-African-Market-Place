@@ -78,10 +78,10 @@ export const updateSingleItem = (id, itemId, item) => (dispatch) => {
 
 export const addItemForSale = (id, item) => (dispatch) => {
   const sendItem = {
-    category: item.category,
-    country: item.country,
+    category: "",
+    country: "",
     description: item.description,
-    market: item.market,
+    market: "",
     name: item.name,
     price: item.price,
   };
