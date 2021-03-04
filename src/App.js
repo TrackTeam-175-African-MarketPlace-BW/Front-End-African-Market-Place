@@ -14,6 +14,8 @@ import EditItem from "./components/ITEMS/EditItem";
 import NewPasswordSuccess from "./components/NewPasswordSuccess";
 import AddItem from "./components/ITEMS/AddItem";
 
+import FakeLogIn from "./components/FakeLoginForm";
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -46,6 +48,7 @@ function App() {
           <NewPasswordSuccess />
         </Route>
         <Route exact path="/">
+          <FakeLogIn />
           <LandingPage />
         </Route>
       </Switch>
