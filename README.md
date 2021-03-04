@@ -2,7 +2,7 @@
 Prior to working on any component, make sure you "git pull origin main" to bring down the latest files!
 ---
 
-VERCEL APP: https://african-market-place-tt-175-buildweek.vercel.app/
+VERCEL APP: https://front-end-african-market-place.vercel.app/
 
 Developers: 
 
