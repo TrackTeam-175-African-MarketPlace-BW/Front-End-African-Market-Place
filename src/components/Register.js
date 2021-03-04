@@ -33,8 +33,8 @@ const Input = styled.input`
   padding: 10px;
   border: 0;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
-  border-radius: 8px;
-  width: 120%;
+  border-radius: 15px;
+  width: 100%;
 `;
 
 const Names = styled.span`
@@ -46,14 +46,14 @@ const TextArea = styled.textarea`
   padding: 10px;
   border: 0;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
-  border-radius: 8px;
-  width: 120%;
+  border-radius: 15px;
+  width: 100%;
 `;
 
 const Select = styled.select`
   outline: 0;
   background: white;
-  width: 85%;
+  width: 100%;
   height: 100%;
   color: black;
   cursor: pointer;
