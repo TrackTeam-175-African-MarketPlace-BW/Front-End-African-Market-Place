@@ -86,7 +86,6 @@ const ItemDiv = styled.div`
 `;
 
 const OwnerProfile = (props) => {
-  // console.log("OWNERPROFILE PROPS", props);
   const { id } = useParams();
   const { push } = useHistory();
 
@@ -117,11 +116,6 @@ const OwnerProfile = (props) => {
 
   const deleteItem = (item) => {
     props.deleteUserItem(props.ownerProfile.id, item.id);
-    // console.log("ITEMFORSALE ID", props.ownerProfile, item.id);
-    // console.log("THESE ARE THE CURRENT ITEMS FOR SALE", props.itemsForSale);
-    // props.itemsForSale.filter((itemForSale) => {
-    //   return itemForSale.id !== item.id;
-    // });
   };
 
   return (
@@ -200,17 +194,6 @@ const OwnerProfile = (props) => {
               <Link onClick={handleUpdateProfile}>{""} update profile?</Link>
             </div>
           )}
-          {/* {props.ownerProfile.user_photo ? (
-            <img
-              style={{ width: "40%", borderRadius: "10px" }}
-              src={props.ownerProfile.user_photo}
-              alt={props.ownerProfile.name}
-            ></img>
-          ) : (
-            <Link onClick={handleUpdateProfile}>
-              no photo found! update profile?
-            </Link>
-          )} */}
           <br></br>
           <Names>country:</Names> {props.ownerProfile.country}
           <br></br>

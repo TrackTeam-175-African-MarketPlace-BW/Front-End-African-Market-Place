@@ -72,16 +72,10 @@ const Register = () => {
 
   const [error, setError] = useState("");
   const { push } = useHistory();
-  // const [passwordShown, setPasswordShown] = useState(false);
-  // const eye = <FontAwesomeIcon icon={faEye} />;
 
   const [eyeVisible, setEyeVisible] = useState(false);
 
   const [countries, setCountries] = useState([]);
-
-  // const togglePasswordVisibility = () => {
-  //   setPasswordShown(passwordShown ? false : true);
-  // };
 
   useEffect(() => {
     axiosWithAuth()
@@ -134,9 +128,6 @@ const Register = () => {
           src="https://i.ibb.co/Qd3wMdJ/Screen-Shot-2021-03-03-at-5-55-33-PM.png"
           style={{ width: "23%" }}
         ></img>
-        {/* {""} register
-        <span role="img" aria-label="corn emoji">
-          {""} 🌾 */}
       </Headers>
 
       <form onSubmit={submitRegistration}>
@@ -161,17 +152,6 @@ const Register = () => {
           placeholder="email required"
         />
         <br></br>
-        {/* <label htmlFor="password" />
-        <Names>password</Names>: <i onClick={togglePasswordVisibility}>{eye}</i>
-        <br></br>
-        <Input
-          type={passwordShown ? "text" : "password"}
-          name="password"
-          value={credentials.password}
-          onChange={handleChanges}
-          placeholder="password required."
-        />
-        <br></br> */}
         <Names>password</Names>:<br></br>
         <div className="form-field">
           <label htmlFor="password" />

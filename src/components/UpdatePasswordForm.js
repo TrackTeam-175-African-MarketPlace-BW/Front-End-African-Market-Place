@@ -29,13 +29,6 @@ const Button = styled.button`
   padding: 0.25em 1em;
 `;
 
-const Input = styled.input`
-  padding: 10px;
-  border: 0;
-  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
-  border-radius: 15ppx;
-`;
-
 const initialState = {
   oldPassword: "",
   newPassword: "",
