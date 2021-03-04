@@ -67,6 +67,7 @@ const AddItem = (props) => {
   const [countries, setCountries] = useState([]);
   const [categories, setCategories] = useState([]);
   const [markets, setMarkets] = useState([]);
+  const [isDisabled, setIsDisabled] = useState(true);
   const { id } = useParams();
   const { push } = useHistory();
 
@@ -87,8 +88,10 @@ const AddItem = (props) => {
   }, []);
 
   const onChange = (e) => {
-    const value =
-      e.target.name === "price" ? parseInt(e.target.value, 10) : e.target.value;
+    let value = e.target.value;
+    if (e.target.name === "price") {
+      if (isNaN(e.target.value)) value = "";
+    }
     setItem({
       ...item,
       [e.target.name]: value,

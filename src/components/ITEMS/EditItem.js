@@ -56,17 +56,19 @@ const Select = styled.select`
 `;
 
 const EditItem = (props) => {
+
   const [item, setItem] = useState({
     name: "",
     description: "",
     price: "",
     category: "",
-    market: "",
     country: "",
+    market: "",
   });
   const [countries, setCountries] = useState([]);
   const [categories, setCategories] = useState([]);
   const [markets, setMarkets] = useState([]);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const { push } = useHistory();
   const { id, itemId } = useParams();
@@ -92,22 +94,31 @@ const EditItem = (props) => {
       .get("/countries")
       .then((res) => {
         // console.log("setCountries response from EditItem.js: res: ", res)
-        setCountries(res.data)
+        setCountries(res.data);
       })
       .catch((err) => console.log(err));
     axiosWithAuth()
       .get("/categories")
       .then((res) => setCategories(res.data))
       .catch((err) => console.log(err));
-    axiosWithAuth()
-      .get("/markets")
-      .then((res) => setMarkets(res.data))
-      .catch((err) => console.log(err));
   }, []);
 
+  useEffect(() => {
+    if (item.country) {
+      setIsDisabled(false);
+    }
+
+    axiosWithAuth()
+      .get(`/markets?country=${item.country}`)
+      .then((res) => setMarkets(res.data))
+      .catch((err) => console.log(err));
+  }, [item.country]);
+
   const onChange = (e) => {
-    const value =
-      e.target.name === "price" ? parseInt(e.target.value, 10) : e.target.value;
+    let value = e.target.value;
+    if (e.target.name === "price") {
+      if (isNaN(e.target.value)) value = "";
+    }
     setItem({
       ...item,
       [e.target.name]: value,
@@ -172,24 +183,6 @@ const EditItem = (props) => {
           })}
         </Select>
         <br></br>
-        <label htmlFor="market" /> <Names>Edit Market Location</Names>:<br></br>
-        <Select
-          id="market"
-          name="market"
-          value={item.market}
-          onChange={onChange}
-          defaultValue="pickOne"
-        >
-          <option value="pickOne">--- Pick One ---</option>
-          {markets.map((market) => {
-            return (
-              <option key={market.id} value={market.market}>
-                {market.market}
-              </option>
-            );
-          })}
-        </Select>
-        <br></br>
         <label htmlFor="country" /> <Names>Edit Country Location</Names>:
         <br></br>
         <Select
@@ -204,6 +197,25 @@ const EditItem = (props) => {
             return (
               <option key={country.id} value={country.country}>
                 {country.country}
+              </option>
+            );
+          })}
+        </Select>
+        <br></br>
+        <label htmlFor="market" /> <Names>Edit Market Location</Names>:<br></br>
+        <Select
+          id="market"
+          name="market"
+          value={item.market}
+          onChange={onChange}
+          defaultValue="pickOne"
+          disabled={isDisabled}
+        >
+          <option value="pickOne">--- Pick One ---</option>
+          {markets.map((market) => {
+            return (
+              <option key={market.id} value={market.market}>
+                {market.market}
               </option>
             );
           })}
