@@ -188,7 +188,7 @@ const AddItem = (props) => {
             })}
         </Select>
         <br></br>
-        <label htmlFor="market" /> <Names>Edit Market Location</Names>:<br></br>
+        <label htmlFor="market" /> <Names>Add Market Location</Names>:<br></br>
         <Select
           id="market"
           name="market"
