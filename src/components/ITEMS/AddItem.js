@@ -59,6 +59,10 @@ const Select = styled.select`
   text-transform: lowercase;
 `;
 
+const ButtonDiv = styled.div`
+  display: flex;
+`;
+
 const AddItem = (props) => {
   const [item, setItem] = useState({
     name: "",
@@ -209,7 +213,10 @@ const AddItem = (props) => {
             })}
         </Select>
         <br></br>
-        <Button type="submit">add item for sale</Button>
+        <ButtonDiv>
+          <Button type="submit">add item for sale</Button>{" "}
+          <Button style={{ width: "110px" }}>cancel edit?</Button>
+        </ButtonDiv>
       </form>
     </Center>
   );
