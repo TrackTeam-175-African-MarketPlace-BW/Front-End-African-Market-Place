@@ -94,10 +94,10 @@ const OwnerProfile = (props) => {
     props.loadUser(id);
     props.loadUserItems(id);
     props.setIsLoggedIn(true);
-    // return () => {
-    //   props.unmountUser();
-    //   props.unmountPasswordChange();
-    // };
+    return () => {
+      props.unmountUser();
+      props.unmountPasswordChange();
+    };
   }, []);
 
   const handleUpdateProfile = (e) => {

@@ -7,8 +7,8 @@ import {
   UPDATED_USER,
   UPDATING_PASSWORD,
   UPDATED_PASSWORD,
-  // TOGGLE_UPDATE_USER,
-  // TOGGLE_UPDATE_PASSWORD,
+  TOGGLE_UPDATE_USER,
+  TOGGLE_UPDATE_PASSWORD,
   CANCEL_EDITING,
   ERROR_UPDATING_PASSWORD,
   DELETE_USER_ITEM,
@@ -67,11 +67,11 @@ export const ownerReducer = (state = initialState, action) => {
         isEditingPassword: false,
       };
 
-    // case TOGGLE_UPDATE_USER:
-    //   return {
-    //     ...state,
-    //     isEditingUser: false,
-    //   };
+    case TOGGLE_UPDATE_USER:
+      return {
+        ...state,
+        isEditingUser: false,
+      };
     case UPDATED_USER:
       console.log("UPDATED_USER", action.payload);
       return {
@@ -94,11 +94,11 @@ export const ownerReducer = (state = initialState, action) => {
         isEditingPassword: false,
         isEditingUser: false,
       };
-    // case TOGGLE_UPDATE_PASSWORD:
-    //   return {
-    //     ...state,
-    //     isEditingPassword: false,
-    //   };
+    case TOGGLE_UPDATE_PASSWORD:
+      return {
+        ...state,
+        isEditingPassword: false,
+      };
     case ERROR_UPDATING_PASSWORD:
       return {
         ...state,
