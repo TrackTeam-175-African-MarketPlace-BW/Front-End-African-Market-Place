@@ -105,6 +105,7 @@ const LogIn = () => {
         />
         <br />
         <br />
+        <label htmlFor='password'/>
         <Names>password</Names>:<br></br>
         <div className="form-field">
           <label htmlFor="password" />

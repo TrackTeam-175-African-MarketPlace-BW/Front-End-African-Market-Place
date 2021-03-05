@@ -21,7 +21,6 @@ export const itemsReducer = (state = initialState, action) => {
         gettingItems: true,
       };
     case DATA_RETRIEVED:
-      console.log("DATA_RETRIEVED", action.payload);
       return {
         ...state,
         gettingItems: false,
