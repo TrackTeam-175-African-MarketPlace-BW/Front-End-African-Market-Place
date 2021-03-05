@@ -106,5 +106,8 @@ export const addItemForSale = (id, item) => (dispatch) => {
 };
 
 export const addToCart = (item) => (dispatch) => {
-
+  dispatch({
+    type: ADD_CART_ITEM,
+    payload: item
+  })
 }

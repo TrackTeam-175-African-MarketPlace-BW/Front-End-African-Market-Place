@@ -80,7 +80,7 @@ const Navigation = (props) => {
           <Link to={`/${props.id}/itemsList`}>Items List</Link>
         )}
         {props.isLoggedIn && (
-          <Link to="/cart">
+          <Link to={`/${props.id}/cart`}>
             Shopping Cart <Span>{props.cart.length}</Span>
           </Link>
         )}

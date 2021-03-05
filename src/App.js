@@ -46,7 +46,7 @@ function App() {
         <Route path="/newpassword">
           <NewPasswordSuccess />
         </Route>
-        <Route path="/car">
+        <Route path="/:id/cart">
           <ShoppingCart />
         </Route>
         <Route exact path="/">

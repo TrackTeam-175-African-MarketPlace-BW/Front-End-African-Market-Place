@@ -55,7 +55,7 @@ const ItemsList = (props) => {
           {props.items
             .sort((a, b) => b.id - a.id)
                 .map((item) => (
-                  <Item key={item.id} item={item}/>
+                  <Item key={item.id} item={item} />
             ))}
         </ItemContainer>
       )}
