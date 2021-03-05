@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import axiosWithAuth from "../../utils/axiosWithAuth";
 import { updateSingleItem } from "../../actions/itemsActions";
+import { cancelEditing } from "../../actions/ownerActions";
 import styled from "styled-components";
 
 const Center = styled.div`
@@ -14,9 +15,14 @@ const Center = styled.div`
   text-transform: lowercase;
 `;
 
-const Span = styled.span`
-  font-size: 4rem;
+const Headers = styled.h1`
+  font-size: 23px;
+  font-weight: none;
+  font-family: "Homemade Apple", cursive;
+  text-align: center;
+  width: 100%;
 `;
+
 const Button = styled.button`
   background: #68773c;
   border-radius: 8px;
@@ -55,8 +61,11 @@ const Select = styled.select`
   text-transform: lowercase;
 `;
 
-const EditItem = (props) => {
+const ButtonDiv = styled.div`
+  display: flex;
+`;
 
+const EditItem = (props) => {
   const [item, setItem] = useState({
     name: "",
     description: "",
@@ -131,12 +140,15 @@ const EditItem = (props) => {
     push(`/${id}/ownerProfile`);
   };
 
+  const toCancelEditing = (e) => {
+    e.preventDefault();
+    props.cancelEditing();
+    push(`/${id}/ownerProfile`);
+  };
+
   return (
     <Center>
-      <Span role="img" aria-label="corn and vase emoji">
-        🌾🏺🌾
-      </Span>
-
+      <Headers>update item information</Headers>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name" /> <Names>Edit Item Name</Names>:<br></br>
         <Input
@@ -221,7 +233,12 @@ const EditItem = (props) => {
           })}
         </Select>
         <br></br>
-        <Button type="submit">update item</Button>
+        <ButtonDiv>
+          <Button type="submit">update item</Button>{" "}
+          <Button onClick={toCancelEditing} style={{ width: "110px" }}>
+            cancel edit?
+          </Button>
+        </ButtonDiv>
       </form>
     </Center>
   );
@@ -229,10 +246,13 @@ const EditItem = (props) => {
 
 const mapStateToProps = (state) => {
   return {
+    updatingItem: state.ORS.updatingItem,
     item_id: state.SIR.selectedItem.id,
     id: state.ORS.owner_id,
     item: state.SIR.selectedItem,
   };
 };
 
-export default connect(mapStateToProps, { updateSingleItem })(EditItem);
+export default connect(mapStateToProps, { updateSingleItem, cancelEditing })(
+  EditItem
+);

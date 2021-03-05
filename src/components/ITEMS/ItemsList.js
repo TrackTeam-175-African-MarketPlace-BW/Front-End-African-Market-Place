@@ -63,7 +63,17 @@ const ItemsList = (props) => {
                     <Names>info</Names>: {item.description}
                   </span>
                   <span>
-                    <Names>🛒 market</Names>: {item.market}
+                    <Names>
+                      <span
+                        role="img"
+                        alt="shopping cart emoji"
+                        aria-label="shopping cart emoji"
+                      >
+                        🛒
+                      </span>{" "}
+                      market
+                    </Names>
+                    : {item.market}
                   </span>
                   <span>
                     <Names>country</Names>: {item.country}
