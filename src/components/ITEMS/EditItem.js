@@ -247,9 +247,9 @@ const EditItem = (props) => {
 const mapStateToProps = (state) => {
   return {
     updatingItem: state.ORS.updatingItem,
-    item_id: state.SIR.selectedItem.id,
+    // item_id: state.SIR.selectedItem.id,
     id: state.ORS.owner_id,
-    item: state.SIR.selectedItem,
+    // item: state.SIR.selectedItem,
   };
 };
 

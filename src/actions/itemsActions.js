@@ -16,23 +16,27 @@ export const ADDED_ITEM = "ADD_ITEM";
 
 export const getItems = () => (dispatch) => {
   dispatch({ type: DATA_LOADING });
-
-  axiosWithAuth()
-    .get("/items")
-    .then((res) => {
-      console.log("cd: itemsActions: getItems: axios.get response: ", res);
-      dispatch({
-        type: DATA_RETRIEVED,
-        payload: res.data,
+  setTimeout(() => {
+    axiosWithAuth()
+      .get("/items")
+      .then((res) => {
+        console.log("cd: itemsActions: getItems: axios.get response: ", res);
+        dispatch({
+          type: DATA_RETRIEVED,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(
+          "cd: itemsAction: getItems: axios.get error: ",
+          err.response
+        );
+        dispatch({
+          type: ERROR_LOADING_DATA,
+          payload: err.response.data.message,
+        });
       });
-    })
-    .catch((err) => {
-      console.log("cd: itemsAction: getItems: axios.get error: ", err.response);
-      dispatch({
-        type: ERROR_LOADING_DATA,
-        payload: err.response.data.message,
-      });
-    });
+  }, 1100);
 };
 
 export const showSingleItem = (itemId) => (dispatch) => {
@@ -83,7 +87,7 @@ export const updateSingleItem = (id, itemId, item) => (dispatch) => {
 };
 
 export const addItemForSale = (id, item) => (dispatch) => {
-  dispatch({type: ADDING_ITEM})
+  dispatch({ type: ADDING_ITEM });
   const sendItem = {
     category: item.category,
     country: item.country,
