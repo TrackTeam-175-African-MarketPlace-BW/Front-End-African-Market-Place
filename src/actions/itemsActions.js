@@ -1,6 +1,5 @@
 import axiosWithAuth from "../utils/axiosWithAuth";
 
-
 export const DATA_LOADING = "DATA_LOADING";
 export const DATA_RETRIEVED = "DATA_RETRIEVED";
 export const ERROR_LOADING_DATA = "ERROR_LOADING_DATA";
@@ -54,8 +53,12 @@ export const showSingleItem = (itemId) => (dispatch) => {
     });
 };
 
-export const updateSingleItem = (id, itemId, item) => (dispatch) => {
+export const updatingTheItem = () => (dispatch) => {
   dispatch({ type: UPDATING_ITEM });
+};
+
+export const updateSingleItem = (id, itemId, item) => (dispatch) => {
+  // dispatch({ type: UPDATING_ITEM });
   axiosWithAuth()
     .put(`users/${id}/items/${itemId}`, item)
     .then((res) => {
@@ -72,7 +75,10 @@ export const updateSingleItem = (id, itemId, item) => (dispatch) => {
       console.log("cd: ItemsAction.js: updateSingleItem: axios.get error: ", {
         err,
       });
-      dispatch({type: ERROR_LOADING_DATA, payload: err.response.data.message})
+      dispatch({
+        type: ERROR_LOADING_DATA,
+        payload: err.response.data.message,
+      });
     });
 };
 
@@ -98,7 +104,10 @@ export const addItemForSale = (id, item) => (dispatch) => {
       });
     })
     .catch((err) => {
-      console.log({ err })
-      dispatch({type: ERROR_LOADING_DATA, payload: err.response.data.message})
+      console.log({ err });
+      dispatch({
+        type: ERROR_LOADING_DATA,
+        payload: err.response.data.message,
+      });
     });
 };

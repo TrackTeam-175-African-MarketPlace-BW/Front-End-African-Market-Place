@@ -14,7 +14,7 @@ import {
   deleteUserItem,
   addingItem,
 } from "../actions/ownerActions";
-import { showSingleItem } from "../actions/itemsActions";
+import { showSingleItem, updatingTheItem } from "../actions/itemsActions";
 import styled, { css } from "styled-components";
 
 const FlexStyling = styled.div`
@@ -112,7 +112,8 @@ const OwnerProfile = (props) => {
 
   const editingItem = (item) => {
     // e.preventDefault();
-    props.showSingleItem();
+    props.updatingTheItem();
+
     push(`/${id}/editItem/${item.id}`);
   };
   const addingNewItem = (e) => {
@@ -198,7 +199,9 @@ const OwnerProfile = (props) => {
           ) : (
             <div>
               no photo found!
-              <Link onClick={handleUpdateProfile}>{""} update profile?</Link>
+              <Button onClick={handleUpdateProfile}>
+                {""} update profile?
+              </Button>
             </div>
           )}
           <br></br>
@@ -251,4 +254,5 @@ export default connect(mapStateToProps, {
   deleteUserItem,
   addingItem,
   showSingleItem,
+  updatingTheItem,
 })(OwnerProfile);

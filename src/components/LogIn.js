@@ -105,12 +105,12 @@ const LogIn = () => {
         />
         <br />
         <br />
-        <label htmlFor='password'/>
+        <label htmlFor="password" />
         <Names>password</Names>
         <div className="form-field">
           <label htmlFor="password" />
 
-          <div className="ps" class="password" style={{ width: "80%" }}>
+          <div className="password" style={{ width: "80%" }}>
             <input
               id="password"
               name="password"
