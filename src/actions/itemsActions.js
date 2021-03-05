@@ -14,6 +14,8 @@ export const REMOVING_ITEM = "REMOVING_ITEM";
 export const REMOVE_ITEM = "REMOVE_ITEM";
 export const ADDING_ITEM = "ADDING_ITEM";
 export const ADDED_ITEM = "ADD_ITEM";
+export const ADD_CART_ITEM = 'ADD_CART_ITEM';
+export const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM';
 
 export const getItems = () => (dispatch) => {
   dispatch({ type: DATA_LOADING });
@@ -102,3 +104,7 @@ export const addItemForSale = (id, item) => (dispatch) => {
       dispatch({type: ERROR_LOADING_DATA, payload: err.response.data.message})
     });
 };
+
+export const addToCart = (item) => (dispatch) => {
+
+}

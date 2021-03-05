@@ -13,6 +13,7 @@ import Footer from "./components/Footer";
 import EditItem from "./components/ITEMS/EditItem";
 import NewPasswordSuccess from "./components/NewPasswordSuccess";
 import AddItem from "./components/ITEMS/AddItem";
+import ShoppingCart from './components/ShoppingCart';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -44,6 +45,9 @@ function App() {
         </Route>
         <Route path="/newpassword">
           <NewPasswordSuccess />
+        </Route>
+        <Route path="/car">
+          <ShoppingCart />
         </Route>
         <Route exact path="/">
           <LandingPage />

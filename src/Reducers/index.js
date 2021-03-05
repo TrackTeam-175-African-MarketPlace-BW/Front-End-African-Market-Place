@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
 import { itemsReducer as IRS } from "./itemsReducer";
 import { ownerReducer as ORS } from "./ownerReducer";
-import { singleItemReducer as SIR } from './singleItemReducer';
+import { singleItemReducer as SIR } from "./singleItemReducer";
+import { shoppingCartReducer as SCR } from "./shoppingCartReducer";
 
 export default combineReducers({
   IRS,
   ORS,
   SIR,
+  SCR,
 });
