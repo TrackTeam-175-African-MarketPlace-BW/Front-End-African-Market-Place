@@ -46,7 +46,13 @@ const ItemsList = (props) => {
     <div>
       <Headers> welcome to the market </Headers>
       {props.gettingItems ? (
-        <Loader style={{textAlign: "center"}} type="ThreeDots" color="#45491e" height={85} width={85} />
+        <Loader
+          style={{ textAlign: "center" }}
+          type="ThreeDots"
+          color="#83A32E"
+          height={85}
+          width={85}
+        />
       ) : props.error ? (
         <h3 style={{ color: "red" }}>{props.error}</h3>
       ) : (
