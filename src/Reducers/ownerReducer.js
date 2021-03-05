@@ -113,6 +113,8 @@ export const ownerReducer = (state = initialState, action) => {
         isEditingPassword: false,
         isEditingUser: false,
         updatingItem: false,
+        updatingItem: false,
+        addingItem: false,
       };
     case DELETE_USER_ITEM:
       return {
