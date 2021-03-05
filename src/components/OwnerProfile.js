@@ -14,6 +14,7 @@ import {
   deleteUserItem,
   addingItem,
 } from "../actions/ownerActions";
+import { showSingleItem, updatingTheItem } from "../actions/itemsActions";
 import styled, { css } from "styled-components";
 
 const FlexStyling = styled.div`
@@ -108,6 +109,13 @@ const OwnerProfile = (props) => {
     e.preventDefault();
     props.editingPassword();
   };
+
+  const editingItem = (item) => {
+    // e.preventDefault();
+    props.updatingTheItem();
+
+    push(`/${id}/editItem/${item.id}`);
+  };
   const addingNewItem = (e) => {
     e.preventDefault();
     props.addingItem();
@@ -164,7 +172,7 @@ const OwnerProfile = (props) => {
                 <Button
                   other
                   onClick={() => {
-                    push(`/${id}/editItem/${item.id}`);
+                    editingItem(item);
                   }}
                 >
                   edit item?
@@ -191,7 +199,9 @@ const OwnerProfile = (props) => {
           ) : (
             <div>
               no photo found!
-              <Link onClick={handleUpdateProfile}>{""} update profile?</Link>
+              <Button onClick={handleUpdateProfile}>
+                {""} update profile?
+              </Button>
             </div>
           )}
           <br></br>
@@ -243,4 +253,6 @@ export default connect(mapStateToProps, {
   unmountPasswordChange,
   deleteUserItem,
   addingItem,
+  showSingleItem,
+  updatingTheItem,
 })(OwnerProfile);

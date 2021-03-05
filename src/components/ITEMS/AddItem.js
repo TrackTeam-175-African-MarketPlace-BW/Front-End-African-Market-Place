@@ -4,6 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { addItemForSale } from "../../actions/itemsActions";
 import styled from "styled-components";
+import { cancelEditing } from "../../actions/ownerActions";
 
 const Headers = styled.h1`
   font-size: 23px;
@@ -120,6 +121,12 @@ const AddItem = (props) => {
     push(`/${id}/ownerProfile`);
   };
 
+  const toCancelEditing = (e) => {
+    e.preventDefault();
+    props.cancelEditing();
+    push(`/${id}/ownerProfile`);
+  };
+
   return (
     <Center>
       <form onSubmit={handleSubmit}>
@@ -215,11 +222,13 @@ const AddItem = (props) => {
         <br></br>
         <ButtonDiv>
           <Button type="submit">add item for sale?</Button>{" "}
-          <Button style={{ width: "110px" }}>cancel addition?</Button>
+          <Button style={{ width: "110px" }} onClick={toCancelEditing}>
+            cancel addition?
+          </Button>
         </ButtonDiv>
       </form>
     </Center>
   );
 };
 
-export default connect(null, { addItemForSale })(AddItem);
+export default connect(null, { addItemForSale, cancelEditing })(AddItem);
