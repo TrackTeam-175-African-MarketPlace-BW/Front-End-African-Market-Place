@@ -27,7 +27,7 @@ const initialState = {
   isLoading: false,
   isEditingUser: false,
   isEditingPassword: false,
-  updatingItem: false,
+  updatingItem: true,
   addingItem: false,
   itemsForSale: [],
 };

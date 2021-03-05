@@ -14,6 +14,7 @@ import {
   deleteUserItem,
   addingItem,
 } from "../actions/ownerActions";
+import { showSingleItem } from "../actions/itemsActions";
 import styled, { css } from "styled-components";
 
 const FlexStyling = styled.div`
@@ -108,6 +109,12 @@ const OwnerProfile = (props) => {
     e.preventDefault();
     props.editingPassword();
   };
+
+  const editingItem = (item) => {
+    // e.preventDefault();
+    props.showSingleItem();
+    push(`/${id}/editItem/${item.id}`);
+  };
   const addingNewItem = (e) => {
     e.preventDefault();
     props.addingItem();
@@ -164,7 +171,7 @@ const OwnerProfile = (props) => {
                 <Button
                   other
                   onClick={() => {
-                    push(`/${id}/editItem/${item.id}`);
+                    editingItem(item);
                   }}
                 >
                   edit item?
@@ -243,4 +250,5 @@ export default connect(mapStateToProps, {
   unmountPasswordChange,
   deleteUserItem,
   addingItem,
+  showSingleItem,
 })(OwnerProfile);
