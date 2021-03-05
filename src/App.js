@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
-import Navigation from "./components/Navigation";
+// import Navigation from "./components/Navigation";
+import NewNavigation from "./components/NewNavigation";
 import OwnerProfile from "./components/OwnerProfile";
 import ItemsList from "./components/ITEMS/ItemsList";
 import "./App.css";
@@ -14,14 +15,13 @@ import EditItem from "./components/ITEMS/EditItem";
 import NewPasswordSuccess from "./components/NewPasswordSuccess";
 import AddItem from "./components/ITEMS/AddItem";
 
-import NavLogin from "./components/NavigationLogin";
-
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <>
-      <Navigation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      {/* <Navigation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> */}
+      <NewNavigation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Switch>
         <PrivateRoute path="/:id/ownerProfile">
           <OwnerProfile setIsLoggedIn={setIsLoggedIn} />
@@ -48,7 +48,6 @@ function App() {
           <NewPasswordSuccess />
         </Route>
         <Route exact path="/">
-          <NavLogin />
           <LandingPage />
         </Route>
       </Switch>

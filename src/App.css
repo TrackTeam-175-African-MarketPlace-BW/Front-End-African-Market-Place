@@ -23,7 +23,7 @@ h1 {
 p {
   font-size: 16px;
 }
-a {
+/* a {
   border-bottom: 1px solid white;
   color: #0076ff;
   cursor: pointer;
@@ -32,7 +32,7 @@ a {
 }
 a:hover {
   border-bottom: 1px solid #0076ff;
-}
+} */
 code,
 pre {
   color: #d400ff;

@@ -6,11 +6,12 @@ import axiosWithAuth from '../utils/axiosWithAuth'
 
 const Form = styled.form`
     display: block;
-    margin: 1em 2.5em;
+    margin: 0rem 0rem 0rem;
 `
 
 const Label = styled.label`
     padding-right: 2em;
+    float: right;
 `
 
 const FormSection = styled.span`
@@ -30,7 +31,7 @@ const Error = styled.span`
     color: red;
 `
 
-const FakeLogIn = () => {
+const NavigationLogin = () => {
 
     const [ credentials, setCredentials ] = useState({
         email: '',
@@ -73,9 +74,9 @@ const FakeLogIn = () => {
                     placeholder='enter your login email'
                     onChange={handleChange}
                 />
-            </Label>
+            </Label><br />
             <Label htmlFor='password'>
-            <FormSection>Password:</FormSection>
+                <FormSection>Password:</FormSection>
                 <input 
                     id='password'
                     name='password'
@@ -84,7 +85,7 @@ const FakeLogIn = () => {
                     onChange={handleChange}
                     placeholder='enter your password'
                 />
-            </Label>
+            </Label><br />
             <Button 
                 type="submit"
             >
@@ -105,4 +106,4 @@ const FakeLogIn = () => {
     )
 }
 
-export default FakeLogIn
+export default NavigationLogin
