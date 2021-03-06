@@ -70,6 +70,16 @@ const Button = styled.button`
       background: #83a32e;
       color: white;
     `}
+
+  ${(props) =>
+    props.special &&
+    css`
+      background: none;
+      color: #5e9bf5;
+      border: none;
+      padding: 5px;
+      margin: 0px;
+    `}
 `;
 
 const ProfileDiv = styled.div`
@@ -199,7 +209,7 @@ const OwnerProfile = (props) => {
           ) : (
             <div>
               no photo found!
-              <Button onClick={handleUpdateProfile}>
+              <Button special onClick={handleUpdateProfile}>
                 {""} update profile?
               </Button>
             </div>
