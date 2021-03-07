@@ -4,14 +4,26 @@ import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import NavigationLogin from "./NavigationLogin";
 
+const HeaderContainer = styled.div`
+    // display: flex;
+    // flex-flow: row wrap;
+    // justify-content: space-between;
+    // align-content: center;
+    // align-items: center;
+    // width: 100%;
+`
+
 const MainDiv = styled.div`
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
+    align-content: center;
+    align-items: center;
     height: auto;
-    padding: 2rem 5rem;
+    padding: 5% 5%;
     align-items: baseline;
     color: rgb(69, 73, 30);
+    width: 90%;
 `;
 
 const NavDiv = styled.div`
@@ -52,11 +64,13 @@ const Navigation = (props) => {
         push('/')
     }
     return (
-        <div className="headerContainer">
+        <HeaderContainer>
             <MainDiv>
                 <h1>Sauti African Market Place</h1>
-                {props.isLoggedIn ? <Button onClick={() => {logOut()}}>Log Out</Button> : <></> }
-                {props.isLoggedIn ? <></> : <NavigationLogin />}
+                <span>
+                    {props.isLoggedIn ? <Button onClick={() => {logOut()}}>Log Out</Button> : <></> }
+                    {props.isLoggedIn ? <></> : <NavigationLogin />}
+                </span>
             </MainDiv>
             <NavDiv>
                 <Link to="/">Home</Link>
@@ -66,7 +80,7 @@ const Navigation = (props) => {
                 {props.isLoggedIn && <Link to={`/${props.id}/ownerProfile`}>Your Profile</Link>}
                 {props.isLoggedIn && <Link to={`/${props.id}/itemsList`}>Items List</Link>}
             </NavDiv>
-        </div>
+        </HeaderContainer>
     );
 };
 
