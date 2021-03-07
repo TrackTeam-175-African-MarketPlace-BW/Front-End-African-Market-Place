@@ -74,6 +74,7 @@ const Navigation = (props) => {
             </MainDiv>
             <NavDiv>
                 <Link to="/">Home</Link>
+                <Link to="/info">About SA</Link>
                 {/* {props.isLoggedIn ? <></> : <Link to="/login"> Current Users: Log In</Link>} */}
                 <Link to="/team">Meet The BW Team</Link>
                 {props.isLoggedIn ? <></> : <Link to="/register">Create an Account</Link>}
