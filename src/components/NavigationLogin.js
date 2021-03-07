@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { NavLink, useHistory } from 'react-router-dom'
+import { Link, NavLink, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import axiosWithAuth from '../utils/axiosWithAuth'
 // import { updatedPassword } from '../actions/ownerActions'
@@ -18,12 +18,20 @@ const FormSection = styled.span`
     padding-right: .5em;
 `
 
+const Div = styled.div`
+    margin-top: .5rem;
+`
+
 const Button = styled.button`
     background-color: rgb(165, 70, 35);
     color: white;
     border: 1px solid black;
     padding-left: 1em;
     padding-right: 1em;
+`
+
+const Span = styled.span`
+    margin-left: 2rem;
 `
 
 const Error = styled.span`
@@ -86,11 +94,16 @@ const NavigationLogin = () => {
                     placeholder='enter your password'
                 />
             </Label><br />
-            <Button 
-                type="submit"
-            >
-                log in
-            </Button>
+            <Div>
+                <Button 
+                    type="submit"
+                >
+                    log in
+                </Button>
+                <Span>
+                    <Link>Forgot password?</Link>
+                </Span>
+            </Div>
             {error && (
                 <Error>
                     {error} please try again or{" "}<NavLink to="/register">make an account</NavLink>
