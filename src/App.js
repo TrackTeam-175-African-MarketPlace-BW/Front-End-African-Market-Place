@@ -7,6 +7,7 @@ import OwnerProfile from "./components/OwnerProfile";
 import ItemsList from "./components/ITEMS/ItemsList";
 import "./App.css";
 import TeamInfo from "./components/TeamInfo";
+import Info from "./components/Info";
 import Register from "./components/Register";
 import LogIn from "./components/LogIn";
 import LandingPage from "./components/LandingPage";
@@ -31,6 +32,9 @@ function App() {
         </PrivateRoute>
          <Route path="/team">
           <TeamInfo />
+        </Route>
+        <Route path ="/info">
+          <Info />
         </Route>
         <Route path="/login">
           <LogIn />

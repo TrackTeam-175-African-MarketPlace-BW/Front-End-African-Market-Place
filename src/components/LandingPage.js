@@ -21,7 +21,7 @@ export default function LandingPage() {
                         <h2 className="div-1-text">Sauti African Market Place empowers small business owners, particularly women, to improve their business and economic opportunities to grow out of poverty.</h2>
                         <div className="flex-container btn-div-flex">
                             <Link
-                                to="/"
+                                to="/info"
                                 role="button"
                                 className="btn-div"
                             >
