@@ -90,8 +90,8 @@ const ShoppingCart = (props) => {
 
   return (
     <CartDiv>
-      [{props.cart.map((item) => (
-        <ShoppingCartItem key={item.id} {...item} />
+      {props.cart.map((item) => (
+        <ShoppingCartItem key={item.id} item={item} />
       ))}
       <div className="shopping-cart__checkout">
         <p>Total: ${getCartTotal()}</p>
