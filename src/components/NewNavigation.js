@@ -4,15 +4,6 @@ import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import NavigationLogin from "./NavigationLogin";
 
-const HeaderContainer = styled.div`
-    // display: flex;
-    // flex-flow: row wrap;
-    // justify-content: space-between;
-    // align-content: center;
-    // align-items: center;
-    // width: 100%;
-`
-
 const MainDiv = styled.div`
     display: flex;
     flex-flow: row wrap;
@@ -20,10 +11,14 @@ const MainDiv = styled.div`
     align-content: center;
     align-items: center;
     height: auto;
-    padding: 5% 5%;
-    align-items: baseline;
+    padding: 2rem;
     color: rgb(69, 73, 30);
     width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    @media screen and (max-width: 900px) {
+        justify-content: center;
+    }
 `;
 
 const NavDiv = styled.div`
@@ -45,6 +40,11 @@ const NavDiv = styled.div`
         letter-spacing: 2px;
         font-weight: bold;
     }
+    @media screen and (max-width: 600px) {
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
+    }
 `;
 
 const Button = styled.button`
@@ -55,6 +55,13 @@ const Button = styled.button`
     padding: 0.25em 1em;
 `;
 
+const Header1 = styled.h1`
+    margin-right: 2rem;
+    @media screen and (max-width: 900px) {
+        text-align: center;
+    }
+`
+
 const Navigation = (props) => {
 
     const { push } = useHistory();
@@ -64,9 +71,9 @@ const Navigation = (props) => {
         push('/')
     }
     return (
-        <HeaderContainer>
+        <div class="header-container">
             <MainDiv>
-                <h1>Sauti African Market Place</h1>
+                <Header1>Sauti African Market Place</Header1>
                 <span>
                     {props.isLoggedIn ? <Button onClick={() => {logOut()}}>Log Out</Button> : <></> }
                     {props.isLoggedIn ? <></> : <NavigationLogin />}
@@ -81,7 +88,7 @@ const Navigation = (props) => {
                 {props.isLoggedIn && <Link to={`/${props.id}/ownerProfile`}>Your Profile</Link>}
                 {props.isLoggedIn && <Link to={`/${props.id}/itemsList`}>Items List</Link>}
             </NavDiv>
-        </HeaderContainer>
+        </div>
     );
 };
 
