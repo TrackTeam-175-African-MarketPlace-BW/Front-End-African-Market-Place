@@ -5,7 +5,7 @@ import backgroundImage from '../images/food_2.jpg';
 
 const Info =  () => {
     return (
-        <div>
+        <div className="info-container">
             <div className="div-container img-div div-1">
                 <img
                     src={backgroundImage}
@@ -25,6 +25,13 @@ const Info =  () => {
                     <li>Improve their pricing and marketing strategies</li>
                 </list>
                 <p>Our low-cost strategizing services can help advance businesses even further by providing affordable access to marketing, pricing, and business management specialists.</p>
+                <Link
+                    to="/register"
+                    className="btn btn-border"
+                    role="button"
+                >
+                        See how Sauti Africa can expand your small business today.
+                </Link>
             </div>
         </div>
     );

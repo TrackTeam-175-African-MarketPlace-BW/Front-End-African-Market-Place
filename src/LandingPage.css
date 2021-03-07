@@ -145,6 +145,11 @@
     margin: .2em;
 }
 
+.btn-border {
+    border: 1px white solid;
+    text-decoration: none;
+}
+
 .btn-div {
     border: 0;
     width: 45%;
