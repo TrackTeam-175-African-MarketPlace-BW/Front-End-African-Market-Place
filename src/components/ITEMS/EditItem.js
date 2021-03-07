@@ -127,6 +127,7 @@ const EditItem = (props) => {
     let value = e.target.value;
     if (e.target.name === "price") {
       if (isNaN(e.target.value)) value = "";
+      // console.log("ONCHANGE NUMBER VALUE", e.target.value);
     }
     setItem({
       ...item,
@@ -176,6 +177,9 @@ const EditItem = (props) => {
           value={item.price}
           onChange={onChange}
         />
+        {item.price === "" ? (
+          <div style={{ color: "red" }}>{`please enter a number value.`}</div>
+        ) : null}
         <br></br>
         <label htmlFor="category" /> <Names>Edit Item Category</Names>:<br></br>
         <Select
@@ -247,9 +251,9 @@ const EditItem = (props) => {
 const mapStateToProps = (state) => {
   return {
     updatingItem: state.ORS.updatingItem,
-    item_id: state.SIR.selectedItem.id,
+    // item_id: state.SIR.selectedItem.id,
     id: state.ORS.owner_id,
-    item: state.SIR.selectedItem,
+    // item: state.SIR.selectedItem,
   };
 };
 

@@ -99,7 +99,7 @@ const UpdatePasswordForm = (props) => {
         <div className="form-field">
           <label htmlFor="oldPassword" />
 
-          <div className="ps" class="password">
+          <div className="password">
             <input
               id="oldPassword"
               name="oldPassword"

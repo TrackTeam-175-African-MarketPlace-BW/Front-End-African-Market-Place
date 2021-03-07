@@ -47,7 +47,13 @@ const ItemsList = (props) => {
     <div>
       <Headers> welcome to the market </Headers>
       {props.gettingItems ? (
-        <Loader type="ThreeDots" color="#c1c1c1" height={40} width={40} />
+        <Loader
+          style={{ textAlign: "center" }}
+          type="ThreeDots"
+          color="#83A32E"
+          height={85}
+          width={85}
+        />
       ) : props.error ? (
         <h3 style={{ color: "red" }}>{props.error}</h3>
       ) : (
@@ -66,6 +72,7 @@ const ItemsList = (props) => {
 const mapStateToProps = (state) => {
   return {
     items: state.IRS.items,
+    gettingItems: state.IRS.gettingItems,
     error: state.IRS.error,
   };
 };

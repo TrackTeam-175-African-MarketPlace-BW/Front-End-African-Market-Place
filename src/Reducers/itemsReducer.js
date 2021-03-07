@@ -7,9 +7,6 @@ import {
 const initialState = {
   items: [],
   gettingItems: false,
-  updatingItem: false,
-  creatingItem: false,
-  deletingItem: false,
   error: null,
 };
 
@@ -30,9 +27,6 @@ export const itemsReducer = (state = initialState, action) => {
       return {
         ...state,
         gettingItems: false,
-        updatingItem: false,
-        creatingItem: false,
-        deletingItem: false,
         error: action.payload,
       };
     default:

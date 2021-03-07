@@ -1,6 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux';
+import {deleteFromCart} from '../actions/itemsActions'
 
-const ShoppingCartItem = () => {
+const ShoppingCartItem = (props) => {
     return (
         <div>
             <p>hello from ShoppingCartItem.js</p>
@@ -8,4 +10,4 @@ const ShoppingCartItem = () => {
     )
 }
 
-export default ShoppingCartItem
+export default connect(null, {deleteFromCart})(ShoppingCartItem);

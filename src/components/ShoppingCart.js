@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addToCart } from "../actions/itemsActions";
 import styled from "styled-components";
+import ShoppingCartItem from './ShoppingCartItem';
+
 
 const CartDiv = styled.div`
   display: block;
@@ -89,7 +90,9 @@ const ShoppingCart = (props) => {
 
   return (
     <CartDiv>
-      <p>hello from ShoppingCart.js</p>
+      [{props.cart.map((item) => (
+        <ShoppingCartItem key={item.id} {...item} />
+      ))}
       <div className="shopping-cart__checkout">
         <p>Total: ${getCartTotal()}</p>
         <button>Checkout</button>
