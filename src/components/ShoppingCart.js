@@ -25,7 +25,7 @@ const ShoppingCart = (props) => {
   console.log("props from ShoppingCart", props)  
   const getCartTotal = () => {
     return props.cart.reduce((acc, value) => {
-        return acc + value.price;
+        return acc + Number(value.price);
       }, 0);
   };
 
