@@ -8,7 +8,8 @@ import ItemsList from "./components/ITEMS/ItemsList";
 import "./App.css";
 import TeamInfo from "./components/TeamInfo";
 import Info from "./components/Info";
-import Register from "./components/Register";
+// import Register from "./components/Register";
+import NewRegister from "./components/NewRegister";
 import LogIn from "./components/LogIn";
 import LandingPage from "./components/LandingPage";
 import Footer from "./components/Footer";
@@ -40,7 +41,8 @@ function App() {
           <LogIn />
         </Route>
         <Route path="/register">
-          <Register />
+          {/* <Register /> */}
+          <NewRegister />
         </Route>
         <Route path="/:id/editItem/:itemId">
           <EditItem />
