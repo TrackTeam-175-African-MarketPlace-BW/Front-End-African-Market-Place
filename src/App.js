@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
-import Navigation from "./components/Navigation";
+// import Navigation from "./components/Navigation";
+import NewNavigation from "./components/NewNavigation";
 import OwnerProfile from "./components/OwnerProfile";
 import ItemsList from "./components/ITEMS/ItemsList";
 import "./App.css";
 import TeamInfo from "./components/TeamInfo";
+import Info from "./components/Info";
 import Register from "./components/Register";
 import LogIn from "./components/LogIn";
 import LandingPage from "./components/LandingPage";
@@ -19,7 +21,8 @@ function App() {
 
   return (
     <>
-      <Navigation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      {/* <Navigation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> */}
+      <NewNavigation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Switch>
         <PrivateRoute path="/:id/ownerProfile">
           <OwnerProfile setIsLoggedIn={setIsLoggedIn} />
@@ -29,6 +32,9 @@ function App() {
         </PrivateRoute>
          <Route path="/team">
           <TeamInfo />
+        </Route>
+        <Route path ="/info">
+          <Info />
         </Route>
         <Route path="/login">
           <LogIn />

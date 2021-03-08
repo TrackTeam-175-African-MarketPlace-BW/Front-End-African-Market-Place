@@ -36,18 +36,10 @@ const Navigation = (props) => {
   };
   return (
     <MainDiv>
-      <h2>Sauti African Market Place</h2>
-      {props.isLoggedIn ? (
-        <Button
-          onClick={() => {
-            logOut();
-          }}
-        >
-          Log Out
-        </Button>
-      ) : (
-        <></>
-      )}
+
+      <h1>Sauti African Market Place</h1>
+      {props.isLoggedIn ? <Button onClick={() => {logOut()}}>Log Out</Button> : <></> }
+
       <NavDiv>
         {props.isLoggedIn ? (
           <></>
