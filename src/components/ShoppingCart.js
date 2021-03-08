@@ -1,7 +1,9 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
+import { checkoutCart } from "../actions/itemsActions";
 import styled from "styled-components";
-import ShoppingCartItem from './ShoppingCartItem';
+import ShoppingCartItem from "./ShoppingCartItem";
 
 const Button = styled.button`
   background: #68773c;
@@ -10,7 +12,6 @@ const Button = styled.button`
   margin: 0.5em 1em;
   padding: 0.25em 1em;
 `;
-
 
 const CartDiv = styled.div`
   display: block;
@@ -22,13 +23,19 @@ const CartDiv = styled.div`
 `;
 
 const ShoppingCart = (props) => {
-  console.log("props from ShoppingCart", props)  
+  console.log("props from ShoppingCart", props);
   const getCartTotal = () => {
     return props.shoppingCart.reduce((acc, value) => {
-        return acc + Number(value.price);
-      }, 0);
+      return acc + Number(value.price);
+    }, 0);
   };
-  useEffect(() => {}, [props.shoppingCart])
+  useEffect(() => {}, [props.shoppingCart]);
+  const { push } = useHistory();
+
+  const handleClick = () => {
+    props.checkoutCart();
+    push(`/${props.id}/ownerProfile`);
+  };
   return (
     <CartDiv>
       {props.shoppingCart.map((item) => (
@@ -36,7 +43,7 @@ const ShoppingCart = (props) => {
       ))}
       <div className="shopping-cart__checkout">
         <p>Total: ${getCartTotal()}</p>
-        <Button>Checkout</Button>
+        <Button onClick={handleClick}>Checkout</Button>
       </div>
     </CartDiv>
   );
@@ -44,8 +51,9 @@ const ShoppingCart = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    shoppingCart: state.ORS.shoppingCart
+    id: state.ORS.ownerProfile.id,
+    shoppingCart: state.ORS.shoppingCart,
   };
 };
 
-export default connect(mapStateToProps, {})(ShoppingCart);
+export default connect(mapStateToProps, { checkoutCart })(ShoppingCart);

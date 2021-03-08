@@ -15,6 +15,7 @@ export const ADDING_ITEM = "ADDING_ITEM";
 export const ADDED_ITEM = "ADD_ITEM";
 export const ADD_CART_ITEM = 'ADD_CART_ITEM';
 export const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM';
+export const CLEAR_CART = 'CLEAR_CART';
 
 export const getItems = () => (dispatch) => {
   dispatch({ type: DATA_LOADING });
@@ -131,4 +132,11 @@ export const deleteFromCart = (itemId) => (dispatch) => {
     type: REMOVE_CART_ITEM,
     payload: itemId,
   })
+}
+
+export const checkoutCart = () => (dispatch) => {
+  dispatch({
+    type: CLEAR_CART
+  })
+  alert("Thank you for your purchase")
 }

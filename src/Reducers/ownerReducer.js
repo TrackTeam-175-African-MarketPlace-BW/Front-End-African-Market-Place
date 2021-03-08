@@ -20,6 +20,7 @@ import {
   ADDED_ITEM,
   ADD_CART_ITEM,
   REMOVE_CART_ITEM,
+  CLEAR_CART,
 } from "../actions/itemsActions";
 
 const initialState = {
@@ -162,6 +163,11 @@ export const ownerReducer = (state = initialState, action) => {
         ...state,
         shoppingCart: state.shoppingCart.filter((item) => item.id !== action.payload),
       };
+    case CLEAR_CART:
+      return {
+        ...state,
+        shoppingCart: [],
+      }
     default:
       return state;
   }
