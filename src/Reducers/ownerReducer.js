@@ -18,6 +18,8 @@ import {
   UPDATED_ITEM,
   ADDING_ITEM,
   ADDED_ITEM,
+  ADD_CART_ITEM,
+  REMOVE_CART_ITEM,
 } from "../actions/itemsActions";
 
 const initialState = {
@@ -30,6 +32,7 @@ const initialState = {
   updatingItem: false,
   addingItem: false,
   itemsForSale: [],
+  shoppingCart: [],
 };
 
 export const ownerReducer = (state = initialState, action) => {
@@ -147,6 +150,17 @@ export const ownerReducer = (state = initialState, action) => {
         addingItem: false,
         updatingItem: false,
         itemsForSale: [...state.itemsForSale, action.payload],
+      };
+    case ADD_CART_ITEM:
+      console.log("ADD_CART_ITEM", action.payload);
+      return {
+        ...state,
+        shoppingCart: [...state.shoppingCart, action.payload],
+      };
+    case REMOVE_CART_ITEM:
+      return {
+        ...state,
+        shoppingCart: state.shoppingCart.filter((item) => item.id !== action.payload),
       };
     default:
       return state;

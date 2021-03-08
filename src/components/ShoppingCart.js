@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import ShoppingCartItem from './ShoppingCartItem';
@@ -24,14 +24,14 @@ const CartDiv = styled.div`
 const ShoppingCart = (props) => {
   console.log("props from ShoppingCart", props)  
   const getCartTotal = () => {
-    return props.cart.reduce((acc, value) => {
+    return props.shoppingCart.reduce((acc, value) => {
         return acc + Number(value.price);
       }, 0);
   };
-
+  useEffect(() => {}, [props.shoppingCart])
   return (
     <CartDiv>
-      {props.cart.map((item) => (
+      {props.shoppingCart.map((item) => (
         <ShoppingCartItem key={item.id} item={item} />
       ))}
       <div className="shopping-cart__checkout">
@@ -44,7 +44,7 @@ const ShoppingCart = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.SCR.cart,
+    shoppingCart: state.ORS.shoppingCart
   };
 };
 

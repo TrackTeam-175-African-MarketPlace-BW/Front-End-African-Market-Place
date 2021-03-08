@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { connect } from "react-redux";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 const MainDiv = styled.div`
@@ -44,7 +44,8 @@ const Span = styled.span`
 
 const Navigation = (props) => {
   const { push } = useHistory();
-  const { id } = useParams();
+  useEffect(() => {}, [props.cart])
+
   const logOut = () => {
     window.localStorage.removeItem("token");
     props.setIsLoggedIn(false);
@@ -81,7 +82,7 @@ const Navigation = (props) => {
           <Link to={`/${props.id}/itemsList`}>Items List</Link>
         )}
         {props.isLoggedIn && (
-          <Link to={`/${id}/cart`}>
+          <Link to={`/${props.id}/cart`}>
             Shopping Cart <Span>{props.cart.length}</Span>
           </Link>
         )}
@@ -93,7 +94,7 @@ const Navigation = (props) => {
 const mapStateToProps = (state) => {
   return {
     id: state.ORS.ownerProfile.id,
-    cart: state.SCR.cart,
+    cart: state.ORS.shoppingCart,
   };
 };
 

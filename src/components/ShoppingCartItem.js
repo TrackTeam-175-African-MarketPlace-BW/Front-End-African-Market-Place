@@ -28,8 +28,9 @@ const Button = styled.button`
 const ShoppingCartItem = (props) => {
   console.log("props from ShoppingCartItem: ", props);
 
-  const handleClick = () => {
-    props.deleteFromCart(props.item.id);
+  const handleClick = (itemId) => {
+    
+    props.deleteFromCart(itemId);
   };
 
   return (

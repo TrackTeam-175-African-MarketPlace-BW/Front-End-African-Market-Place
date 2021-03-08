@@ -23,19 +23,19 @@ const ItemContainer = styled.div`
   margin: 20px auto;
 `;
 
-const StyledDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 15px;
-  text-transform: lowercase;
-  font-size: 1rem;
-`;
+// const StyledDiv = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   margin: 15px;
+//   text-transform: lowercase;
+//   font-size: 1rem;
+// `;
 
-const Names = styled.span`
-  font-family: "Homemade Apple", cursive;
-  font-size: 1em;
-`;
+// const Names = styled.span`
+//   font-family: "Homemade Apple", cursive;
+//   font-size: 1em;
+// `;
 
 const ItemsList = (props) => {
   useEffect(() => {

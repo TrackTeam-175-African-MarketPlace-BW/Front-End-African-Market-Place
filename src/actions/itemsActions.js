@@ -126,9 +126,9 @@ export const addToCart = (item) => (dispatch) => {
   })
 }
 
-export const deleteFromCart = (item) => (dispatch) => {
+export const deleteFromCart = (itemId) => (dispatch) => {
   dispatch({
     type: REMOVE_CART_ITEM,
-    payload: item,
+    payload: itemId,
   })
 }
