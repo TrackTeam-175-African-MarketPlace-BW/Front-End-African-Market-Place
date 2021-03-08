@@ -62,6 +62,21 @@ const Header1 = styled.h1`
   }
 `;
 
+const Span = styled.span`
+  display: inline-block;
+  position: relative;
+  top: -8px;
+  left: 0px;
+  font-weight: bold;
+  line-height: 18px;
+  text-align: center;
+  background: lightcoral;
+  border-radius: 100%;
+  width: 18px;
+  height: 18px;
+  color: white;
+`;
+
 const Navigation = (props) => {
   const { push } = useHistory();
   const logOut = () => {
