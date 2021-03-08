@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { getItems } from "./../../actions/itemsActions";
 import Loader from "react-loader-spinner";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const Headers = styled.h1`
   font-size: 20px;
@@ -44,43 +44,58 @@ const ItemsList = (props) => {
 
   return (
     <div>
-      <Headers> 🍃 welc🌎me 🍃 to 🍃 the 🍃 market 🍃 </Headers>
+      <Headers> welcome to the market </Headers>
       {props.gettingItems ? (
-        <Loader type="ThreeDots" color="#c1c1c1" height={40} width={40} />
+        <Loader
+          style={{ textAlign: "center" }}
+          type="ThreeDots"
+          color="#83A32E"
+          height={85}
+          width={85}
+        />
       ) : props.error ? (
         <h3 style={{ color: "red" }}>{props.error}</h3>
       ) : (
         <ItemContainer>
-          {props.items.sort((a,b) => b.id - a.id).map((item) => {
-            return (
-              <StyledDiv key={item.id}>
-                <span>
-                  <Names>name</Names>: {item.name}
-                </span>
-                <span>
-                  <Names>info</Names>: {item.description}
-                </span>
-                <span>
-                  <Names>🛒 market</Names>: {item.market}
-                </span>
-                <span>
-                  <Names>country</Names>: {item.country}
-                </span>
-                <span>
-                  <Names>price</Names>: ${item.price}
-                </span>
-                <span>
-                  <Names>owner</Names>: {item.owner}
-                </span>
-                <span>
-                  <Names>✉️email</Names>: {item.owner_email}
-                </span>
-                <span>
-                  <Names>id</Names>: {item.id}
-                </span>
-              </StyledDiv>
-            );
-          })}
+          {props.items
+            .sort((a, b) => b.id - a.id)
+            .map((item) => {
+              return (
+                <StyledDiv key={item.id}>
+                  <span>
+                    <Names>name</Names>: {item.name}
+                  </span>
+                  <span>
+                    <Names>info</Names>: {item.description}
+                  </span>
+                  <span>
+                    <Names>
+                      <span
+                        role="img"
+                        alt="shopping cart emoji"
+                        aria-label="shopping cart emoji"
+                      >
+                        🛒
+                      </span>{" "}
+                      market
+                    </Names>
+                    : {item.market}
+                  </span>
+                  <span>
+                    <Names>country</Names>: {item.country}
+                  </span>
+                  <span>
+                    <Names>price</Names>: ${item.price}
+                  </span>
+                  <span>
+                    <Names>owner</Names>: {item.owner}
+                  </span>
+                  <span>
+                    <Names>email</Names>: {item.owner_email}
+                  </span>
+                </StyledDiv>
+              );
+            })}
         </ItemContainer>
       )}
     </div>
@@ -88,9 +103,10 @@ const ItemsList = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return {  
+  return {
     items: state.IRS.items,
-    error: state.IRS.error,    
+    gettingItems: state.IRS.gettingItems,
+    error: state.IRS.error,
   };
 };
 

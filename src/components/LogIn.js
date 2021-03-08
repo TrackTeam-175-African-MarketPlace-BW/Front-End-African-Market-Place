@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import axiosWithAuth from "../utils/axiosWithAuth";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 const Center = styled.div`
   display: flex;
@@ -33,11 +31,12 @@ const Button = styled.button`
 `;
 
 const Input = styled.input`
-  padding: 10px;
+  padding: 8px;
   border: 0;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
-  border-radius: 8px;
-  width: 100%;
+  border-radius: 15px;
+  width: 80%;
+  height: 21px;
 `;
 
 const Names = styled.span`
@@ -52,18 +51,14 @@ const LogIn = () => {
   });
   const [error, setError] = useState("");
   const { push } = useHistory();
-  const [passwordShown, setPasswordShown] = useState(false);
-  const eye = <FontAwesomeIcon icon={faEye} />;
+
+  const [eyeVisible, setEyeVisible] = useState(false);
 
   const handleChange = (e) => {
     setCredentials({
       ...credentials,
       [e.target.name]: e.target.value,
     });
-  };
-
-  const togglePasswordVisibility = () => {
-    setPasswordShown(passwordShown ? false : true);
   };
 
   const handleLogin = (e) => {
@@ -73,7 +68,7 @@ const LogIn = () => {
       .then((res) => {
         console.log("cd: Login.js: handleLogin: post request response: ", res);
         localStorage.setItem("token", res.data.token);
-        push(`${res.data.user.id}/ownerProfile`); // NOTE adjust where the user gets sent after logging in
+        push(`${res.data.user.id}/ownerProfile`);
       })
       .catch((err) => {
         console.log(
@@ -83,16 +78,23 @@ const LogIn = () => {
       });
   };
 
+  const handleClick = (e) => {
+    if (eyeVisible === false) {
+      setEyeVisible(true);
+      e.target.src =
+        "https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/000/036/original/eye-closed.png";
+    } else {
+      setEyeVisible(false);
+      e.target.src =
+        "https://icon-library.com/images/vector-eye-icon/vector-eye-icon-6.jpg";
+    }
+  };
+
   return (
     <Center>
-      <Headers>
-        <span role="img" aria-label="corn emoji">
-          🌽
-        </span>
-        {""} welcome, login below!
-      </Headers>
+      <Headers>welcome, login below!</Headers>
       <form onSubmit={handleLogin}>
-        <label htmlFor="email" /> <Names>user email:</Names>
+        <label htmlFor="email" /> <Names>user email</Names>
         <Input
           id="email"
           name="email"
@@ -102,25 +104,39 @@ const LogIn = () => {
           placeholder="email here please"
         />
         <br />
-        <label htmlFor="password" /> <Names>password</Names>:{" "}
-        <i onClick={togglePasswordVisibility}>{eye}</i>
-        <br></br>
-        <Input
-          id="password"
-          name="password"
-          type={passwordShown ? "text" : "password"}
-          value={credentials.password}
-          onChange={handleChange}
-          placeholder="password here please"
-        />
         <br />
+        <label htmlFor="password" />
+        <Names>password</Names>
+        <div className="form-field">
+          <label htmlFor="password" />
+
+          <div className="password" style={{ width: "80%" }}>
+            <input
+              id="password"
+              name="password"
+              value={credentials.password}
+              onChange={handleChange}
+              placeholder="password here"
+              className="text"
+              type={eyeVisible ? "text" : "password"}
+              style={{ width: "63%" }}
+            />
+            <img
+              onClick={handleClick}
+              alt="eye icon"
+              className="eye"
+              src="https://icon-library.com/images/vector-eye-icon/vector-eye-icon-6.jpg"
+              style={{ marginLeft: "14px", width: "20px" }}
+            />
+          </div>
+        </div>
         {error && (
           <div style={{ color: "red" }}>
             {error} please try again, or{" "}
             <NavLink to="/register">register here</NavLink>
           </div>
         )}
-        <Button style={{ marginTop: "15px" }} type="submit">
+        <Button style={{ marginTop: "15px", marginLeft: "50px" }} type="submit">
           log in
         </Button>
       </form>

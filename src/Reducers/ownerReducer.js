@@ -40,7 +40,6 @@ export const ownerReducer = (state = initialState, action) => {
         isLoading: true,
       };
     case USER_RETRIEVED:
-      console.log("USER_RETRIEVED", action.payload);
       return {
         ...state,
         isLoading: false,
@@ -50,6 +49,8 @@ export const ownerReducer = (state = initialState, action) => {
     case USER_ITEMS_RETRIEVED:
       return {
         ...state,
+        addingItem: false,
+        updatingItem: false,
         isLoading: false,
         itemsForSale: action.payload,
       };
@@ -110,6 +111,8 @@ export const ownerReducer = (state = initialState, action) => {
         ...state,
         isEditingPassword: false,
         isEditingUser: false,
+        updatingItem: false,
+        addingItem: false,
       };
     case DELETE_USER_ITEM:
       return {
@@ -136,11 +139,13 @@ export const ownerReducer = (state = initialState, action) => {
       return {
         ...state,
         addingItem: true,
+        updatingItem: false,
       };
     case ADDED_ITEM:
       return {
         ...state,
         addingItem: false,
+        updatingItem: false,
         itemsForSale: [...state.itemsForSale, action.payload],
       };
     default:

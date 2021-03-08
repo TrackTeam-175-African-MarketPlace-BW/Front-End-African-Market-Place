@@ -1,6 +1,5 @@
 import axiosWithAuth from "../utils/axiosWithAuth";
 
-
 export const DATA_LOADING = "DATA_LOADING";
 export const DATA_RETRIEVED = "DATA_RETRIEVED";
 export const ERROR_LOADING_DATA = "ERROR_LOADING_DATA";
@@ -17,23 +16,27 @@ export const ADDED_ITEM = "ADD_ITEM";
 
 export const getItems = () => (dispatch) => {
   dispatch({ type: DATA_LOADING });
-
-  axiosWithAuth()
-    .get("/items")
-    .then((res) => {
-      console.log("cd: itemsActions: getItems: axios.get response: ", res);
-      dispatch({
-        type: DATA_RETRIEVED,
-        payload: res.data,
+  setTimeout(() => {
+    axiosWithAuth()
+      .get("/items")
+      .then((res) => {
+        console.log("cd: itemsActions: getItems: axios.get response: ", res);
+        dispatch({
+          type: DATA_RETRIEVED,
+          payload: res.data,
+        });
+      })
+      .catch((err) => {
+        console.log(
+          "cd: itemsAction: getItems: axios.get error: ",
+          err.response
+        );
+        dispatch({
+          type: ERROR_LOADING_DATA,
+          payload: err.response.data.message,
+        });
       });
-    })
-    .catch((err) => {
-      console.log("cd: itemsAction: getItems: axios.get error: ", err.response);
-      dispatch({
-        type: ERROR_LOADING_DATA,
-        payload: err.response.data.message,
-      });
-    });
+  }, 1100);
 };
 
 export const showSingleItem = (itemId) => (dispatch) => {
@@ -54,8 +57,12 @@ export const showSingleItem = (itemId) => (dispatch) => {
     });
 };
 
-export const updateSingleItem = (id, itemId, item) => (dispatch) => {
+export const updatingTheItem = () => (dispatch) => {
   dispatch({ type: UPDATING_ITEM });
+};
+
+export const updateSingleItem = (id, itemId, item) => (dispatch) => {
+  // dispatch({ type: UPDATING_ITEM });
   axiosWithAuth()
     .put(`users/${id}/items/${itemId}`, item)
     .then((res) => {
@@ -72,11 +79,15 @@ export const updateSingleItem = (id, itemId, item) => (dispatch) => {
       console.log("cd: ItemsAction.js: updateSingleItem: axios.get error: ", {
         err,
       });
-      dispatch({type: ERROR_LOADING_DATA, payload: err.response.data.message})
+      dispatch({
+        type: ERROR_LOADING_DATA,
+        payload: err.response.data.message,
+      });
     });
 };
 
 export const addItemForSale = (id, item) => (dispatch) => {
+  dispatch({ type: ADDING_ITEM });
   const sendItem = {
     category: item.category,
     country: item.country,
@@ -98,7 +109,10 @@ export const addItemForSale = (id, item) => (dispatch) => {
       });
     })
     .catch((err) => {
-      console.log({ err })
-      dispatch({type: ERROR_LOADING_DATA, payload: err.response.data.message})
+      console.log({ err });
+      dispatch({
+        type: ERROR_LOADING_DATA,
+        payload: err.response.data.message,
+      });
     });
 };

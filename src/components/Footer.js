@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const FooterStyle = styled.div`
+
     height: auto;
     padding: 2rem 0rem;
     text-align: center;
     width: 100%;
+
 `;
 
 const FooterDiv = styled.div`
@@ -16,6 +18,7 @@ const FooterDiv = styled.div`
   margin-left: auto;
   margin-right: auto;
 `;
+
 
 const Footer =  ({ isLoggedIn }) => {
     return (
@@ -27,6 +30,7 @@ const Footer =  ({ isLoggedIn }) => {
                     {isLoggedIn ? <></> : <Link to="/login">Current Users: Log In</Link>}
                     {isLoggedIn ? <></> : <Link to="/register">Register Here</Link>}
                     <Link to="/team">Meet The BW Team</Link>
+                    <Link to="/">Home</Link>
                     {isLoggedIn && <Link to="/:id/ownerProfile">Your Profile</Link>}
                     {isLoggedIn && <Link to="/:id/itemsList">Items List</Link>}
                 </FooterDiv>

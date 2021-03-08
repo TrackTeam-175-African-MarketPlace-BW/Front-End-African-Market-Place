@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import axiosWithAuth from "../../utils/axiosWithAuth";
 import { updateSingleItem } from "../../actions/itemsActions";
+import { cancelEditing } from "../../actions/ownerActions";
 import styled from "styled-components";
 
 const Center = styled.div`
@@ -14,9 +15,14 @@ const Center = styled.div`
   text-transform: lowercase;
 `;
 
-const Span = styled.span`
-  font-size: 4rem;
+const Headers = styled.h1`
+  font-size: 23px;
+  font-weight: none;
+  font-family: "Homemade Apple", cursive;
+  text-align: center;
+  width: 100%;
 `;
+
 const Button = styled.button`
   background: #68773c;
   border-radius: 8px;
@@ -55,18 +61,23 @@ const Select = styled.select`
   text-transform: lowercase;
 `;
 
+const ButtonDiv = styled.div`
+  display: flex;
+`;
+
 const EditItem = (props) => {
   const [item, setItem] = useState({
     name: "",
     description: "",
     price: "",
     category: "",
-    market: "",
     country: "",
+    market: "",
   });
   const [countries, setCountries] = useState([]);
   const [categories, setCategories] = useState([]);
   const [markets, setMarkets] = useState([]);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const { push } = useHistory();
   const { id, itemId } = useParams();
@@ -92,22 +103,32 @@ const EditItem = (props) => {
       .get("/countries")
       .then((res) => {
         // console.log("setCountries response from EditItem.js: res: ", res)
-        setCountries(res.data)
+        setCountries(res.data);
       })
       .catch((err) => console.log(err));
     axiosWithAuth()
       .get("/categories")
       .then((res) => setCategories(res.data))
       .catch((err) => console.log(err));
-    axiosWithAuth()
-      .get("/markets")
-      .then((res) => setMarkets(res.data))
-      .catch((err) => console.log(err));
   }, []);
 
+  useEffect(() => {
+    if (item.country) {
+      setIsDisabled(false);
+    }
+
+    axiosWithAuth()
+      .get(`/markets?country=${item.country}`)
+      .then((res) => setMarkets(res.data))
+      .catch((err) => console.log(err));
+  }, [item.country]);
+
   const onChange = (e) => {
-    const value =
-      e.target.name === "price" ? parseInt(e.target.value, 10) : e.target.value;
+    let value = e.target.value;
+    if (e.target.name === "price") {
+      if (isNaN(e.target.value)) value = "";
+      // console.log("ONCHANGE NUMBER VALUE", e.target.value);
+    }
     setItem({
       ...item,
       [e.target.name]: value,
@@ -120,12 +141,15 @@ const EditItem = (props) => {
     push(`/${id}/ownerProfile`);
   };
 
+  const toCancelEditing = (e) => {
+    e.preventDefault();
+    props.cancelEditing();
+    push(`/${id}/ownerProfile`);
+  };
+
   return (
     <Center>
-      <Span role="img" aria-label="corn and vase emoji">
-        🌾🏺🌾
-      </Span>
-
+      <Headers>update item information</Headers>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name" /> <Names>Edit Item Name</Names>:<br></br>
         <Input
@@ -153,6 +177,9 @@ const EditItem = (props) => {
           value={item.price}
           onChange={onChange}
         />
+        {item.price === "" ? (
+          <div style={{ color: "red" }}>{`please enter a number value.`}</div>
+        ) : null}
         <br></br>
         <label htmlFor="category" /> <Names>Edit Item Category</Names>:<br></br>
         <Select
@@ -167,24 +194,6 @@ const EditItem = (props) => {
             return (
               <option key={category.id} value={category.category}>
                 {category.category}
-              </option>
-            );
-          })}
-        </Select>
-        <br></br>
-        <label htmlFor="market" /> <Names>Edit Market Location</Names>:<br></br>
-        <Select
-          id="market"
-          name="market"
-          value={item.market}
-          onChange={onChange}
-          defaultValue="pickOne"
-        >
-          <option value="pickOne">--- Pick One ---</option>
-          {markets.map((market) => {
-            return (
-              <option key={market.id} value={market.market}>
-                {market.market}
               </option>
             );
           })}
@@ -209,7 +218,31 @@ const EditItem = (props) => {
           })}
         </Select>
         <br></br>
-        <Button type="submit">update item</Button>
+        <label htmlFor="market" /> <Names>Edit Market Location</Names>:<br></br>
+        <Select
+          id="market"
+          name="market"
+          value={item.market}
+          onChange={onChange}
+          defaultValue="pickOne"
+          disabled={isDisabled}
+        >
+          <option value="pickOne">--- Pick One ---</option>
+          {markets.map((market) => {
+            return (
+              <option key={market.id} value={market.market}>
+                {market.market}
+              </option>
+            );
+          })}
+        </Select>
+        <br></br>
+        <ButtonDiv>
+          <Button type="submit">update item</Button>{" "}
+          <Button onClick={toCancelEditing} style={{ width: "110px" }}>
+            cancel edit?
+          </Button>
+        </ButtonDiv>
       </form>
     </Center>
   );
@@ -217,10 +250,13 @@ const EditItem = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    item_id: state.SIR.selectedItem.id,
+    updatingItem: state.ORS.updatingItem,
+    // item_id: state.SIR.selectedItem.id,
     id: state.ORS.owner_id,
-    item: state.SIR.selectedItem,
+    // item: state.SIR.selectedItem,
   };
 };
 
-export default connect(mapStateToProps, { updateSingleItem })(EditItem);
+export default connect(mapStateToProps, { updateSingleItem, cancelEditing })(
+  EditItem
+);

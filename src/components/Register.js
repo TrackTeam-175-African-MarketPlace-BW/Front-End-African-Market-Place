@@ -3,8 +3,6 @@ import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 const Center = styled.div`
   display: flex;
@@ -13,12 +11,10 @@ const Center = styled.div`
   align-items: center;
 `;
 
-const Headers = styled.h1`
-  font-size: 28px;
-  font-weight: none;
-  font-family: "Homemade Apple", cursive;
+const Headers = styled.div`
   width: 100%;
   text-align: center;
+  margin-left: 13%;
 `;
 
 const Button = styled.button`
@@ -35,8 +31,8 @@ const Input = styled.input`
   padding: 10px;
   border: 0;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
-  border-radius: 8px;
-  width: 120%;
+  border-radius: 15px;
+  width: 100%;
 `;
 
 const Names = styled.span`
@@ -48,14 +44,14 @@ const TextArea = styled.textarea`
   padding: 10px;
   border: 0;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
-  border-radius: 8px;
-  width: 120%;
+  border-radius: 15px;
+  width: 100%;
 `;
 
 const Select = styled.select`
   outline: 0;
   background: white;
-  width: 85%;
+  width: 100%;
   height: 100%;
   color: black;
   cursor: pointer;
@@ -76,14 +72,10 @@ const Register = () => {
 
   const [error, setError] = useState("");
   const { push } = useHistory();
-  const [passwordShown, setPasswordShown] = useState(false);
-  const eye = <FontAwesomeIcon icon={faEye} />;
+
+  const [eyeVisible, setEyeVisible] = useState(false);
 
   const [countries, setCountries] = useState([]);
-
-  const togglePasswordVisibility = () => {
-    setPasswordShown(passwordShown ? false : true);
-  };
 
   useEffect(() => {
     axiosWithAuth()
@@ -117,16 +109,26 @@ const Register = () => {
       });
   };
 
+  const handleClick = (e) => {
+    if (eyeVisible === false) {
+      setEyeVisible(true);
+      e.target.src =
+        "https://d338t8kmirgyke.cloudfront.net/icons/icon_pngs/000/000/036/original/eye-closed.png";
+    } else {
+      setEyeVisible(false);
+      e.target.src =
+        "https://icon-library.com/images/vector-eye-icon/vector-eye-icon-6.jpg";
+    }
+  };
+
   return (
     <Center>
       <Headers>
-        <span role="img" aria-label="corn emoji">
-          🌱
-        </span>
-        {""} register
-        <span role="img" aria-label="corn emoji">
-          {""} 🌾
-        </span>
+        <img
+          alt="corn and text that says register with a corn"
+          src="https://i.ibb.co/Qd3wMdJ/Screen-Shot-2021-03-03-at-5-55-33-PM.png"
+          style={{ width: "23%" }}
+        ></img>
       </Headers>
 
       <form onSubmit={submitRegistration}>
@@ -151,17 +153,30 @@ const Register = () => {
           placeholder="email required"
         />
         <br></br>
-        <label htmlFor="password" />
-        <Names>password</Names>: <i onClick={togglePasswordVisibility}>{eye}</i>
-        <br></br>
-        <Input
-          type={passwordShown ? "text" : "password"}
-          name="password"
-          value={credentials.password}
-          onChange={handleChanges}
-          placeholder="password required."
-        />
-        <br></br>
+        <Names>password</Names>:<br></br>
+        <div className="form-field">
+          <label htmlFor="password" />
+
+          <div className="ps" class="password" style={{ width: "120%" }}>
+            <input
+              id="password"
+              name="password"
+              value={credentials.password}
+              onChange={handleChanges}
+              placeholder="password here"
+              className="text"
+              type={eyeVisible ? "text" : "password"}
+              style={{ width: "50%" }}
+            />
+            <img
+              onClick={handleClick}
+              className="eye"
+              alt="eye icon"
+              src="https://icon-library.com/images/vector-eye-icon/vector-eye-icon-6.jpg"
+              style={{ marginLeft: "70px", width: "20px" }}
+            />
+          </div>
+        </div>
         <label htmlFor="country">
           <Names>location</Names>:<br></br>
           <div>
@@ -198,7 +213,9 @@ const Register = () => {
           />
         </label>
         <br></br>
-        <Button style={{ marginTop: "10px" }}>Ready to register?</Button>
+        <Button style={{ marginTop: "10px", marginLeft: "60px" }}>
+          ready to register?
+        </Button>
         <br></br>
         {error ? <div style={{ color: "red" }}>{error}</div> : null}
       </form>

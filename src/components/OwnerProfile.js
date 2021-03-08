@@ -14,8 +14,8 @@ import {
   deleteUserItem,
   addingItem,
 } from "../actions/ownerActions";
+import { showSingleItem, updatingTheItem } from "../actions/itemsActions";
 import styled, { css } from "styled-components";
-
 
 const FlexStyling = styled.div`
   display: flex;
@@ -26,6 +26,7 @@ const FlexStyling = styled.div`
 
   width: 90%;
   margin-left: 8%;
+  align-items: center;
 `;
 
 const Names = styled.span`
@@ -40,10 +41,12 @@ const SaleItemsDiv = styled.div`
   padding: 10px;
   border-radius: 20px;
   flex-wrap: wrap;
-  width: 100%;
+
+  width: 110%;
   margin: 0 auto;
   text-align: center;
   padding: 10px;
+  max-height: 40%;
 `;
 
 const Headers = styled.h1`
@@ -67,6 +70,16 @@ const Button = styled.button`
       background: #83a32e;
       color: white;
     `}
+
+  ${(props) =>
+    props.special &&
+    css`
+      background: none;
+      color: #5e9bf5;
+      border: none;
+      padding: 5px;
+      margin: 0px;
+    `}
 `;
 
 const ProfileDiv = styled.div`
@@ -76,6 +89,7 @@ const ProfileDiv = styled.div`
   text-align: center;
   padding-right: 60px;
   width: 100%;
+  min-height: 40%;
 `;
 
 const ItemDiv = styled.div`
@@ -83,7 +97,6 @@ const ItemDiv = styled.div`
 `;
 
 const OwnerProfile = (props) => {
-  // console.log("OWNERPROFILE PROPS", props);
   const { id } = useParams();
   const { push } = useHistory();
 
@@ -106,6 +119,13 @@ const OwnerProfile = (props) => {
     e.preventDefault();
     props.editingPassword();
   };
+
+  const editingItem = (item) => {
+    // e.preventDefault();
+    props.updatingTheItem();
+
+    push(`/${id}/editItem/${item.id}`);
+  };
   const addingNewItem = (e) => {
     e.preventDefault();
     props.addingItem();
@@ -114,22 +134,12 @@ const OwnerProfile = (props) => {
 
   const deleteItem = (item) => {
     props.deleteUserItem(props.ownerProfile.id, item.id);
-    // console.log("ITEMFORSALE ID", props.ownerProfile, item.id);
-    // console.log("THESE ARE THE CURRENT ITEMS FOR SALE", props.itemsForSale);
-    // props.itemsForSale.filter((itemForSale) => {
-    //   return itemForSale.id !== item.id;
-    // });
   };
 
   return (
     <FlexStyling>
       <SaleItemsDiv>
-        <Headers>
-          <span role="img" aria-label="corn emoji">
-            🌾
-          </span>{" "}
-          {props.ownerProfile.name}'s items for sale{" "}
-        </Headers>
+        <Headers>{props.ownerProfile.name}'s items for sale </Headers>
         <br></br>
 
         {props.itemsForSale.length === 0 ? (
@@ -139,7 +149,7 @@ const OwnerProfile = (props) => {
               😪
             </span>{" "}
             <br></br>
-            <Link to={`/${id}/itemsList`}>Want to change that?</Link> <br></br>
+            <Link to={`/${id}/addItem`}>Want to change that?</Link> <br></br>
             Add an item to your profile!
           </div>
         ) : null}
@@ -172,7 +182,7 @@ const OwnerProfile = (props) => {
                 <Button
                   other
                   onClick={() => {
-                    push(`/${id}/editItem/${item.id}`);
+                    editingItem(item);
                   }}
                 >
                   edit item?
@@ -184,12 +194,7 @@ const OwnerProfile = (props) => {
 
       <ProfileDiv>
         <div>
-          <Headers>
-            <span role="img" aria-label="bust of two people emoji">
-              👥
-            </span>{" "}
-            welcome, {props.ownerProfile.name}
-          </Headers>
+          <Headers>welcome, {props.ownerProfile.name}</Headers>
           <br></br>
           <Names>name:</Names> {props.ownerProfile.name}
           <br></br>
@@ -204,20 +209,11 @@ const OwnerProfile = (props) => {
           ) : (
             <div>
               no photo found!
-              <Link onClick={handleUpdateProfile}>{""} update profile?</Link>
+              <Button special onClick={handleUpdateProfile}>
+                {""} update profile?
+              </Button>
             </div>
           )}
-          {/* {props.ownerProfile.user_photo ? (
-            <img
-              style={{ width: "40%", borderRadius: "10px" }}
-              src={props.ownerProfile.user_photo}
-              alt={props.ownerProfile.name}
-            ></img>
-          ) : (
-            <Link onClick={handleUpdateProfile}>
-              no photo found! update profile?
-            </Link>
-          )} */}
           <br></br>
           <Names>country:</Names> {props.ownerProfile.country}
           <br></br>
@@ -267,4 +263,6 @@ export default connect(mapStateToProps, {
   unmountPasswordChange,
   deleteUserItem,
   addingItem,
+  showSingleItem,
+  updatingTheItem,
 })(OwnerProfile);

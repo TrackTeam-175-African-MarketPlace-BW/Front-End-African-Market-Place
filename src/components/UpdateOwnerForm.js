@@ -19,10 +19,6 @@ const Button = styled.button`
   padding: 0.25em 1em;
 `;
 
-// const Names = styled.span`
-//   font-family: "Homemade Apple", cursive;
-//   font-size: 14px;
-// `;
 const Input = styled.input`
   padding: 10px;
   border: 0;
@@ -35,13 +31,16 @@ const TextArea = styled.textarea`
   border: 0;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
   border-radius: 8px;
+  height: 80px;
+  border-radius: 15px;
+  width: 90%;
 `;
 
 const Select = styled.select`
   outline: 0;
   background: white;
   width: 100%;
-  height: 100%;
+  padding: 5px;
   color: black;
   cursor: pointer;
   border: 1px solid white;
