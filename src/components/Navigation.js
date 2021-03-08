@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 const MainDiv = styled.div`
@@ -44,6 +44,7 @@ const Span = styled.span`
 
 const Navigation = (props) => {
   const { push } = useHistory();
+  const { id } = useParams();
   const logOut = () => {
     window.localStorage.removeItem("token");
     props.setIsLoggedIn(false);
@@ -80,7 +81,7 @@ const Navigation = (props) => {
           <Link to={`/${props.id}/itemsList`}>Items List</Link>
         )}
         {props.isLoggedIn && (
-          <Link to={`/${props.id}/cart`}>
+          <Link to={`/${id}/cart`}>
             Shopping Cart <Span>{props.cart.length}</Span>
           </Link>
         )}

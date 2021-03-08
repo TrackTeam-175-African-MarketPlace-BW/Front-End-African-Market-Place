@@ -28,8 +28,8 @@ const Button = styled.button`
 const ShoppingCartItem = (props) => {
   console.log("props from ShoppingCartItem: ", props);
 
-  const handleClick = (item) => {
-    props.deleteFromCart(item);
+  const handleClick = () => {
+    props.deleteFromCart(props.item.id);
   };
 
   return (
@@ -60,7 +60,7 @@ const ShoppingCartItem = (props) => {
         <Names>price</Names>: ${props.item.price}
       </span>
       <span>
-        <Button onClick={handleClick}>Remove From Cart</Button>
+        <Button onClick={() => handleClick(props.item.id)}>Remove From Cart</Button>
       </span>
     </StyledDiv>
   );
