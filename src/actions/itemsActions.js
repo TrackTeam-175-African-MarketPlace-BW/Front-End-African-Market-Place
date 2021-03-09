@@ -13,6 +13,9 @@ export const REMOVING_ITEM = "REMOVING_ITEM";
 export const REMOVE_ITEM = "REMOVE_ITEM";
 export const ADDING_ITEM = "ADDING_ITEM";
 export const ADDED_ITEM = "ADD_ITEM";
+export const ADD_CART_ITEM = 'ADD_CART_ITEM';
+export const REMOVE_CART_ITEM = 'REMOVE_CART_ITEM';
+export const CLEAR_CART = 'CLEAR_CART';
 
 export const getItems = () => (dispatch) => {
   dispatch({ type: DATA_LOADING });
@@ -116,3 +119,24 @@ export const addItemForSale = (id, item) => (dispatch) => {
       });
     });
 };
+
+export const addToCart = (item) => (dispatch) => {
+  dispatch({
+    type: ADD_CART_ITEM,
+    payload: item
+  })
+}
+
+export const deleteFromCart = (itemId) => (dispatch) => {
+  dispatch({
+    type: REMOVE_CART_ITEM,
+    payload: itemId,
+  })
+}
+
+export const checkoutCart = () => (dispatch) => {
+  dispatch({
+    type: CLEAR_CART
+  })
+  alert("Thank you for your purchase")
+}

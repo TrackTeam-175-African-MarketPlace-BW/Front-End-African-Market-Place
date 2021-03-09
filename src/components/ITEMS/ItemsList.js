@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { getItems } from "./../../actions/itemsActions";
 import Loader from "react-loader-spinner";
 import styled from "styled-components";
+import Item from './Item';
 
 const Headers = styled.h1`
   font-size: 20px;
@@ -22,19 +23,19 @@ const ItemContainer = styled.div`
   margin: 20px auto;
 `;
 
-const StyledDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 15px;
-  text-transform: lowercase;
-  font-size: 1rem;
-`;
+// const StyledDiv = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   margin: 15px;
+//   text-transform: lowercase;
+//   font-size: 1rem;
+// `;
 
-const Names = styled.span`
-  font-family: "Homemade Apple", cursive;
-  font-size: 1em;
-`;
+// const Names = styled.span`
+//   font-family: "Homemade Apple", cursive;
+//   font-size: 1em;
+// `;
 
 const ItemsList = (props) => {
   useEffect(() => {
@@ -59,43 +60,9 @@ const ItemsList = (props) => {
         <ItemContainer>
           {props.items
             .sort((a, b) => b.id - a.id)
-            .map((item) => {
-              return (
-                <StyledDiv key={item.id}>
-                  <span>
-                    <Names>name</Names>: {item.name}
-                  </span>
-                  <span>
-                    <Names>info</Names>: {item.description}
-                  </span>
-                  <span>
-                    <Names>
-                      <span
-                        role="img"
-                        alt="shopping cart emoji"
-                        aria-label="shopping cart emoji"
-                      >
-                        🛒
-                      </span>{" "}
-                      market
-                    </Names>
-                    : {item.market}
-                  </span>
-                  <span>
-                    <Names>country</Names>: {item.country}
-                  </span>
-                  <span>
-                    <Names>price</Names>: ${item.price}
-                  </span>
-                  <span>
-                    <Names>owner</Names>: {item.owner}
-                  </span>
-                  <span>
-                    <Names>email</Names>: {item.owner_email}
-                  </span>
-                </StyledDiv>
-              );
-            })}
+                .map((item) => (
+                  <Item key={item.id} item={item} />
+            ))}
         </ItemContainer>
       )}
     </div>

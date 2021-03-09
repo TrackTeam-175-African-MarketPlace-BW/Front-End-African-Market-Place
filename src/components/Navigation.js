@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { connect } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
@@ -27,8 +27,25 @@ const Button = styled.button`
   padding: 0.25em 1em;
 `;
 
+const Span = styled.span`
+  display: inline-block;
+  position: relative;
+  top: -8px;
+  left: 0px;
+  font-weight: bold;
+  line-height: 18px;
+  text-align: center;
+  background: lightcoral;
+  border-radius: 100%;
+  width: 18px;
+  height: 18px;
+  color: white;
+`;
+
 const Navigation = (props) => {
   const { push } = useHistory();
+  useEffect(() => {}, [props.cart])
+
   const logOut = () => {
     window.localStorage.removeItem("token");
     props.setIsLoggedIn(false);
@@ -56,6 +73,11 @@ const Navigation = (props) => {
         {props.isLoggedIn && (
           <Link to={`/${props.id}/itemsList`}>Items List</Link>
         )}
+        {props.isLoggedIn && (
+          <Link to={`/${props.id}/cart`}>
+            Shopping Cart <Span>{props.cart.length}</Span>
+          </Link>
+        )}
       </NavDiv>
     </MainDiv>
   );
@@ -64,6 +86,7 @@ const Navigation = (props) => {
 const mapStateToProps = (state) => {
   return {
     id: state.ORS.ownerProfile.id,
+    cart: state.ORS.shoppingCart,
   };
 };
 
