@@ -98,9 +98,14 @@ const NewRegister = () => {
   }, []);
 
   const handleChanges = (e) => {
+    Yup.reach(formSchema, [e.target.name])
+      .validate([e.target.value])
+        .then(() => setYupErrors({...yupErrors, [e.target.name]: ''}))
+        .catch(err => setYupErrors({...yupErrors, [e.target.name]: err.yupErrors}))
+    
     setCredentials({
       ...credentials,
-      [e.target.name]: e.target.value,
+      [e.target.name]: [e.target.value],
     });
   };
 
@@ -148,33 +153,55 @@ const NewRegister = () => {
       bio: "",
   })
 
-  const inputChange = e => {
-      const { name, value } = e.target
-  }
+
+  // Yup
+  //   .reach(formSchema, [e.target.name])
+  //   .validate([e.target.value])
+  //   .then(valid => {
+  //       setYupErrors({
+  //           ...yupErrors, [e.target.name]: ""
+  //       })
+  //   })
+  //   .catch(err => {
+  //       setYupErrors({
+  //           ...yupErrors, [e.target.name]: err.yupErrors[0]
+  //       })
+  //   })
+
+  //   setFormState({
+  //       ...formState, [e.target.name]: [e.target.value]
+  //   })
+
+  // useEffect(() => {
+  //     formSchema.isValid(credentials)
+  //       .then(valid => setButtonDisabled(!valid))
+  //       .catch(err => console.log(err))
+  // }, [credentials]);
+
 
   Yup
-    .reach(formSchema, name)
-    .validate(value)
-    .then(valid => {
-        setYupErrors({
-            ...yupErrors, [name]: ""
-        })
-    })
-    .catch(err => {
-        setYupErrors({
-            ...yupErrors, [name]: err.yupErrors[0]
-        })
-    })
-
-    setFormState({
-        ...formState, [name]: value
-    })
-
-  useEffect(() => {
-      formSchema.isValid(credentials).then(valid => {
-          setButtonDisabled(!valid);
+  .reach(formSchema, name)
+  .validate(value)
+  .then(valid => {
+      setYupErrors({
+          ...yupErrors, name: ""
       })
-  }, [credentials]);
+  })
+  .catch(err => {
+      setYupErrors({
+          ...yupErrors, name: err.yupErrors[0]
+      })
+  })
+
+  setFormState({
+      ...formState, name: value
+  })
+
+useEffect(() => {
+    formSchema.isValid(credentials)
+      .then(valid => setButtonDisabled(!valid))
+      .catch(err => console.log(err))
+}, [credentials]);
 
   return (
     <Center>
